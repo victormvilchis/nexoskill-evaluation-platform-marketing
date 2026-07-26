@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#081426"/>
+  <circle cx="980" cy="80" r="240" fill="#16304f"/>
+  <circle cx="1070" cy="500" r="290" fill="#0d7f87" opacity=".35"/>
+  <text x="90" y="210" fill="#61e6d2" font-family="Arial, sans-serif" font-size="34" font-weight="700">NEXOSKILL</text>
+  <text x="90" y="310" fill="#ffffff" font-family="Arial, sans-serif" font-size="62" font-weight="700">Talento tecnológico</text>
+  <text x="90" y="385" fill="#ffffff" font-family="Arial, sans-serif" font-size="62" font-weight="700">con resultados medibles.</text>
+  <text x="90" y="470" fill="#b7c5d7" font-family="Arial, sans-serif" font-size="28">Evaluación · Preparación · Analítica</text>
+</svg>

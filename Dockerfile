@@ -1,0 +1,25 @@
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --no-audit --no-fund
+COPY . .
+ARG VITE_API_URL
+ARG VITE_PLATFORM_URL
+ARG VITE_SITE_URL
+ARG VITE_CONTACT_EMAIL
+ARG VITE_ANALYTICS_ID
+ARG VITE_ENABLE_ANALYTICS
+ENV VITE_API_URL=$VITE_API_URL \
+    VITE_PLATFORM_URL=$VITE_PLATFORM_URL \
+    VITE_SITE_URL=$VITE_SITE_URL \
+    VITE_CONTACT_EMAIL=$VITE_CONTACT_EMAIL \
+    VITE_ANALYTICS_ID=$VITE_ANALYTICS_ID \
+    VITE_ENABLE_ANALYTICS=$VITE_ENABLE_ANALYTICS
+RUN npm run build
+
+FROM nginx:1.27-alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget -qO- http://127.0.0.1/health >/dev/null || exit 1

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nexoskill.com/sitemap.xml
