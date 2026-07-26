@@ -27,6 +27,14 @@ test('todas las rutas base están declaradas', () => {
   requiredRoutes.forEach((route) => assert.match(app, new RegExp(`path=\\"${route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\"`)));
 });
 
+test('las rutas de la Parte 2 utilizan páginas comerciales completas', () => {
+  const pages = ['PlatformPage', 'BootcampsPage', 'TrainingPage', 'AdvisoryPage', 'TalentEvaluationPage'];
+  pages.forEach((page) => {
+    assert.match(app, new RegExp(`import \\{ ${page} \\}`));
+    assert.match(app, new RegExp(`<${page} \\/>`));
+  });
+});
+
 test('cada enlace principal apunta a una ruta implementada', () => {
   const links = [...navigation.matchAll(/href: '([^']+)'/g)].map((match) => match[1]);
   links.forEach((link) => assert.ok(app.includes(`path="${link}"`) || link.startsWith('/tecnologias/'), `Ruta no implementada: ${link}`));

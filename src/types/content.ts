@@ -14,7 +14,17 @@ export type IconName =
   | 'check'
   | 'arrow'
   | 'menu'
-  | 'close';
+  | 'close'
+  | 'target'
+  | 'book'
+  | 'settings'
+  | 'briefcase'
+  | 'report'
+  | 'database'
+  | 'rocket'
+  | 'refresh'
+  | 'clipboard'
+  | 'search';
 
 export interface NavigationItem {
   label: string;
@@ -62,4 +72,25 @@ export interface ProcessStep {
   number: string;
   title: string;
   description: string;
+}
+
+export interface PageCapability {
+  title: string;
+  description: string;
+  icon: IconName;
+  bullets?: string[];
+}
+
+export interface JourneyStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export interface ProgramItem {
+  title: string;
+  description: string;
+  icon: IconName;
+  tag?: string;
+  bullets: string[];
 }

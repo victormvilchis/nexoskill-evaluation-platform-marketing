@@ -1,8 +1,20 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
+import { extname, join } from 'node:path';
 import test from 'node:test';
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
+
+async function walk(directory) {
+  const entries = await readdir(new URL(`../${directory}/`, import.meta.url), { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const relative = join(directory, entry.name).replaceAll('\\', '/');
+    if (entry.isDirectory()) files.push(...await walk(relative));
+    else if (['.ts', '.tsx'].includes(extname(entry.name))) files.push(relative);
+  }
+  return files;
+}
 
 test('la Home contiene la propuesta de valor y sus secciones principales', async () => {
   const home = await read('src/pages/HomePage.tsx');
@@ -23,20 +35,22 @@ test('el contenido comercial está centralizado', async () => {
     read('src/content/faqs.ts'),
   ]);
 
-  assert.equal((technologies.match(/slug:/g) ?? []).length, 6);
+  assert.equal((technologies.match(/slug:/g) ?? []).length, 8);
   assert.equal((services.match(/title:/g) ?? []).length, 5);
   assert.equal((plans.match(/name:/g) ?? []).length, 4);
   assert.equal((faqs.match(/question:/g) ?? []).length, 6);
 });
 
+test('el contenido público no incluye tecnologías o marcas internas', async () => {
+  const files = await walk('src');
+  const content = (await Promise.all(files.map(read))).join('\n');
+  assert.doesNotMatch(content, /\b(?:APX|ASO|LRBA|Cells|BBVA)\b/i);
+  assert.doesNotMatch(content, /Open Banking|Normativa/i);
+});
+
 test('no se utiliza la marca registrada concedida ni preguntas reales de certificación', async () => {
-  const files = await Promise.all([
-    read('src/pages/HomePage.tsx'),
-    read('src/content/technologies.ts'),
-    read('src/content/services.ts'),
-    read('src/components/layout/Footer.tsx'),
-  ]);
-  const content = files.join('\n');
+  const files = await walk('src');
+  const content = (await Promise.all(files.map(read))).join('\n');
   assert.doesNotMatch(content, /®/);
   assert.doesNotMatch(content, /preguntas reales de certificaci[oó]n/i);
 });
