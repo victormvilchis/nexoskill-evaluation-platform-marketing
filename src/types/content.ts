@@ -82,12 +82,25 @@ export interface Feature {
 }
 
 export interface Plan {
+  id: string;
   name: string;
   audience: string;
   priceLabel: string;
   description: string;
+  seats: string;
+  technologyScope: string;
+  roles: string;
+  reporting: string;
+  substitutions: string;
+  support: string;
   features: string[];
+  ctaLabel: string;
   featured?: boolean;
+}
+
+export interface PlanComparisonRow {
+  label: string;
+  values: Record<string, string>;
 }
 
 export interface FaqItem {

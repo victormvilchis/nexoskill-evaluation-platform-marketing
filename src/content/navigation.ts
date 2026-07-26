@@ -22,6 +22,7 @@ export const footerNavigation = {
     { label: 'Planes', href: '/planes' },
     { label: 'Preguntas frecuentes', href: '/preguntas-frecuentes' },
     { label: 'Contacto', href: '/contacto' },
+    { label: 'Solicitar cotización', href: '/solicitar-cotizacion' },
   ],
   legal: [
     { label: 'Aviso de privacidad', href: '/aviso-de-privacidad' },

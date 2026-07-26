@@ -4,6 +4,7 @@ import { CTASection } from '../components/common/CTASection';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import { Icon } from '../components/common/Icon';
 import { SectionHeading } from '../components/common/SectionHeading';
+import { PricingCard } from '../components/pricing/PricingCard';
 import { businessProblems, platformFeatures } from '../content/features';
 import { faqs } from '../content/faqs';
 import { plans } from '../content/plans';
@@ -207,17 +208,7 @@ export function HomePage() {
             <ArrowLink to="/planes">Comparar todos los planes</ArrowLink>
           </div>
           <div className="pricing-grid">
-            {plans.slice(0, 3).map((plan) => (
-              <article className={`pricing-card ${plan.featured ? 'pricing-card--featured' : ''}`} key={plan.name}>
-                {plan.featured ? <span className="pricing-card__badge">Recomendado</span> : null}
-                <span className="pricing-card__audience">{plan.audience}</span>
-                <h3>{plan.name}</h3>
-                <p>{plan.description}</p>
-                <strong className="pricing-card__price">{plan.priceLabel}</strong>
-                <ul>{plan.features.map((feature) => <li key={feature}><Icon name="check" size={17} /> {feature}</li>)}</ul>
-                <Link className={`button ${plan.featured ? 'button--primary' : 'button--secondary'} button--full`} to="/solicitar-demo">Consultar plan</Link>
-              </article>
-            ))}
+            {plans.slice(0, 3).map((plan) => <PricingCard compact key={plan.id} plan={plan} />)}
           </div>
         </div>
       </section>

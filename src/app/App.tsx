@@ -7,6 +7,9 @@ import { BootcampsPage } from '../pages/BootcampsPage';
 import { DemoPage } from '../pages/DemoPage';
 import { HomePage } from '../pages/HomePage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { FaqPage } from '../pages/FaqPage';
+import { PricingPage } from '../pages/PricingPage';
+import { QuoteRequestPage } from '../pages/QuoteRequestPage';
 import { PlatformPage } from '../pages/PlatformPage';
 import { StandardPage } from '../pages/StandardPage';
 import { TalentEvaluationPage } from '../pages/TalentEvaluationPage';
@@ -39,12 +42,13 @@ export function App() {
           <Route path="/bootcamps" element={<BootcampsPage />} />
           <Route path="/capacitaciones" element={<TrainingPage />} />
           <Route path="/asesorias" element={<AdvisoryPage />} />
-          <Route path="/planes" element={<StandardPage eyebrow="Planes comerciales" title="Capacidad y acompañamiento para cada etapa." description="Compara opciones para equipos pequeños, academias internas y operaciones empresariales con necesidades específicas." path="/planes" highlights={['Starter tecnológico', 'Professional Academy', 'Business Certification', 'Enterprise']} />} />
+          <Route path="/planes" element={<PricingPage />} />
           <Route path="/empresas" element={<TalentEvaluationPage />} />
           <Route path="/nosotros" element={<StandardPage eyebrow="Acerca de NexoSkill" title="Tecnología y especialización para desarrollar talento." description="NexoSkill busca convertir el conocimiento técnico en procesos de evaluación y preparación claros, medibles y útiles para las organizaciones." path="/nosotros" note="La sección institucional se completará únicamente con información verificable, sin inventar clientes, alianzas, métricas ni testimonios." />} />
           <Route path="/contacto" element={<DemoPage />} />
           <Route path="/solicitar-demo" element={<DemoPage />} />
-          <Route path="/preguntas-frecuentes" element={<StandardPage eyebrow="Preguntas frecuentes" title="Respuestas para evaluar la solución." description="Información sobre organizaciones, asientos, contenido, personalización, avances, bootcamps y contratación." path="/preguntas-frecuentes" />} />
+          <Route path="/solicitar-cotizacion" element={<QuoteRequestPage />} />
+          <Route path="/preguntas-frecuentes" element={<FaqPage />} />
           <Route path="/aviso-de-privacidad" element={<StandardPage eyebrow="Información legal" title="Aviso de privacidad en preparación." description="El documento definitivo deberá validarse antes de publicar formularios y mecanismos de captación de datos personales." path="/aviso-de-privacidad" note="No se publica un texto legal genérico como definitivo. Esta ruta queda preparada para incorporar el aviso validado durante la fase de contacto y cumplimiento." />} />
           <Route path="/terminos-y-condiciones" element={<StandardPage eyebrow="Información legal" title="Términos y condiciones en preparación." description="Las condiciones definitivas se incorporarán una vez validadas las reglas comerciales y de uso del sitio." path="/terminos-y-condiciones" note="Esta primera versión evita presentar condiciones no validadas como si fueran definitivas." />} />
           <Route path="*" element={<NotFoundPage />} />

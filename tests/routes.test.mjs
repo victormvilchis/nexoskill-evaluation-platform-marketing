@@ -18,6 +18,7 @@ const requiredRoutes = [
   '/nosotros',
   '/contacto',
   '/solicitar-demo',
+  '/solicitar-cotizacion',
   '/preguntas-frecuentes',
   '/aviso-de-privacidad',
   '/terminos-y-condiciones',
