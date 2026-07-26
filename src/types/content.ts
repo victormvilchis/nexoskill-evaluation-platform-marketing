@@ -31,13 +31,40 @@ export interface NavigationItem {
   href: string;
 }
 
+export interface TechnologyCompetency {
+  title: string;
+  description: string;
+}
+
+export interface TechnologyOffering {
+  title: string;
+  description: string;
+  icon: IconName;
+}
+
+export interface TechnologyFaq {
+  question: string;
+  answer: string;
+}
+
 export interface Technology {
   name: string;
   slug: string;
   summary: string;
+  description: string;
   category: string;
   level: string;
+  levels: string[];
   iconLabel: string;
+  featured?: boolean;
+  audience: string[];
+  competencies: TechnologyCompetency[];
+  offerings: TechnologyOffering[];
+  learningPath: string[];
+  modalities: string[];
+  relatedPrograms: string[];
+  faqs: TechnologyFaq[];
+  seoKeywords: string[];
 }
 
 export interface Service {

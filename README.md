@@ -4,19 +4,20 @@ Sitio público, comercial e institucional de NexoSkill. Este repositorio es inde
 
 ## Versión
 
-`0.1.0 Parte 2 — Plataforma y servicios`
+`0.1.0 Parte 3 — Catálogo de tecnologías`
 
 Esta entrega incluye:
 
 - Home comercial y navegación responsiva.
-- Catálogo tecnológico basado únicamente en tecnologías públicas.
-- Página completa de Plataforma.
-- Página completa de Bootcamps.
-- Página completa de Capacitaciones.
-- Página completa de Asesorías.
-- Página completa de Evaluación de talento.
-- Componentes reutilizables para páginas comerciales.
-- Pruebas que bloquean referencias a tecnologías o marcas internas.
+- Páginas completas de Plataforma y servicios.
+- Catálogo de 10 especialidades tecnológicas públicas.
+- Búsqueda y filtro por área tecnológica.
+- Páginas individuales mediante `/tecnologias/:slug`.
+- Competencias, niveles, modalidades y rutas por especialidad.
+- Programas relacionados y preguntas frecuentes por tecnología.
+- SEO individual y sitemap actualizado.
+- Contenido original sin referencias a tecnologías internas ni afiliaciones no autorizadas.
+- Pruebas automáticas de rutas, contenido y estructura tecnológica.
 
 ## URLs locales
 

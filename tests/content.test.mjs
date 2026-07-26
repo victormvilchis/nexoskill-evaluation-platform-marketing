@@ -35,7 +35,7 @@ test('el contenido comercial está centralizado', async () => {
     read('src/content/faqs.ts'),
   ]);
 
-  assert.equal((technologies.match(/slug:/g) ?? []).length, 8);
+  assert.equal((technologies.match(/^\s{4}slug:/gm) ?? []).length, 10);
   assert.equal((services.match(/title:/g) ?? []).length, 5);
   assert.equal((plans.match(/name:/g) ?? []).length, 4);
   assert.equal((faqs.match(/question:/g) ?? []).length, 6);
