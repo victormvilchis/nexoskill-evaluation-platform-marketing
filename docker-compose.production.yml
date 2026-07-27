@@ -1,0 +1,40 @@
+services:
+  marketing-api:
+    build:
+      context: ./backend
+    env_file: .env.production
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    expose:
+      - "8081"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 35s
+    security_opt:
+      - no-new-privileges:true
+
+  marketing-web:
+    build:
+      context: .
+      args:
+        VITE_SITE_URL: ${VITE_SITE_URL}
+        VITE_API_URL: /api
+        VITE_CONTACT_EMAIL: ${VITE_CONTACT_EMAIL}
+        VITE_PRIVACY_EMAIL: ${VITE_PRIVACY_EMAIL}
+        VITE_LEGAL_ENTITY: ${VITE_LEGAL_ENTITY}
+        VITE_LEGAL_ADDRESS: ${VITE_LEGAL_ADDRESS}
+        VITE_ENABLE_ANALYTICS: ${VITE_ENABLE_ANALYTICS:-false}
+        VITE_GTM_ID: ${VITE_GTM_ID:-}
+        VITE_GA_MEASUREMENT_ID: ${VITE_GA_MEASUREMENT_ID:-}
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      marketing-api:
+        condition: service_healthy
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true

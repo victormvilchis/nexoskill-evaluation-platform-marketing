@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.env
+.env.local
+*.log
+backend/target
+playwright-report
+test-results
+.runtime
+logs
+.github

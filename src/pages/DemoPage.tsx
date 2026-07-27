@@ -1,43 +1,46 @@
-import { useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Icon } from '../components/common/Icon';
+import { LeadForm } from '../components/forms/LeadForm';
 import { Seo } from '../seo/Seo';
-import { siteConfig } from '../seo/siteConfig';
 
 export function DemoPage() {
+  const location = useLocation();
   const [searchParams] = useSearchParams();
-  const technology = searchParams.get('tecnologia');
-  const subject = encodeURIComponent(`Solicitud de demo NexoSkill${technology ? ` - ${technology.toUpperCase()}` : ''}`);
-  const emailHref = siteConfig.contactEmail ? `mailto:${siteConfig.contactEmail}?subject=${subject}` : 'mailto:?subject=' + subject;
+  const technology = searchParams.get('tecnologia') ?? '';
+  const service = searchParams.get('servicio') ?? '';
+  const isContact = location.pathname === '/contacto';
 
   return (
-    <main className="contact-page">
+    <div className="contact-page">
       <Seo
-        description="Solicita una demostración de NexoSkill y conoce cómo evaluar, preparar y medir el avance de tu talento tecnológico."
-        path="/solicitar-demo"
-        title="Solicitar una demo"
+        description={isContact ? 'Contacta al equipo comercial de NexoSkill.' : 'Solicita una demostración de NexoSkill y conoce cómo evaluar, preparar y medir el avance de tu talento tecnológico.'}
+        path={isContact ? '/contacto' : '/solicitar-demo'}
+        title={isContact ? 'Contacto comercial' : 'Solicitar demo'}
       />
       <section className="contact-hero">
-        <div className="container contact-grid">
+        <div className="container contact-grid contact-grid--form">
           <div>
-            <span className="eyebrow eyebrow--hero">Hablemos de tu objetivo</span>
-            <h1>Solicita una demostración de NexoSkill.</h1>
-            <p>Comparte el tamaño de tu equipo, la tecnología de interés y el objetivo del programa. En la Parte 5 este flujo contará con formulario, backend, correo y persistencia.</p>
+            <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">{isContact ? 'Contacto' : 'Solicitar demo'}</span></nav>
+            <span className="eyebrow eyebrow--hero">{isContact ? 'Hablemos de tu necesidad' : 'Conoce la plataforma'}</span>
+            <h1>{isContact ? 'Conversemos sobre tu programa de talento.' : 'Solicita una demostración de NexoSkill.'}</h1>
+            <p>{isContact ? 'Comparte el contexto de tu organización y el equipo comercial dará seguimiento a tu solicitud.' : 'Cuéntanos qué necesitas evaluar, preparar o desarrollar. Coordinaremos una sesión enfocada en el contexto real de tu organización.'}</p>
             <ul className="contact-benefits">
-              <li><Icon name="check" size={18} /> Recorrido por la plataforma</li>
-              <li><Icon name="check" size={18} /> Revisión de necesidades</li>
-              <li><Icon name="check" size={18} /> Propuesta de siguiente paso</li>
+              <li><Icon name="check" size={18} /> Atención según el objetivo del equipo</li>
+              <li><Icon name="check" size={18} /> Revisión de tecnologías y alcance</li>
+              <li><Icon name="check" size={18} /> Siguiente paso claramente definido</li>
             </ul>
           </div>
-          <div className="contact-card">
-            <span className="contact-card__step">Canal inicial</span>
-            <h2>Contacto comercial por correo</h2>
-            <p>Esta primera entrega no incluye formularios simulados. El botón abrirá tu cliente de correo para iniciar una solicitud real.</p>
-            {technology ? <p className="contact-card__interest"><strong>Tecnología:</strong> {technology.toUpperCase()}</p> : null}
-            <a className="button button--primary button--full" href={emailHref}>Preparar solicitud <Icon name="arrow" size={18} /></a>
-            {!siteConfig.contactEmail ? <small>Configura VITE_CONTACT_EMAIL para establecer el destinatario comercial.</small> : <small>Destino configurado: {siteConfig.contactEmail}</small>}
-          </div>
+          <LeadForm
+            defaultService={service || (isContact ? 'Contacto comercial' : 'Demostración de plataforma')}
+            defaultTechnology={technology}
+            description={isContact ? 'Completa los datos para que podamos canalizar tu solicitud.' : 'Completa el contexto básico y coordinaremos una sesión para mostrarte la solución.'}
+            kind={isContact ? 'contact' : 'demo'}
+            source={location.pathname}
+            submitLabel={isContact ? 'Enviar mensaje' : 'Solicitar demo'}
+            title={isContact ? 'Contactar a NexoSkill' : 'Coordinar una demostración'}
+          />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

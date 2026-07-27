@@ -1,17 +1,26 @@
 {
   "name": "nexoskill-evaluation-platform-marketing",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0-rc.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run generate:sitemap && tsc -b && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "typecheck": "tsc -b --pretty false",
     "lint": "tsc -b --pretty false",
-    "test": "node --test tests/*.test.mjs",
-    "check": "npm run lint && npm run test && npm run build",
-    "start": "vite"
+    "test": "npm run test:unit",
+    "check": "npm run lint && npm run test:unit && npm run release:check && npm run build",
+    "start": "vite",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "validate:seo": "node scripts/validate-seo.mjs",
+    "test:unit": "node --test tests/*.test.mjs && node scripts/validate-source.mjs && npm run validate:seo",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:a11y": "playwright test e2e/accessibility.spec.ts",
+    "check:all": "npm run check && npm run test:e2e",
+    "analyze": "npm run build -- --mode analyze",
+    "release:check": "node scripts/release-check.mjs"
   },
   "dependencies": {
     "react": "19.2.8",
@@ -23,7 +32,9 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.4",
     "typescript": "5.9.3",
-    "vite": "8.1.5"
+    "vite": "8.1.5",
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.55.0"
   },
   "engines": {
     "node": ">=22.12.0",

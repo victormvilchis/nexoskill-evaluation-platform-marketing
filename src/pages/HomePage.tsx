@@ -4,6 +4,7 @@ import { CTASection } from '../components/common/CTASection';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import { Icon } from '../components/common/Icon';
 import { SectionHeading } from '../components/common/SectionHeading';
+import { PricingCard } from '../components/pricing/PricingCard';
 import { businessProblems, platformFeatures } from '../content/features';
 import { faqs } from '../content/faqs';
 import { plans } from '../content/plans';
@@ -25,19 +26,19 @@ export function HomePage() {
         <div className="container hero__grid">
           <div className="hero__content">
             <span className="eyebrow eyebrow--hero">Plataforma y servicios para talento tecnológico</span>
-            <h1>Evalúa, desarrolla y certifica talento tecnológico desde una sola plataforma.</h1>
+            <h1>Evalúa y desarrolla talento tecnológico con una ruta clara.</h1>
             <p className="hero__lead">
-              Diagnostica habilidades reales, diseña rutas de preparación y convierte el avance de cada persona en resultados claros para tu organización.
+              Diagnostica habilidades reales, prepara talento para nuevos retos y convierte el avance de cada persona en resultados claros para tu organización.
             </p>
             <div className="hero__actions">
               <Link className="button button--primary button--large" to="/solicitar-demo">
-                Solicitar una demo <Icon name="arrow" size={18} />
+                Solicitar demo <Icon name="arrow" size={18} />
               </Link>
               <Link className="button button--secondary button--large" to="/plataforma">Conocer la plataforma</Link>
             </div>
             <ul className="hero__proof" aria-label="Capacidades principales">
               <li><Icon name="check" size={18} /> Diagnóstico por tecnología</li>
-              <li><Icon name="check" size={18} /> Rutas personalizadas</li>
+              <li><Icon name="check" size={18} /> Preparación para certificaciones</li>
               <li><Icon name="check" size={18} /> Analítica de avance</li>
             </ul>
           </div>
@@ -189,7 +190,7 @@ export function HomePage() {
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
                 <ul>{service.bullets.map((bullet) => <li key={bullet}><Icon name="check" size={16} /> {bullet}</li>)}</ul>
-                <ArrowLink to={service.href}>Conocer más</ArrowLink>
+                <ArrowLink to={service.href}>Conocer servicio</ArrowLink>
               </article>
             ))}
           </div>
@@ -207,17 +208,7 @@ export function HomePage() {
             <ArrowLink to="/planes">Comparar todos los planes</ArrowLink>
           </div>
           <div className="pricing-grid">
-            {plans.slice(0, 3).map((plan) => (
-              <article className={`pricing-card ${plan.featured ? 'pricing-card--featured' : ''}`} key={plan.name}>
-                {plan.featured ? <span className="pricing-card__badge">Recomendado</span> : null}
-                <span className="pricing-card__audience">{plan.audience}</span>
-                <h3>{plan.name}</h3>
-                <p>{plan.description}</p>
-                <strong className="pricing-card__price">{plan.priceLabel}</strong>
-                <ul>{plan.features.map((feature) => <li key={feature}><Icon name="check" size={17} /> {feature}</li>)}</ul>
-                <Link className={`button ${plan.featured ? 'button--primary' : 'button--secondary'} button--full`} to="/solicitar-demo">Consultar plan</Link>
-              </article>
-            ))}
+            {plans.slice(0, 3).map((plan) => <PricingCard compact key={plan.id} plan={plan} />)}
           </div>
         </div>
       </section>
