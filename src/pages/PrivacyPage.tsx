@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { analyticsIsConfigured } from '../analytics/analytics';
 import { Seo } from '../seo/Seo';
 import { siteConfig } from '../seo/siteConfig';
@@ -14,6 +15,7 @@ export function PrivacyPage() {
       <div className="legal-page">
         <section className="subpage-hero subpage-hero--compact">
           <div className="container legal-page__hero">
+            <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">Aviso de privacidad</span></nav>
             <span className="eyebrow eyebrow--hero">Privacidad</span>
             <h1>Aviso de privacidad del sitio público.</h1>
             <p>Este documento describe el tratamiento de la información enviada a través de los formularios comerciales de NexoSkill.</p>
@@ -23,8 +25,8 @@ export function PrivacyPage() {
         <div className="container legal-page__content">
           <section>
             <h2>Responsable</h2>
-            <p><strong>{siteConfig.legalEntity}</strong> es responsable del tratamiento de los datos recabados en este sitio. {privacyContact ? <>Para asuntos de privacidad puedes escribir a <a href={`mailto:${privacyContact}`}>{privacyContact}</a>.</> : <>El correo de privacidad debe configurarse antes de publicar el sitio en producción.</>}</p>
-            {siteConfig.legalAddress ? <p>Domicilio de contacto: {siteConfig.legalAddress}.</p> : <p className="legal-page__notice">Antes de publicar en producción debe configurarse la identidad jurídica y el domicilio de contacto mediante las variables de entorno correspondientes.</p>}
+            <p><strong>{siteConfig.legalEntity}</strong> es responsable del tratamiento de los datos recabados en este sitio. {privacyContact ? <>Para asuntos de privacidad puedes escribir a <a href={`mailto:${privacyContact}`}>{privacyContact}</a>.</> : <>Para asuntos de privacidad puedes utilizar el <Link to="/contacto">formulario de contacto</Link>.</>}</p>
+            {siteConfig.legalAddress ? <p>Domicilio de contacto: {siteConfig.legalAddress}.</p> : null}
           </section>
           <section>
             <h2>Datos que recopilamos</h2>

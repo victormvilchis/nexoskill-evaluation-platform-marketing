@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Seo } from '../seo/Seo';
 import { siteConfig } from '../seo/siteConfig';
 
@@ -13,6 +14,7 @@ export function TermsPage() {
       <div className="legal-page">
         <section className="subpage-hero subpage-hero--compact">
           <div className="container legal-page__hero">
+            <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">Términos y condiciones</span></nav>
             <span className="eyebrow eyebrow--hero">Condiciones del sitio</span>
             <h1>Términos y condiciones de uso.</h1>
             <p>Estas condiciones aplican al sitio público de NexoSkill. El uso de la plataforma SaaS podrá estar sujeto a contratos y condiciones independientes.</p>
@@ -27,7 +29,7 @@ export function TermsPage() {
           <section><h2>Tecnologías y marcas de terceros</h2><p>Las tecnologías mencionadas se presentan como áreas generales de conocimiento. Las marcas pertenecen a sus respectivos titulares y su mención no implica afiliación, patrocinio ni contenido oficial.</p></section>
           <section><h2>Disponibilidad</h2><p>Se aplican medidas razonables para mantener el sitio disponible y seguro, pero pueden existir interrupciones por mantenimiento, infraestructura, proveedores o causas fuera de control.</p></section>
           <section><h2>Enlaces externos</h2><p>El acceso a la plataforma u otros sitios puede dirigir a aplicaciones independientes con sus propios términos, políticas y controles de seguridad.</p></section>
-          <section><h2>Contacto</h2><p>{contactEmail ? <>Las dudas sobre estas condiciones pueden enviarse a <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</> : <>El correo de contacto debe configurarse antes de publicar el sitio en producción.</>}</p></section>
+          <section><h2>Contacto</h2><p>{contactEmail ? <>Las dudas sobre estas condiciones pueden enviarse a <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</> : <>Las dudas sobre estas condiciones pueden enviarse mediante el <Link to="/contacto">formulario de contacto</Link>.</>}</p></section>
         </div>
       </div>
     </>

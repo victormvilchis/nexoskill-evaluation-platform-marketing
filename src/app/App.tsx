@@ -1,11 +1,13 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnalyticsManager } from '../analytics/AnalyticsManager';
+import { AppErrorBoundary } from '../components/common/AppErrorBoundary';
 import { ConsentBanner } from '../components/privacy/ConsentBanner';
 import { Footer } from '../components/layout/Footer';
 import { Header } from '../components/layout/Header';
 import { HomePage } from '../pages/HomePage';
 
+const AboutPage = lazy(() => import('../pages/AboutPage').then((module) => ({ default: module.AboutPage })));
 const AdvisoryPage = lazy(() => import('../pages/AdvisoryPage').then((module) => ({ default: module.AdvisoryPage })));
 const BootcampsPage = lazy(() => import('../pages/BootcampsPage').then((module) => ({ default: module.BootcampsPage })));
 const DemoPage = lazy(() => import('../pages/DemoPage').then((module) => ({ default: module.DemoPage })));
@@ -14,7 +16,6 @@ const FaqPage = lazy(() => import('../pages/FaqPage').then((module) => ({ defaul
 const PricingPage = lazy(() => import('../pages/PricingPage').then((module) => ({ default: module.PricingPage })));
 const QuoteRequestPage = lazy(() => import('../pages/QuoteRequestPage').then((module) => ({ default: module.QuoteRequestPage })));
 const PlatformPage = lazy(() => import('../pages/PlatformPage').then((module) => ({ default: module.PlatformPage })));
-const StandardPage = lazy(() => import('../pages/StandardPage').then((module) => ({ default: module.StandardPage })));
 const TalentEvaluationPage = lazy(() => import('../pages/TalentEvaluationPage').then((module) => ({ default: module.TalentEvaluationPage })));
 const TechnologiesPage = lazy(() => import('../pages/TechnologiesPage').then((module) => ({ default: module.TechnologiesPage })));
 const TechnologyPage = lazy(() => import('../pages/TechnologyPage').then((module) => ({ default: module.TechnologyPage })));
@@ -46,7 +47,8 @@ export function App() {
       <AnalyticsManager />
       <Header />
       <div id="main-content" role="main" tabIndex={-1}>
-        <Suspense fallback={<PageLoader />}>
+        <AppErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/plataforma" element={<PlatformPage />} />
@@ -57,7 +59,7 @@ export function App() {
             <Route path="/asesorias" element={<AdvisoryPage />} />
             <Route path="/planes" element={<PricingPage />} />
             <Route path="/empresas" element={<TalentEvaluationPage />} />
-            <Route path="/nosotros" element={<StandardPage eyebrow="Acerca de NexoSkill" title="Tecnología y especialización para desarrollar talento." description="NexoSkill convierte el conocimiento técnico en procesos de evaluación y preparación claros, medibles y útiles para las organizaciones." path="/nosotros" note="La comunicación institucional utiliza únicamente información verificable y no presenta clientes, alianzas, métricas o testimonios sin autorización." />} />
+            <Route path="/nosotros" element={<AboutPage />} />
             <Route path="/contacto" element={<DemoPage />} />
             <Route path="/solicitar-demo" element={<DemoPage />} />
             <Route path="/solicitar-cotizacion" element={<QuoteRequestPage />} />
@@ -67,6 +69,7 @@ export function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
+        </AppErrorBoundary>
       </div>
       <Footer />
       <ConsentBanner />

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Icon } from '../components/common/Icon';
 import { LeadForm } from '../components/forms/LeadForm';
 import { plans } from '../content/plans';
@@ -22,9 +22,10 @@ export function QuoteRequestPage() {
       <section className="quote-hero">
         <div className="container quote-layout">
           <div className="quote-copy">
+            <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">Solicitar cotización</span></nav>
             <span className="eyebrow eyebrow--hero">Solicitud comercial</span>
             <h1>Dimensiona una propuesta para tu equipo.</h1>
-            <p>La solicitud se registra en el backend de marketing para que el equipo comercial pueda darle seguimiento y, cuando el correo esté configurado, recibir notificaciones automáticas.</p>
+            <p>Comparte el contexto de tu organización para que el equipo comercial pueda revisar el alcance y preparar el siguiente paso contigo.</p>
             <div className="quote-plan-summary">
               <span>Plan seleccionado</span>
               <h2>{selectedPlan.name}</h2>

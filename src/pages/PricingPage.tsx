@@ -51,7 +51,7 @@ export function PricingPage() {
             title="Capacidades por plan."
           />
           <PlanComparison />
-          <p className="comparison-note"><Icon name="shield" size={18} /> Las integraciones, SSO y API se validan técnica y comercialmente antes de incluirse en una propuesta.</p>
+          <p className="comparison-note"><Icon name="shield" size={18} /> El acceso único y las integraciones se validan técnica y comercialmente antes de incluirse en una propuesta.</p>
         </div>
       </section>
 

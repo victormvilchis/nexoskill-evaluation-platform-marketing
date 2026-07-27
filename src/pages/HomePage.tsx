@@ -26,9 +26,9 @@ export function HomePage() {
         <div className="container hero__grid">
           <div className="hero__content">
             <span className="eyebrow eyebrow--hero">Plataforma y servicios para talento tecnológico</span>
-            <h1>Evalúa, desarrolla y certifica talento tecnológico desde una sola plataforma.</h1>
+            <h1>Evalúa y desarrolla talento tecnológico con una ruta clara.</h1>
             <p className="hero__lead">
-              Diagnostica habilidades reales, diseña rutas de preparación y convierte el avance de cada persona en resultados claros para tu organización.
+              Diagnostica habilidades reales, prepara talento para nuevos retos y convierte el avance de cada persona en resultados claros para tu organización.
             </p>
             <div className="hero__actions">
               <Link className="button button--primary button--large" to="/solicitar-demo">
@@ -38,7 +38,7 @@ export function HomePage() {
             </div>
             <ul className="hero__proof" aria-label="Capacidades principales">
               <li><Icon name="check" size={18} /> Diagnóstico por tecnología</li>
-              <li><Icon name="check" size={18} /> Rutas personalizadas</li>
+              <li><Icon name="check" size={18} /> Preparación para certificaciones</li>
               <li><Icon name="check" size={18} /> Analítica de avance</li>
             </ul>
           </div>

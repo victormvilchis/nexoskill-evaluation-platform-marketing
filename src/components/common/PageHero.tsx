@@ -10,6 +10,7 @@ interface PageHeroProps {
   visualItems: string[];
   secondaryLabel?: string;
   secondaryHref?: string;
+  breadcrumbLabel?: string;
 }
 
 export function PageHero({
@@ -21,12 +22,18 @@ export function PageHero({
   visualItems,
   secondaryLabel = 'Conocer las soluciones',
   secondaryHref = '/empresas',
+  breadcrumbLabel,
 }: PageHeroProps) {
   return (
     <section className="page-hero">
       <div className="page-hero__glow" aria-hidden="true" />
       <div className="container page-hero__grid">
         <div className="page-hero__content">
+          <nav aria-label="Migas de pan" className="breadcrumbs">
+            <Link to="/">Inicio</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{breadcrumbLabel ?? eyebrow}</span>
+          </nav>
           <span className="eyebrow eyebrow--hero">{eyebrow}</span>
           <h1>{title}</h1>
           <p>{description}</p>

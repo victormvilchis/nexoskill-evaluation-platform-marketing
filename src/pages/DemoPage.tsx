@@ -1,4 +1,4 @@
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Icon } from '../components/common/Icon';
 import { LeadForm } from '../components/forms/LeadForm';
 import { Seo } from '../seo/Seo';
@@ -20,9 +20,10 @@ export function DemoPage() {
       <section className="contact-hero">
         <div className="container contact-grid contact-grid--form">
           <div>
+            <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">{isContact ? 'Contacto' : 'Solicitar demo'}</span></nav>
             <span className="eyebrow eyebrow--hero">{isContact ? 'Hablemos de tu necesidad' : 'Conoce la plataforma'}</span>
             <h1>{isContact ? 'Conversemos sobre tu programa de talento.' : 'Solicita una demostración de NexoSkill.'}</h1>
-            <p>{isContact ? 'Comparte el contexto de tu organización y el equipo comercial dará seguimiento a tu solicitud.' : 'Cuéntanos qué necesitas evaluar, preparar o desarrollar. La información se almacenará de forma controlada para dar seguimiento comercial.'}</p>
+            <p>{isContact ? 'Comparte el contexto de tu organización y el equipo comercial dará seguimiento a tu solicitud.' : 'Cuéntanos qué necesitas evaluar, preparar o desarrollar. Coordinaremos una sesión enfocada en el contexto real de tu organización.'}</p>
             <ul className="contact-benefits">
               <li><Icon name="check" size={18} /> Atención según el objetivo del equipo</li>
               <li><Icon name="check" size={18} /> Revisión de tecnologías y alcance</li>

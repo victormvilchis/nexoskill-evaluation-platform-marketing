@@ -18,7 +18,7 @@ async function walk(directory) {
 
 test('la Home contiene la propuesta de valor y sus secciones principales', async () => {
   const home = await read('src/pages/HomePage.tsx');
-  assert.match(home, /Evalúa, desarrolla y certifica talento tecnológico/);
+  assert.match(home, /Evalúa y desarrolla talento tecnológico con una ruta clara/);
   assert.match(home, /featuredTechnologies\.map/);
   assert.match(home, /processSteps\.map/);
   assert.match(home, /platformFeatures\.map/);

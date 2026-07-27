@@ -2,11 +2,17 @@ import type { NavigationItem } from '../types/content';
 
 export const primaryNavigation: NavigationItem[] = [
   { label: 'Plataforma', href: '/plataforma' },
-  { label: 'Soluciones', href: '/empresas' },
   { label: 'Tecnologías', href: '/tecnologias' },
   { label: 'Bootcamps', href: '/bootcamps' },
   { label: 'Planes', href: '/planes' },
   { label: 'Nosotros', href: '/nosotros' },
+];
+
+export const solutionsNavigation = [
+  { label: 'Soluciones para empresas', href: '/empresas', description: 'Evaluación, preparación y seguimiento para equipos.' },
+  { label: 'Capacitaciones', href: '/capacitaciones', description: 'Programas por tecnología, nivel u objetivo.' },
+  { label: 'Asesorías', href: '/asesorias', description: 'Diseño de academias, rutas y evaluaciones.' },
+  { label: 'Solicitar cotización', href: '/solicitar-cotizacion', description: 'Dimensiona capacidad, servicios y acompañamiento.' },
 ];
 
 export const footerNavigation = {

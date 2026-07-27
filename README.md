@@ -95,3 +95,8 @@ Consulta [`DEPLOYMENT.md`](DEPLOYMENT.md). Para desarrollo:
 ```powershell
 docker compose up --build
 ```
+
+
+## Estado de la versión
+
+Versión `0.1.1`: cierre UX/UI prepublicación con navegación de soluciones, página institucional completa, formularios reorganizados, estados de confirmación y recuperación ante errores de renderizado.
