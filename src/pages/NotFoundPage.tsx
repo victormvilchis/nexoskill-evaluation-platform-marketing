@@ -3,7 +3,7 @@ import { Seo } from '../seo/Seo';
 
 export function NotFoundPage() {
   return (
-    <main className="not-found">
+    <div className="not-found">
       <Seo description="La página solicitada no existe." noIndex title="Página no encontrada" />
       <div className="container">
         <span>404</span>
@@ -11,6 +11,6 @@ export function NotFoundPage() {
         <p>Regresa al inicio para continuar explorando NexoSkill.</p>
         <Link className="button button--primary" to="/">Volver al inicio</Link>
       </div>
-    </main>
+    </div>
   );
 }

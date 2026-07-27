@@ -11,7 +11,7 @@ export function DemoPage() {
   const isContact = location.pathname === '/contacto';
 
   return (
-    <main className="contact-page">
+    <div className="contact-page">
       <Seo
         description={isContact ? 'Contacta al equipo comercial de NexoSkill.' : 'Solicita una demostración de NexoSkill y conoce cómo evaluar, preparar y medir el avance de tu talento tecnológico.'}
         path={isContact ? '/contacto' : '/solicitar-demo'}
@@ -40,6 +40,6 @@ export function DemoPage() {
           />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ export function AdvisoryPage() {
         path="/asesorias"
         title="Asesoría en evaluación y capacitación tecnológica"
       />
-      <main>
+      <div>
         <PageHero
           description="Acompañamos a tu organización para convertir una necesidad de capacitación o evaluación en un modelo claro, mantenible y medible."
           eyebrow="Asesoría especializada"
@@ -86,7 +86,7 @@ export function AdvisoryPage() {
             <LeadForm compact defaultService="Asesoría" description="Comparte la necesidad, el equipo involucrado y el resultado esperado." kind="advisory" source="/asesorias" submitLabel="Solicitar asesoría" title="Iniciar conversación" />
           </div>
         </section>
-      </main>
+      </div>
       <CTASection />
     </>
   );

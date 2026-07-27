@@ -31,7 +31,7 @@ test('todas las rutas base están declaradas', () => {
 test('las rutas de la Parte 2 utilizan páginas comerciales completas', () => {
   const pages = ['PlatformPage', 'BootcampsPage', 'TrainingPage', 'AdvisoryPage', 'TalentEvaluationPage'];
   pages.forEach((page) => {
-    assert.match(app, new RegExp(`import \\{ ${page} \\}`));
+    assert.match(app, new RegExp(`(?:import \\{ ${page} \\}|const ${page} = lazy\\()`));
     assert.match(app, new RegExp(`<${page} \\/>`));
   });
 });
@@ -49,7 +49,7 @@ test('la URL de la plataforma no está repetida en componentes', async () => {
   assert.doesNotMatch(`${header}\n${footer}`, /localhost:5173|app\.nexoskill\.com/);
 });
 
-test('ScrollToTop no devuelve el resultado de window.scrollTo desde useEffect', () => {
+test('el efecto de navegación no devuelve el resultado de window.scrollTo desde useEffect', () => {
   assert.match(app, /useEffect\(\(\) => \{\s*window\.scrollTo\(/s);
   assert.doesNotMatch(app, /useEffect\(\(\) => window\.scrollTo\(/);
 });

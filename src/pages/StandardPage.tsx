@@ -16,7 +16,7 @@ export function StandardPage({ eyebrow, title, description, path, highlights = [
   return (
     <>
       <Seo description={description} path={path} title={title} />
-      <main className="subpage">
+      <div className="subpage">
         <section className="subpage-hero">
           <div className="container subpage-hero__grid">
             <div>
@@ -36,7 +36,7 @@ export function StandardPage({ eyebrow, title, description, path, highlights = [
             </div>
           </div>
         </section>
-      </main>
+      </div>
       <CTASection />
     </>
   );

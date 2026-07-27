@@ -13,7 +13,7 @@ export function QuoteRequestPage() {
   const selectedPlan = useMemo(() => plans.find((plan) => plan.id === planId) ?? plans[1], [planId]);
 
   return (
-    <main className="quote-page">
+    <div className="quote-page">
       <Seo
         description="Solicita una cotización de NexoSkill según el tamaño de tu equipo, tecnologías de interés y objetivo del programa."
         path="/solicitar-cotizacion"
@@ -50,6 +50,6 @@ export function QuoteRequestPage() {
           />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

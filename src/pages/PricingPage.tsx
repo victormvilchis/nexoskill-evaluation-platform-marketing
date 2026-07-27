@@ -12,7 +12,7 @@ import { Seo } from '../seo/Seo';
 
 export function PricingPage() {
   return (
-    <main>
+    <div>
       <Seo
         description="Compara los planes comerciales de NexoSkill para evaluar, preparar y dar seguimiento al talento tecnológico de tu organización."
         path="/planes"
@@ -111,6 +111,6 @@ export function PricingPage() {
         secondaryLabel="Solicitar demo"
         title="Dimensionemos tu programa."
       />
-    </main>
+    </div>
   );
 }

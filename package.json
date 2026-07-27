@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run generate:sitemap && tsc -b && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "typecheck": "tsc -b --pretty false",
     "lint": "tsc -b --pretty false",
-    "test": "node --test tests/*.test.mjs && node scripts/validate-source.mjs",
+    "test": "node --test tests/*.test.mjs && node scripts/validate-source.mjs && npm run validate:seo",
     "check": "npm run lint && npm run test && npm run build",
-    "start": "vite"
+    "start": "vite",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "validate:seo": "node scripts/validate-seo.mjs"
   },
   "dependencies": {
     "react": "19.2.8",

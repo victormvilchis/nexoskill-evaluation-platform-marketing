@@ -5,6 +5,7 @@ import { Icon } from '../components/common/Icon';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { getTechnologyBySlug } from '../content/technologies';
 import { Seo } from '../seo/Seo';
+import { faqSchema, serviceSchema } from '../seo/structuredData';
 import { NotFoundPage } from './NotFoundPage';
 
 export function TechnologyPage() {
@@ -21,8 +22,13 @@ export function TechnologyPage() {
         description={`${technology.summary} Conoce competencias, niveles, evaluaciones, rutas y modalidades disponibles en NexoSkill.`}
         path={`/tecnologias/${technology.slug}`}
         title={`Evaluación y capacitación en ${technology.name}`}
+        keywords={technology.seoKeywords}
+        structuredData={[
+          serviceSchema(`Evaluación y capacitación en ${technology.name}`, technology.summary, `/tecnologias/${technology.slug}`, technology.audience),
+          faqSchema(technology.faqs),
+        ]}
       />
-      <main className="technology-detail">
+      <div className="technology-detail">
         <section className="technology-detail-hero">
           <div className="container technology-detail-hero__grid">
             <div>
@@ -146,7 +152,7 @@ export function TechnologyPage() {
           description={`Diseñemos una evaluación o ruta de preparación en ${technology.name} alineada con el nivel y los objetivos de tu equipo.`}
           title={`Desarrolla capacidades en ${technology.name}.`}
         />
-      </main>
+      </div>
     </>
   );
 }

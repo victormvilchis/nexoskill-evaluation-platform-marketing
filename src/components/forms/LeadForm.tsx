@@ -2,6 +2,7 @@ import { type FormEvent, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '../common/Icon';
 import { LeadApiError, submitLead } from '../../services/leadApi';
+import { trackEvent } from '../../analytics/analytics';
 import type { LeadKind, LeadSubmissionPayload } from '../../types/lead';
 
 interface PlanOption {
@@ -86,6 +87,11 @@ export function LeadForm({
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<{ type: 'idle' | 'sending' | 'success' | 'error'; message?: string; reference?: string }>({ type: 'idle' });
   const formStartedAt = useRef(new Date().toISOString());
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const focusFirstError = () => {
+    window.requestAnimationFrame(() => formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus());
+  };
 
   const updateField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -99,6 +105,7 @@ export function LeadForm({
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
       setStatus({ type: 'error', message: 'Revisa los campos marcados antes de continuar.' });
+      focusFirstError();
       return;
     }
 
@@ -126,6 +133,7 @@ export function LeadForm({
     try {
       const response = await submitLead(kind, payload);
       setStatus({ type: 'success', message: response.message, reference: response.reference });
+      trackEvent('lead_submit_success', { request_type: kind, service: defaultService, plan_id: planId });
       setForm(createInitialState(defaultTechnology));
       formStartedAt.current = new Date().toISOString();
     } catch (error) {
@@ -133,8 +141,11 @@ export function LeadForm({
         const mappedErrors = Object.fromEntries(Object.entries(error.fieldErrors).map(([key, value]) => [key as keyof FormState, value]));
         setErrors((current) => ({ ...current, ...mappedErrors }));
         setStatus({ type: 'error', message: error.message });
+        trackEvent('lead_submit_error', { request_type: kind, error_type: 'api' });
+        focusFirstError();
       } else {
         setStatus({ type: 'error', message: 'No fue posible enviar la solicitud.' });
+        trackEvent('lead_submit_error', { request_type: kind, error_type: 'network' });
       }
     }
   };
@@ -142,7 +153,7 @@ export function LeadForm({
   const formClass = compact ? 'lead-form lead-form--compact' : 'lead-form';
 
   return (
-    <form className={formClass} noValidate onSubmit={handleSubmit}>
+    <form className={formClass} noValidate onSubmit={handleSubmit} ref={formRef}>
       <div className="lead-form__heading">
         <span>Solicitud comercial</span>
         <h2>{title}</h2>

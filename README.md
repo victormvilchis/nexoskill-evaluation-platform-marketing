@@ -6,31 +6,24 @@ Sitio público y comercial de NexoSkill. Este repositorio es independiente de `n
 
 - Sitio de marketing: `http://localhost:5174`
 - API de prospectos: `http://localhost:8081`
-- Plataforma administrativa existente: `http://localhost:5173/evaluaciones/admin/students`
+- Plataforma de evaluaciones: `http://localhost:5173/evaluaciones/dashboard`
 
 ## Requisitos
 
-- Node.js 22.12 o superior.
-- npm 10 o superior.
-- Java 21.
-- Maven 3.9 o superior.
+- Node.js 22.12 o superior y npm 10 o superior.
+- Java 21 y Maven 3.9 o superior.
 - Acceso a la instancia Oracle utilizada por la plataforma.
 
 ## Inicio local
 
-Ejecuta:
+En PowerShell:
 
 ```powershell
+Set-ExecutionPolicy -Scope Process Bypass
 .\start-marketing.ps1
 ```
 
-En la primera ejecución se solicitarán:
-
-- URL JDBC de Oracle.
-- Usuario/esquema Oracle.
-- Contraseña Oracle.
-
-La configuración se guarda en `.env.local`, archivo excluido de Git. El backend crea únicamente objetos con prefijo `MKT_`, por lo que puede utilizar la misma instancia y el mismo esquema de la plataforma sin reutilizar sus tablas.
+En la primera ejecución se solicitan URL JDBC, usuario y contraseña Oracle. La configuración queda en `.env.local`, excluido de Git.
 
 Para detener ambos procesos:
 
@@ -38,9 +31,15 @@ Para detener ambos procesos:
 .\stop-marketing.ps1
 ```
 
-## Backend
+## Separación de aplicaciones
 
-El backend Spring Boot expone:
+- Marketing se publica en la raíz de su dominio: `https://nexoskill.com`.
+- La plataforma se publica de forma independiente: `https://app.nexoskill.com`.
+- En local, el botón **Iniciar sesión** dirige a `http://localhost:5173/evaluaciones/dashboard`.
+
+## Backend y Oracle
+
+Endpoints:
 
 - `POST /api/v1/leads/contact`
 - `POST /api/v1/leads/demo`
@@ -49,52 +48,50 @@ El backend Spring Boot expone:
 - `POST /api/v1/leads/bootcamp`
 - `GET /actuator/health`
 
-La migración Oracle crea:
+Objetos Oracle aislados:
 
 - `MKT_PROSPECT`
 - `MKT_PROSPECT_SEQ`
 - `MKT_FLYWAY_HISTORY`
 
-## Correo
+Aunque técnicamente puede compartir esquema, en producción se recomienda un usuario Oracle de aplicación con privilegios mínimos y no utilizar `SYSTEM`.
 
-Los prospectos siempre se guardan en Oracle. El correo es opcional y está desactivado inicialmente. Para habilitarlo configura en `.env.local`:
+## Analítica y consentimiento
+
+La analítica está desactivada por defecto. Para habilitarla configura uno de estos identificadores y activa la bandera:
 
 ```env
-MAIL_ENABLED=true
-MAIL_HOST=smtp.example.com
-MAIL_PORT=587
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_SMTP_AUTH=true
-MAIL_STARTTLS=true
-MAIL_STARTTLS_REQUIRED=true
-MAIL_FROM=no-reply@example.com
-CONTACT_RECIPIENT=ventas@example.com
+VITE_ENABLE_ANALYTICS=true
+VITE_GTM_ID=GTM-XXXXXXX
+# o
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+Los scripts de medición no se cargan hasta que la persona acepta la analítica opcional.
+
+## Correo
+
+Los prospectos se guardan en Oracle aunque SMTP esté desactivado. Para evitar que Actuator marque el servicio como no saludable mientras no exista SMTP:
+
+```env
+MAIL_ENABLED=false
+MAIL_HEALTH_ENABLED=false
 ```
 
 ## Validación
 
-Frontend:
-
 ```powershell
 npm test
 npm run build
-```
-
-Backend:
-
-```powershell
 cd backend
 mvn test
-mvn package
+mvn clean package
 ```
 
-## Docker
+## Docker y producción
 
-Docker Compose no levanta una base de datos adicional; utiliza la instancia Oracle configurada por variables de entorno:
+Consulta [`DEPLOYMENT.md`](DEPLOYMENT.md). Para desarrollo:
 
 ```powershell
 docker compose up --build
 ```
-
-El sitio queda en `http://localhost:8080` y la API en `http://localhost:8081`.

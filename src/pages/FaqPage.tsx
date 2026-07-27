@@ -5,14 +5,16 @@ import { SectionHeading } from '../components/common/SectionHeading';
 import { faqs } from '../content/faqs';
 import { pricingFaqs } from '../content/pricingFaqs';
 import { Seo } from '../seo/Seo';
+import { faqSchema } from '../seo/structuredData';
 
 export function FaqPage() {
   return (
-    <main>
+    <div>
       <Seo
         description="Respuestas sobre la plataforma NexoSkill, asientos, contenido, planes, personalización, bootcamps, seguridad y contratación."
         path="/preguntas-frecuentes"
         title="Preguntas frecuentes"
+        structuredData={faqSchema([...faqs, ...pricingFaqs])}
       />
       <PageHero
         description="Consulta cómo funciona la solución, qué puede personalizarse y cómo se dimensionan los planes y servicios para cada organización."
@@ -57,6 +59,6 @@ export function FaqPage() {
         primaryLabel="Solicitar cotización"
         title="¿Tu escenario necesita una respuesta específica?"
       />
-    </main>
+    </div>
   );
 }

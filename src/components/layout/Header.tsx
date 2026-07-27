@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { primaryNavigation } from '../../content/navigation';
 import { siteConfig } from '../../seo/siteConfig';
@@ -8,6 +8,7 @@ import { Icon } from '../common/Icon';
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     setIsOpen(false);
@@ -15,7 +16,17 @@ export function Header() {
 
   useEffect(() => {
     document.body.classList.toggle('nav-open', isOpen);
-    return () => document.body.classList.remove('nav-open');
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.body.classList.remove('nav-open');
+      document.removeEventListener('keydown', closeOnEscape);
+    };
   }, [isOpen]);
 
   return (
@@ -28,6 +39,7 @@ export function Header() {
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
           className="nav-toggle"
           onClick={() => setIsOpen((current) => !current)}
+          ref={toggleRef}
           type="button"
         >
           <Icon name={isOpen ? 'close' : 'menu'} />
@@ -45,8 +57,8 @@ export function Header() {
             ))}
           </div>
           <div className="site-nav__actions">
-            <a className="login-link" href={siteConfig.platformUrl}>Iniciar sesión</a>
-            <Link className="button button--primary button--small" to="/solicitar-demo">Solicitar demo</Link>
+            <a data-analytics-event="platform_login_click" data-analytics-label="Header" className="login-link" href={siteConfig.platformUrl}>Iniciar sesión</a>
+            <Link data-analytics-event="demo_cta_click" data-analytics-label="Header" className="button button--primary button--small" to="/solicitar-demo">Solicitar demo</Link>
           </div>
         </nav>
       </div>

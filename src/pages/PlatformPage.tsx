@@ -16,7 +16,7 @@ export function PlatformPage() {
         path="/plataforma"
         title="Plataforma de evaluación y desarrollo de talento"
       />
-      <main>
+      <div>
         <PageHero
           description="NexoSkill reúne evaluación, preparación y seguimiento en una operación organizada para empresas que necesitan desarrollar talento con evidencia clara."
           eyebrow="Plataforma NexoSkill"
@@ -98,7 +98,7 @@ export function PlatformPage() {
           linkTo="/solicitar-demo"
           title="Gobierno, seguridad y escalabilidad desde la base."
         />
-      </main>
+      </div>
       <CTASection />
     </>
   );

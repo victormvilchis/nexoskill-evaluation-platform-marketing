@@ -39,7 +39,7 @@ export function TechnologiesPage() {
         path="/tecnologias"
         title="Tecnologías y competencias"
       />
-      <main>
+      <div>
         <PageHero
           description="Configura evaluaciones, rutas y programas sobre especialidades tecnológicas públicas, con contenido original y un alcance adaptable a cada equipo."
           eyebrow="Catálogo tecnológico"
@@ -121,7 +121,7 @@ export function TechnologiesPage() {
           description="Cuéntanos qué perfiles necesitas evaluar o desarrollar y diseñaremos una ruta alineada con tus objetivos."
           title="Construyamos tu catálogo tecnológico."
         />
-      </main>
+      </div>
     </>
   );
 }

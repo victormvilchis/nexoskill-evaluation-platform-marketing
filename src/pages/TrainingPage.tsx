@@ -15,7 +15,7 @@ export function TrainingPage() {
         path="/capacitaciones"
         title="Capacitaciones tecnológicas empresariales"
       />
-      <main>
+      <div>
         <PageHero
           description="Diseñamos programas para desarrollar capacidades concretas, preparar equipos para proyectos y homologar conocimientos dentro de la organización."
           eyebrow="Capacitación empresarial"
@@ -75,7 +75,7 @@ export function TrainingPage() {
           linkTo="/solicitar-demo"
           title="Un modelo que puede crecer con la organización."
         />
-      </main>
+      </div>
       <CTASection />
     </>
   );

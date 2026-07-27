@@ -15,7 +15,7 @@ export function TalentEvaluationPage() {
         path="/empresas"
         title="Evaluación de talento tecnológico para empresas"
       />
-      <main>
+      <div>
         <PageHero
           description="Obtén una lectura consistente del conocimiento técnico antes de contratar, asignar, capacitar o preparar a un equipo."
           eyebrow="Soluciones para empresas"
@@ -84,7 +84,7 @@ export function TalentEvaluationPage() {
           linkTo="/solicitar-demo"
           title="Conecta el diagnóstico con una acción formativa."
         />
-      </main>
+      </div>
       <CTASection />
     </>
   );

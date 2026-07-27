@@ -4,8 +4,10 @@ backend/target/
 .env
 .env.*
 !.env.example
+!.env.production.example
 *.local
 *.log
+*.tsbuildinfo
 .DS_Store
 .vscode/
 .idea/

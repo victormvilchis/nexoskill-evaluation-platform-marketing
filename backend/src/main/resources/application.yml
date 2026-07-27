@@ -1,6 +1,7 @@
 server:
   port: ${BACKEND_PORT:8081}
   shutdown: graceful
+  forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:none}
   error:
     include-message: never
     include-stacktrace: never
@@ -56,7 +57,7 @@ spring:
 management:
   health:
     mail:
-      enabled: false
+      enabled: ${MAIL_HEALTH_ENABLED:false}
   endpoints:
     web:
       exposure:

@@ -16,7 +16,7 @@ export function BootcampsPage() {
         path="/bootcamps"
         title="Bootcamps tecnológicos para empresas"
       />
-      <main>
+      <div>
         <PageHero
           description="Programas intensivos para acelerar el desarrollo de capacidades con una ruta clara, práctica guiada y seguimiento durante todo el proceso."
           eyebrow="Bootcamps NexoSkill"
@@ -86,7 +86,7 @@ export function BootcampsPage() {
             <LeadForm compact defaultService="Bootcamp" description="Indica la tecnología, el nivel esperado y el tiempo disponible." kind="bootcamp" source="/bootcamps" submitLabel="Consultar bootcamp" title="Solicitar información" />
           </div>
         </section>
-      </main>
+      </div>
       <CTASection />
     </>
   );

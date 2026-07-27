@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { footerNavigation } from '../../content/navigation';
 import { featuredTechnologies } from '../../content/technologies';
+import { analyticsIsConfigured } from '../../analytics/analytics';
 import { siteConfig } from '../../seo/siteConfig';
 import { BrandMark } from '../common/BrandMark';
 
@@ -14,7 +15,7 @@ export function Footer() {
           <div className="site-footer__brand">
             <BrandMark inverse />
             <p>Evaluación, preparación y analítica para desarrollar talento tecnológico con resultados medibles.</p>
-            <Link className="footer-demo-link" to="/solicitar-demo">Solicitar una demostración</Link>
+            <Link data-analytics-event="demo_cta_click" data-analytics-label="Footer" className="footer-demo-link" to="/solicitar-demo">Solicitar una demostración</Link>
           </div>
           <div>
             <h2>Soluciones</h2>
@@ -33,7 +34,8 @@ export function Footer() {
           <p>© {year} NexoSkill. Todos los derechos reservados.</p>
           <div>
             {footerNavigation.legal.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}
-            <a href={siteConfig.platformUrl}>Acceso a la plataforma</a>
+            <a data-analytics-event="platform_login_click" data-analytics-label="Footer" href={siteConfig.platformUrl}>Acceso a la plataforma</a>
+            {analyticsIsConfigured() ? <button className="footer-privacy-button" onClick={() => window.dispatchEvent(new Event('nexoskill:open-consent'))} type="button">Preferencias de cookies</button> : null}
           </div>
         </div>
       </div>
