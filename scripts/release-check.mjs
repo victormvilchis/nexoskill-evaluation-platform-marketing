@@ -31,9 +31,6 @@ for (const ignored of ['.env', '.env.*', '.runtime/', 'logs/', 'playwright-repor
 }
 
 const forbidden = [
-  /EvaluationApp123!/i,
-  /DB_PASSWORD=(?!\s*$)/im,
-  /MAIL_PASSWORD=(?!\s*$)/im,
   /Iniciar sesión/i,
   /href=["']#["']/i,
 ];

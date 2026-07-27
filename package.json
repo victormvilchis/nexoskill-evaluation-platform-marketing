@@ -20,7 +20,8 @@
     "test:a11y": "playwright test e2e/accessibility.spec.ts",
     "check:all": "npm run check && npm run test:e2e",
     "analyze": "npm run build -- --mode analyze",
-    "release:check": "node scripts/release-check.mjs"
+    "release:check": "node scripts/release-check.mjs && npm run repository:guard",
+    "repository:guard": "node scripts/repository-guard.mjs"
   },
   "dependencies": {
     "react": "19.2.8",

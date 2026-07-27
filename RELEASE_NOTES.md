@@ -32,3 +32,7 @@ Esta versión es un candidato de publicación. No agrega nuevas líneas comercia
 - Prueba 404 alineada con la página real.
 - Control móvil único y backdrop fuera del árbol accesible.
 - Diagnóstico de Java corregido para PowerShell.
+
+## Corrección del pipeline de seguridad
+
+El job `Repository guard` ahora ejecuta `npm run repository:guard`. La validación revisa archivos sensibles y asignaciones reales sin interpretar sus propias expresiones regulares o pruebas como credenciales. Esta corrección no modifica la aplicación, la base de datos ni los contratos de API.
