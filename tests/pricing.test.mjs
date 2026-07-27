@@ -28,13 +28,12 @@ test('la página de planes utiliza contenido centralizado, comparación, FAQ y C
   assert.match(comparison, /planComparison\.map/);
 });
 
-test('la solicitud de cotización valida datos y genera un correo real', () => {
-  assert.match(quotePage, /const validate/);
-  assert.match(quotePage, /type="email"/);
-  assert.match(quotePage, /maxLength=\{700\}/);
-  assert.match(quotePage, /window\.location\.href = `mailto:/);
-  assert.match(quotePage, /siteConfig\.contactEmail/);
-  assert.match(quotePage, /\/aviso-de-privacidad/);
+test('la solicitud de cotización utiliza el formulario persistente del backend', () => {
+  assert.match(quotePage, /<LeadForm/);
+  assert.match(quotePage, /kind="quote"/);
+  assert.match(quotePage, /planOptions=/);
+  assert.match(quotePage, /onPlanChange=\{setPlanId\}/);
+  assert.doesNotMatch(quotePage, /mailto:/);
 });
 
 test('las rutas comerciales nuevas están declaradas y el FAQ ya no es provisional', () => {

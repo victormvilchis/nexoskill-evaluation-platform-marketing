@@ -4,6 +4,7 @@ import { JourneySteps } from '../components/common/JourneySteps';
 import { PageHero } from '../components/common/PageHero';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { ValueBand } from '../components/common/ValueBand';
+import { LeadForm } from '../components/forms/LeadForm';
 import { advisoryJourney, advisoryServices } from '../content/advisory';
 import { Seo } from '../seo/Seo';
 
@@ -71,9 +72,20 @@ export function AdvisoryPage() {
           eyebrow="Solución integral"
           items={['Diagnóstico', 'Diseño', 'Contenido', 'Implementación']}
           linkLabel="Solicitar una asesoría"
-          linkTo="/solicitar-demo"
+          linkTo="#solicitar-asesoria"
           title="Del diseño estratégico a la operación."
         />
+
+        <section className="section lead-capture-section" id="solicitar-asesoria">
+          <div className="container lead-capture-grid">
+            <div>
+              <span className="eyebrow">Solicitud de asesoría</span>
+              <h2>Cuéntanos qué necesitas diseñar o mejorar.</h2>
+              <p>La solicitud quedará registrada para revisar el contexto, dimensionar el alcance y proponerte el siguiente paso.</p>
+            </div>
+            <LeadForm compact defaultService="Asesoría" description="Comparte la necesidad, el equipo involucrado y el resultado esperado." kind="advisory" source="/asesorias" submitLabel="Solicitar asesoría" title="Iniciar conversación" />
+          </div>
+        </section>
       </main>
       <CTASection />
     </>

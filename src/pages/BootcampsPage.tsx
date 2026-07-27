@@ -4,6 +4,7 @@ import { PageHero } from '../components/common/PageHero';
 import { ProgramGrid } from '../components/common/ProgramGrid';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { ValueBand } from '../components/common/ValueBand';
+import { LeadForm } from '../components/forms/LeadForm';
 import { bootcampJourney, bootcampPrograms } from '../content/bootcamps';
 import { Seo } from '../seo/Seo';
 
@@ -71,9 +72,20 @@ export function BootcampsPage() {
           eyebrow="Resultado del programa"
           items={['Resultados por participante', 'Visión consolidada del grupo', 'Brechas identificadas', 'Recomendaciones de continuidad']}
           linkLabel="Consultar un bootcamp"
-          linkTo="/solicitar-demo"
+          linkTo="#consultar-bootcamp"
           title="No solo impartimos sesiones: medimos el proceso."
         />
+
+        <section className="section lead-capture-section" id="consultar-bootcamp">
+          <div className="container lead-capture-grid">
+            <div>
+              <span className="eyebrow">Consulta de bootcamp</span>
+              <h2>Diseñemos el programa según tu equipo.</h2>
+              <p>Comparte la tecnología, el número de participantes y el objetivo para dimensionar una propuesta.</p>
+            </div>
+            <LeadForm compact defaultService="Bootcamp" description="Indica la tecnología, el nivel esperado y el tiempo disponible." kind="bootcamp" source="/bootcamps" submitLabel="Consultar bootcamp" title="Solicitar información" />
+          </div>
+        </section>
       </main>
       <CTASection />
     </>

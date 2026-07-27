@@ -1,0 +1,20 @@
+# Ejemplo de configuración. No almacenar credenciales reales en Git.
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    username: NEXOSKILL_MARKETING
+    password: CHANGE_ME
+
+app:
+  cors:
+    allowed-origins:
+      - http://localhost:5174
+  mail:
+    enabled: false
+    recipient: ventas@example.com
+    from: no-reply@example.com
+  security:
+    ip-hash-salt: CHANGE_ME_WITH_A_RANDOM_VALUE
