@@ -9,6 +9,8 @@ server:
 spring:
   application:
     name: nexoskill-marketing-backend
+  profiles:
+    default: local
   lifecycle:
     timeout-per-shutdown-phase: 20s
   datasource:
@@ -74,7 +76,7 @@ management:
 info:
   app:
     name: NexoSkill Marketing Backend
-    version: 0.1.3
+    version: 1.0.0-rc.1
 
 app:
   cors:

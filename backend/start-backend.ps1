@@ -1,6 +1,8 @@
 $ErrorActionPreference = 'Stop'
 $backendRoot = $PSScriptRoot
 $projectRoot = Split-Path $backendRoot -Parent
+$logsRoot = Join-Path $projectRoot 'logs'
+New-Item -ItemType Directory -Force -Path $logsRoot | Out-Null
 
 function Import-DotEnv([string]$Path) {
     if (-not (Test-Path $Path)) { return }
@@ -19,12 +21,14 @@ function Import-DotEnv([string]$Path) {
 
 Import-DotEnv (Join-Path $projectRoot '.env')
 Import-DotEnv (Join-Path $projectRoot '.env.local')
+if (-not $env:SPRING_PROFILES_ACTIVE) { $env:SPRING_PROFILES_ACTIVE = 'local' }
 
 Set-Location $backendRoot
 Write-Host ''
-Write-Host 'NexoSkill Marketing API: http://localhost:8081' -ForegroundColor Green
+Write-Host "NexoSkill Marketing API ($($env:SPRING_PROFILES_ACTIVE)): http://localhost:8081" -ForegroundColor Green
 Write-Host 'Health: http://localhost:8081/actuator/health'
+Write-Host "Log: $logsRoot\backend.log"
 Write-Host ''
 
-mvn spring-boot:run
+mvn spring-boot:run 2>&1 | Tee-Object -FilePath (Join-Path $logsRoot 'backend.log')
 exit $LASTEXITCODE

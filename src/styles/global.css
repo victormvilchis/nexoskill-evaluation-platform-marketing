@@ -775,7 +775,7 @@ p {
 }
 
 .technology-card small {
-  color: var(--ink-500);
+  color: var(--ink-600);
 }
 
 .problem-section {
@@ -965,8 +965,7 @@ p {
   font-size: 0.92rem;
 }
 
-.service-card--featured p,
-.service-card--featured li {
+.service-card--featured p {
   color: #b8c6d5;
 }
 
@@ -990,6 +989,10 @@ p {
   gap: 8px;
   color: var(--ink-700);
   font-size: 0.88rem;
+}
+
+.service-card.service-card--featured li {
+  color: #b8c6d5;
 }
 
 .service-card li svg,
@@ -4636,4 +4639,12 @@ p {
   .lead-form__success-actions .button {
     width: 100%;
   }
+}
+
+.lead-form__error-reference {
+  display: block;
+  margin-top: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
 }

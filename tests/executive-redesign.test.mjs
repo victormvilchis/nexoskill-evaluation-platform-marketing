@@ -39,7 +39,10 @@ test('el dropdown conserva el diseño original y mejora su accesibilidad', () =>
 test('el menú móvil bloquea el fondo y se cierra al navegar', () => {
   assert.match(header, /document\.body\.classList\.toggle\('nav-open', mobileOpen\)/);
   assert.match(header, /setMobileOpen\(false\)/);
-  assert.match(header, /nav-backdrop/);
+  assert.match(header, /mobileOpen && \(/);
+  assert.match(header, /aria-hidden="true"/);
+  assert.match(header, /className="nav-backdrop nav-backdrop--visible"/);
+  assert.doesNotMatch(header, /aria-label="Cerrar menú principal"[\s\S]*nav-backdrop/);
   assert.match(enhancements, /body\.nav-open/);
   assert.match(enhancements, /@media \(max-width: 960px\)/);
 });

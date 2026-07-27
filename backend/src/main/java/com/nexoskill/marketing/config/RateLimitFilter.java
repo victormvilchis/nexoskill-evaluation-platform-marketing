@@ -1,6 +1,7 @@
 package com.nexoskill.marketing.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nexoskill.marketing.api.ApiErrorResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,11 +61,14 @@ public class RateLimitFilter extends OncePerRequestFilter {
                 response.setContentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE);
                 response.setCharacterEncoding("UTF-8");
                 response.setHeader("Retry-After", String.valueOf(properties.rateLimit().window().toSeconds()));
-                objectMapper.writeValue(response.getWriter(), Map.of(
-                        "type", "about:blank",
-                        "title", "Demasiadas solicitudes",
-                        "status", 429,
-                        "detail", "Espera unos minutos antes de volver a enviar el formulario."
+                Object requestId = request.getAttribute(RequestCorrelationFilter.ATTRIBUTE);
+                objectMapper.writeValue(response.getWriter(), new ApiErrorResponse(
+                        "RATE_LIMIT_EXCEEDED",
+                        "Espera unos minutos antes de volver a enviar el formulario.",
+                        Map.of(),
+                        now,
+                        request.getRequestURI(),
+                        requestId == null ? "" : requestId.toString()
                 ));
                 return;
             }

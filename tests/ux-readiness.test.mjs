@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
-const [app, about, header, navigation, pageHero, leadForm, boundary] = await Promise.all([
+const [app, about, header, navigation, pageHero, leadForm, boundary, globalStyles, navigationE2e] = await Promise.all([
   read('src/app/App.tsx'),
   read('src/pages/AboutPage.tsx'),
   read('src/components/layout/Header.tsx'),
@@ -11,6 +11,8 @@ const [app, about, header, navigation, pageHero, leadForm, boundary] = await Pro
   read('src/components/common/PageHero.tsx'),
   read('src/components/forms/LeadForm.tsx'),
   read('src/components/common/AppErrorBoundary.tsx'),
+  read('src/styles/global.css'),
+  read('e2e/navigation.spec.ts'),
 ]);
 
 test('la página Nosotros está terminada y no utiliza contenido provisional', () => {
@@ -49,4 +51,12 @@ test('la aplicación cuenta con recuperación visual ante errores de renderizado
   assert.match(app, /<AppErrorBoundary>/);
   assert.match(boundary, /getDerivedStateFromError/);
   assert.match(boundary, /Actualizar página/);
+});
+
+
+test('la Home mantiene contraste AA y la prueba de navegación contempla móvil', () => {
+  assert.match(globalStyles, /\.technology-card small \{\s*color: var\(--ink-600\);/s);
+  assert.match(globalStyles, /\.service-card\.service-card--featured li \{\s*color: #b8c6d5;/s);
+  assert.match(navigationE2e, /testInfo\.project\.name\.startsWith\('mobile-'\)/);
+  assert.match(navigationE2e, /Abrir menú principal/);
 });

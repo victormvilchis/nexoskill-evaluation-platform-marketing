@@ -3,12 +3,22 @@ import type { LeadKind, LeadSubmissionPayload, LeadSubmissionResponse, ProblemDe
 
 export class LeadApiError extends Error {
   readonly status?: number;
+  readonly code?: string;
+  readonly requestId?: string;
   readonly fieldErrors: Record<string, string>;
 
-  constructor(message: string, status?: number, fieldErrors: Record<string, string> = {}) {
+  constructor(
+    message: string,
+    status?: number,
+    fieldErrors: Record<string, string> = {},
+    code?: string,
+    requestId?: string,
+  ) {
     super(message);
     this.name = 'LeadApiError';
     this.status = status;
+    this.code = code;
+    this.requestId = requestId;
     this.fieldErrors = fieldErrors;
   }
 }
@@ -36,9 +46,11 @@ export async function submitLead(kind: LeadKind, payload: LeadSubmissionPayload)
         problem = {};
       }
       throw new LeadApiError(
-        problem.detail || 'No fue posible enviar la solicitud. Intenta nuevamente.',
+        problem.message || problem.detail || 'No fue posible enviar la solicitud. Intenta nuevamente.',
         response.status,
-        problem.errors ?? {},
+        problem.fieldErrors ?? problem.errors ?? {},
+        problem.code,
+        problem.requestId || response.headers.get('X-Request-Id') || undefined,
       );
     }
 

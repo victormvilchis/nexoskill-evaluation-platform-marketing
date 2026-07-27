@@ -1,102 +1,169 @@
 # NexoSkill Marketing Website
 
-## Estado de la versión
+Sitio público y comercial de NexoSkill. Este repositorio es independiente de `nexoskill-evaluation-platform` y no contiene la operación de evaluaciones, estudiantes ni administración SaaS.
 
-**0.1.3 — QA visual y cierre productivo:** conserva el diseño visual aprobado, refuerza navegación por teclado, anchors, SEO dinámico, configuración tolerante del API y documentación de despliegue.
+## Estado
 
-Sitio público y comercial de NexoSkill. Este repositorio es independiente de `nexoskill-evaluation-platform`.
+**1.0.0 RC1 — Release Candidate**
 
-## Puertos locales
+Esta versión estabiliza el producto existente mediante pruebas E2E, accesibilidad automática, configuración por ambiente, scripts operativos, control de errores y automatización de GitHub. No agrega nuevas líneas comerciales.
 
-- Sitio de marketing: `http://localhost:5174`
-- API de prospectos: `http://localhost:8081`
+## Servicios locales
+
+| Servicio | URL |
+|---|---|
+| Marketing | `http://localhost:5174` |
+| API comercial | `http://localhost:8081` |
+| Health | `http://localhost:8081/actuator/health` |
+| Mailpit opcional | `http://localhost:8025` |
+
+La plataforma de evaluaciones continúa como aplicación independiente.
 
 ## Requisitos
 
 - Node.js 22.12 o superior y npm 10 o superior.
 - Java 21 y Maven 3.9 o superior.
-- Acceso a la instancia Oracle utilizada por la plataforma.
+- Acceso a Oracle `XEPDB1` mediante un usuario aplicativo, por ejemplo `EVALUATION_APP`.
+- PowerShell 5.1 o superior en Windows.
+
+No utilices `SYSTEM` o `SYS` como usuario de la aplicación.
 
 ## Inicio local
 
-En PowerShell:
+El diagnóstico previo comprueba herramientas, variables, puertos y conectividad TCP con Oracle:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
+.\check-marketing.ps1
+```
+
+Inicia frontend y backend:
+
+```powershell
 .\start-marketing.ps1
 ```
 
-En la primera ejecución se solicitan URL JDBC, usuario y contraseña Oracle. La configuración queda en `.env.local`, excluido de Git.
+También puedes ejecutar:
 
-Para detener ambos procesos:
+```text
+start-marketing.cmd
+```
+
+La primera ejecución solicita la conexión Oracle y guarda la configuración en `.env.local`, excluido de Git.
+
+Detener:
 
 ```powershell
 .\stop-marketing.ps1
 ```
 
-## Separación de aplicaciones
+El script solo finaliza procesos cuya línea de comandos pertenece a este repositorio. No detiene automáticamente la plataforma principal.
 
-- Marketing se publica en la raíz de su dominio: `https://nexoskill.com`.
-- La plataforma se publica de forma independiente: `https://app.nexoskill.com`.
+## Oracle
 
-## Backend y Oracle
+Los objetos del sitio comercial permanecen aislados dentro del esquema compartido:
 
-Endpoints:
+- `MKT_PROSPECT`
+- `MKT_PROSPECT_SEQ`
+- `MKT_FLYWAY_HISTORY`
+
+Verificación rápida desde SQL Developer:
+
+```sql
+@scripts/oracle/verify-marketing.sql
+```
+
+Los formularios disponibles son:
 
 - `POST /api/v1/leads/contact`
 - `POST /api/v1/leads/demo`
 - `POST /api/v1/leads/quote`
 - `POST /api/v1/leads/advisory`
 - `POST /api/v1/leads/bootcamp`
-- `GET /actuator/health`
 
-Objetos Oracle aislados:
+## Correo local con Mailpit
 
-- `MKT_PROSPECT`
-- `MKT_PROSPECT_SEQ`
-- `MKT_FLYWAY_HISTORY`
-
-Aunque técnicamente puede compartir esquema, en producción se recomienda un usuario Oracle de aplicación con privilegios mínimos y no utilizar `SYSTEM`.
-
-## Analítica y consentimiento
-
-La analítica está desactivada por defecto. Para habilitarla configura uno de estos identificadores y activa la bandera:
-
-```env
-VITE_ENABLE_ANALYTICS=true
-VITE_GTM_ID=GTM-XXXXXXX
-# o
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
-
-Los scripts de medición no se cargan hasta que la persona acepta la analítica opcional.
-
-## Correo
-
-Los prospectos se guardan en Oracle aunque SMTP esté desactivado. Para evitar que Actuator marque el servicio como no saludable mientras no exista SMTP:
-
-```env
-MAIL_ENABLED=false
-MAIL_HEALTH_ENABLED=false
-```
-
-## Validación
-
-La URL del API puede configurarse como `http://localhost:8081` o `http://localhost:8081/api`; el frontend normaliza automáticamente la base hacia `/api`.
-
+El guardado en Oracle funciona aunque SMTP esté desactivado. Para probar las notificaciones sin enviar correos reales:
 
 ```powershell
-npm test
-npm run build
+docker compose -f docker-compose.yml -f docker-compose.mail.yml up --build
+```
+
+Abre `http://localhost:8025` para consultar los mensajes capturados.
+
+## Validaciones
+
+### Frontend y validaciones estáticas
+
+```powershell
+npm install
+npm run check
+```
+
+### Navegador real
+
+Instala los navegadores una sola vez:
+
+```powershell
+npx playwright install
+```
+
+Ejecuta:
+
+```powershell
+npm run test:e2e
+```
+
+Para Chromium únicamente:
+
+```powershell
+npm run test:e2e -- --project=chromium
+```
+
+### Backend
+
+```powershell
 cd backend
-mvn test
-mvn clean package
+mvn clean verify
+cd ..
 ```
 
-## Docker y producción
-
-Consulta [`DEPLOYMENT.md`](DEPLOYMENT.md). Para desarrollo:
+### Validación completa
 
 ```powershell
-docker compose up --build
+npm run check:all
 ```
+
+## Perfiles Spring Boot
+
+- `local`: configuración de desarrollo y health de correo desactivado.
+- `prod`: exige credenciales, sal de IP fuerte, CORS HTTPS explícito y usuario Oracle no privilegiado.
+
+El script local establece automáticamente:
+
+```env
+SPRING_PROFILES_ACTIVE=local
+```
+
+Docker productivo utiliza `prod`.
+
+## Git y CI
+
+GitHub Actions ejecuta:
+
+- Validación TypeScript, contenido, SEO y build.
+- Playwright y axe sobre Chromium.
+- Pruebas y empaquetado Maven.
+- Control para impedir archivos `.env` o credenciales versionadas.
+
+Flujo recomendado:
+
+```text
+main
+feature/*
+fix/*
+release/*
+hotfix/*
+```
+
+Consulta [`RELEASE_NOTES.md`](RELEASE_NOTES.md), [`CHANGELOG.md`](CHANGELOG.md) y [`docs/RC1_CHECKLIST.md`](docs/RC1_CHECKLIST.md).

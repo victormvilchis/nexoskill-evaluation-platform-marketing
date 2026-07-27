@@ -12,3 +12,11 @@ spring:
 app:
   mail:
     enabled: false
+
+  spam:
+    minimum-completion-time: 0s
+    maximum-completion-time: 24h
+    duplicate-window: 0s
+    maximum-urls: 2
+  security:
+    ip-hash-salt: test-salt-test-salt-test-salt-test

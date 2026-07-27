@@ -4,6 +4,7 @@ services:
       context: ./backend
     environment:
       BACKEND_PORT: 8081
+      SPRING_PROFILES_ACTIVE: local
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}

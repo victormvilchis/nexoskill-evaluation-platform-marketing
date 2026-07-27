@@ -1,5 +1,8 @@
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
+$runtimeRoot = Join-Path $PSScriptRoot '.runtime'
+$logsRoot = Join-Path $PSScriptRoot 'logs'
+New-Item -ItemType Directory -Force -Path $runtimeRoot, $logsRoot | Out-Null
 
 function Import-DotEnv([string]$Path) {
     if (-not (Test-Path $Path)) { return }
@@ -41,12 +44,16 @@ function Write-LocalEnvironment([hashtable]$Values) {
     Set-Content -Path $path -Value $lines -Encoding UTF8
 }
 
-if (-not (Test-Path '.env')) {
-    Copy-Item '.env.example' '.env'
-}
-
+if (-not (Test-Path '.env')) { Copy-Item '.env.example' '.env' }
 Import-DotEnv (Join-Path $PSScriptRoot '.env')
 Import-DotEnv (Join-Path $PSScriptRoot '.env.local')
+
+foreach ($command in @('node', 'npm', 'java', 'mvn')) {
+    if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
+        Write-Host "ERROR: $command no está instalado o no está disponible en PATH." -ForegroundColor Red
+        exit 1
+    }
+}
 
 if (-not $env:DB_URL) {
     $dbUrl = Read-Host 'URL JDBC de Oracle [jdbc:oracle:thin:@//localhost:1521/XEPDB1]'
@@ -60,15 +67,16 @@ if (-not $dbUrl.StartsWith('jdbc:oracle:thin:')) {
 
 if (-not $env:DB_USERNAME) { $dbUsername = Read-Host 'Usuario/esquema Oracle para marketing' }
 else { $dbUsername = $env:DB_USERNAME }
-
 if (-not $dbUsername) {
     Write-Host 'ERROR: Debes indicar un usuario Oracle.' -ForegroundColor Red
     exit 1
 }
+if ($dbUsername.ToUpperInvariant() -in @('SYSTEM', 'SYS')) {
+    Write-Host 'WARN: No se recomienda utilizar SYSTEM/SYS. Usa EVALUATION_APP u otro usuario aplicativo.' -ForegroundColor Yellow
+}
 
 if (-not $env:DB_PASSWORD) { $dbPassword = Read-PlainSecureString 'Contraseña Oracle' }
 else { $dbPassword = $env:DB_PASSWORD }
-
 if (-not $dbPassword) {
     Write-Host 'ERROR: Debes indicar la contraseña Oracle.' -ForegroundColor Red
     exit 1
@@ -80,15 +88,19 @@ Write-LocalEnvironment @{
     DB_USERNAME = $dbUsername
     DB_PASSWORD = $dbPassword
     IP_HASH_SALT = $ipSalt
+    SPRING_PROFILES_ACTIVE = 'local'
 }
 Import-DotEnv (Join-Path $PSScriptRoot '.env.local')
 
+& (Join-Path $PSScriptRoot 'check-marketing.ps1') -Quiet -AllowOccupiedPorts
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-foreach ($command in @('node', 'npm', 'java', 'mvn')) {
-    if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
-        Write-Host "ERROR: $command no está instalado o no está disponible en PATH." -ForegroundColor Red
-        exit 1
-    }
+& (Join-Path $PSScriptRoot 'stop-marketing.ps1') -Silent
+$occupied = @(5174, 8081) | Where-Object { Get-NetTCPConnection -LocalPort $_ -State Listen -ErrorAction SilentlyContinue }
+if ($occupied.Count) {
+    Write-Host "ERROR: Los puertos $($occupied -join ', ') siguen ocupados por procesos ajenos al proyecto." -ForegroundColor Red
+    Write-Host 'Ejecuta .\check-marketing.ps1 para consultar el diagnóstico.' -ForegroundColor Yellow
+    exit 1
 }
 
 if (-not (Test-Path 'node_modules')) {
@@ -96,16 +108,12 @@ if (-not (Test-Path 'node_modules')) {
     npm install
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
-
-if (Test-Path 'node_modules/.vite') {
-    Remove-Item 'node_modules/.vite' -Recurse -Force
-}
-
-& (Join-Path $PSScriptRoot 'stop-marketing.ps1') -Silent
+if (Test-Path 'node_modules/.vite') { Remove-Item 'node_modules/.vite' -Recurse -Force }
 
 $backendScript = Join-Path $PSScriptRoot 'backend\start-backend.ps1'
 $backendArguments = "-NoProfile -ExecutionPolicy Bypass -File `"$backendScript`""
 $backendProcess = Start-Process powershell -ArgumentList $backendArguments -PassThru
+Set-Content -Path (Join-Path $runtimeRoot 'marketing-api.pid') -Value $backendProcess.Id -Encoding ascii
 
 Write-Host 'Iniciando API de marketing...' -ForegroundColor Yellow
 $backendReady = $false
@@ -119,7 +127,11 @@ for ($attempt = 1; $attempt -le 240; $attempt++) {
 }
 
 if (-not $backendReady) {
-    Write-Host 'ERROR: La API no pudo iniciar. Revisa la ventana del backend para consultar el error de Oracle o Maven.' -ForegroundColor Red
+    Write-Host 'ERROR: La API no pudo iniciar. Revisa logs\backend.log y la ventana del backend.' -ForegroundColor Red
+    if (Test-Path (Join-Path $logsRoot 'backend.log')) {
+        Write-Host 'Últimas líneas del backend:' -ForegroundColor Yellow
+        Get-Content (Join-Path $logsRoot 'backend.log') -Tail 25
+    }
     if (-not $backendProcess.HasExited) { taskkill /PID $backendProcess.Id /T /F | Out-Null }
     exit 1
 }
@@ -127,6 +139,7 @@ if (-not $backendReady) {
 Write-Host ''
 Write-Host 'NexoSkill Marketing: http://localhost:5174/' -ForegroundColor Green
 Write-Host 'API de solicitudes: http://localhost:8081/actuator/health' -ForegroundColor Green
+Write-Host 'Log del backend: logs\backend.log' -ForegroundColor DarkGray
 Write-Host ''
 Write-Host 'Para detener frontend y backend, presiona Ctrl+C.' -ForegroundColor Yellow
 Write-Host ''
@@ -135,7 +148,5 @@ try {
     npm run dev
     exit $LASTEXITCODE
 } finally {
-    if ($backendProcess -and -not $backendProcess.HasExited) {
-        taskkill /PID $backendProcess.Id /T /F | Out-Null
-    }
+    & (Join-Path $PSScriptRoot 'stop-marketing.ps1') -Silent
 }

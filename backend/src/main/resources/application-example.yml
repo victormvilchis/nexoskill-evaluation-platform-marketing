@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
-    username: NEXOSKILL_MARKETING
+    username: EVALUATION_APP
     password: CHANGE_ME
 
 app:

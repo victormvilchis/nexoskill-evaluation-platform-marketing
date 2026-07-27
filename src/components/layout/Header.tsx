@@ -195,17 +195,17 @@ export function Header() {
         </nav>
       </div>
 
-      <button
-        aria-label="Cerrar menú principal"
-        className={`nav-backdrop ${mobileOpen ? 'nav-backdrop--visible' : ''}`}
-        onClick={() => {
-          setMobileOpen(false);
-          setSolutionsOpen(false);
-          mobileToggleRef.current?.focus();
-        }}
-        tabIndex={-1}
-        type="button"
-      />
+      {mobileOpen && (
+        <div
+          aria-hidden="true"
+          className="nav-backdrop nav-backdrop--visible"
+          onClick={() => {
+            setMobileOpen(false);
+            setSolutionsOpen(false);
+            mobileToggleRef.current?.focus();
+          }}
+        />
+      )}
     </header>
   );
 }

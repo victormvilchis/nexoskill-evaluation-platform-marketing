@@ -27,6 +27,13 @@ export interface LeadSubmissionResponse {
 }
 
 export interface ProblemDetails {
+  code?: string;
+  message?: string;
+  fieldErrors?: Record<string, string>;
+  timestamp?: string;
+  path?: string;
+  requestId?: string;
+  // Compatibilidad temporal con respuestas RFC 9457 de versiones anteriores.
   title?: string;
   detail?: string;
   status?: number;

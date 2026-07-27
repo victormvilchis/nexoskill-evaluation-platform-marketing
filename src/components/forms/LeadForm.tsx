@@ -87,7 +87,7 @@ export function LeadForm({
   const formId = useId().replaceAll(':', '');
   const [form, setForm] = useState<FormState>(() => createInitialState(defaultTechnology));
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<{ type: 'idle' | 'sending' | 'success' | 'error'; message?: string; reference?: string }>({ type: 'idle' });
+  const [status, setStatus] = useState<{ type: 'idle' | 'sending' | 'success' | 'error'; message?: string; reference?: string; requestId?: string }>({ type: 'idle' });
   const formStartedAt = useRef(new Date().toISOString());
   const submittingRef = useRef(false);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -158,7 +158,7 @@ export function LeadForm({
       if (error instanceof LeadApiError) {
         const mappedErrors = Object.fromEntries(Object.entries(error.fieldErrors).map(([key, value]) => [key as keyof FormState, value]));
         setErrors((current) => ({ ...current, ...mappedErrors }));
-        setStatus({ type: 'error', message: error.message });
+        setStatus({ type: 'error', message: error.message, requestId: error.requestId });
         trackEvent('lead_submit_error', { request_type: kind, error_type: 'api' });
         if (Object.keys(mappedErrors).length > 0) focusFirstError();
         else window.requestAnimationFrame(() => statusRef.current?.focus());
@@ -205,6 +205,7 @@ export function LeadForm({
           <strong>No se pudo enviar</strong>
           <span>{status.message}</span>
           {Object.keys(errors).length > 0 ? <span>{Object.keys(errors).length} {Object.keys(errors).length === 1 ? 'campo requiere' : 'campos requieren'} atención.</span> : null}
+          {status.requestId ? <small className="lead-form__error-reference">Referencia técnica: {status.requestId}</small> : null}
         </div>
       ) : null}
 

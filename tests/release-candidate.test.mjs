@@ -17,10 +17,10 @@ const [app, header, siteConfig, seo, notFound, styles, packageJson, pom, backend
   read('.gitattributes'),
 ]);
 
-test('la versión 0.1.3 está alineada entre frontend y backend', () => {
-  assert.match(packageJson, /"version": "0\.1\.3"/);
-  assert.match(pom, /<artifactId>nexoskill-marketing-backend<\/artifactId>\s*<version>0\.1\.3<\/version>/);
-  assert.match(backendConfig, /version: 0\.1\.3/);
+test('la versión 1.0.0 RC1 está alineada entre frontend y backend', () => {
+  assert.match(packageJson, /"version": "1\.0\.0-rc\.1"/);
+  assert.match(pom, /<artifactId>nexoskill-marketing-backend<\/artifactId>\s*<version>1\.0\.0-rc\.1<\/version>/);
+  assert.match(backendConfig, /version: 1\.0\.0-rc\.1/);
 });
 
 test('la navegación interna por anchors funciona con header sticky y foco accesible', () => {
@@ -57,7 +57,7 @@ test('SEO elimina keywords obsoletas y 404 usa su ruta real', () => {
 
 test('el cierre productivo documenta health checks válidos y finales de línea estables', () => {
   assert.doesNotMatch(deployment, /\/api\/\.\.\/actuator/);
-  assert.match(deployment, /marketing-api curl -fsS http:\/\/127\.0\.0\.1:8081\/actuator\/health/);
+  assert.match(deployment, /marketing-api[\s\S]*curl -fsS http:\/\/127\.0\.0\.1:8081\/actuator\/health/);
   assert.match(attributes, /\*\.ps1 text eol=crlf/);
   assert.match(attributes, /\*\.tsx text eol=lf/);
 });

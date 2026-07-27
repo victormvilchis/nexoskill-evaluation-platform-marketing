@@ -12,3 +12,8 @@ backend/target/
 .vscode/
 .idea/
 coverage/
+.runtime/
+playwright-report/
+test-results/
+blob-report/
+logs/
