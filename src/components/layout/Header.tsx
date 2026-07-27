@@ -1,4 +1,4 @@
-import { type KeyboardEvent as ReactKeyboardEvent, useEffect, useRef, useState } from 'react';
+import { type FocusEvent as ReactFocusEvent, type KeyboardEvent as ReactKeyboardEvent, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { primaryNavigation, solutionsNavigation } from '../../content/navigation';
 import { BrandMark } from '../common/BrandMark';
@@ -9,6 +9,7 @@ export function Header() {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const location = useLocation();
   const mobileToggleRef = useRef<HTMLButtonElement | null>(null);
+  const mobileNavRef = useRef<HTMLElement | null>(null);
   const solutionsButtonRef = useRef<HTMLButtonElement | null>(null);
   const solutionsMenuRef = useRef<HTMLDivElement | null>(null);
   const solutionsActive = solutionsNavigation.some((item) => location.pathname === item.href);
@@ -17,6 +18,15 @@ export function Header() {
     setMobileOpen(false);
     setSolutionsOpen(false);
   }, [location.pathname]);
+
+
+  useEffect(() => {
+    if (!mobileOpen || !window.matchMedia('(max-width: 960px)').matches) return;
+
+    window.requestAnimationFrame(() => {
+      mobileNavRef.current?.querySelector<HTMLElement>('a[href], button:not([disabled])')?.focus();
+    });
+  }, [mobileOpen]);
 
   useEffect(() => {
     document.body.classList.toggle('nav-open', mobileOpen);
@@ -89,6 +99,13 @@ export function Header() {
     }
   };
 
+  const handleSolutionsBlur = (event: ReactFocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget as Node | null;
+    if (solutionsOpen && nextTarget && !event.currentTarget.contains(nextTarget)) {
+      setSolutionsOpen(false);
+    }
+  };
+
   const renderLink = (item: { label: string; href: string }) => (
     <NavLink className={({ isActive }) => (isActive ? 'is-active' : undefined)} key={item.href} to={item.href}>
       {item.label}
@@ -116,11 +133,12 @@ export function Header() {
           aria-label="Navegación principal"
           className={`site-nav ${mobileOpen ? 'site-nav--open' : ''}`}
           id="primary-navigation"
+          ref={mobileNavRef}
         >
           <div className="site-nav__links">
             {renderLink(primaryNavigation[0])}
 
-            <div className={`nav-dropdown ${solutionsOpen ? 'nav-dropdown--open' : ''}`}>
+            <div className={`nav-dropdown ${solutionsOpen ? 'nav-dropdown--open' : ''}`} onBlur={handleSolutionsBlur}>
               <button
                 aria-controls="solutions-navigation"
                 aria-expanded={solutionsOpen}
@@ -128,10 +146,10 @@ export function Header() {
                 className={solutionsActive ? 'is-active' : undefined}
                 onClick={() => setSolutionsOpen((current) => !current)}
                 onKeyDown={(event) => {
-                  if (event.key === 'ArrowDown') {
+                  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
                     event.preventDefault();
                     setSolutionsOpen(true);
-                    window.requestAnimationFrame(() => focusSolution('first'));
+                    window.requestAnimationFrame(() => focusSolution(event.key === 'ArrowUp' ? 'last' : 'first'));
                   }
                 }}
                 ref={solutionsButtonRef}
@@ -146,16 +164,17 @@ export function Header() {
               <div
                 aria-label="Soluciones NexoSkill"
                 className="nav-dropdown__menu"
+                hidden={!solutionsOpen}
                 id="solutions-navigation"
                 onKeyDown={handleSolutionsKeyDown}
                 ref={solutionsMenuRef}
               >
                 <span className="nav-dropdown__eyebrow">Soluciones NexoSkill</span>
                 {solutionsNavigation.map((item) => (
-                  <Link key={item.href} to={item.href}>
+                  <NavLink className={({ isActive }) => (isActive ? 'is-active' : undefined)} key={item.href} to={item.href}>
                     <strong>{item.label}</strong>
                     <small>{item.description}</small>
-                  </Link>
+                  </NavLink>
                 ))}
               </div>
             </div>
@@ -182,6 +201,7 @@ export function Header() {
         onClick={() => {
           setMobileOpen(false);
           setSolutionsOpen(false);
+          mobileToggleRef.current?.focus();
         }}
         tabIndex={-1}
         type="button"

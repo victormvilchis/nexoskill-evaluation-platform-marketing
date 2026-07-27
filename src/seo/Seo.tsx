@@ -40,7 +40,11 @@ export function Seo({ title, description, path = '/', noIndex = false, image = '
     ensureMeta('meta[name="description"]', { name: 'description', content: description });
     ensureMeta('meta[name="robots"]', { name: 'robots', content: noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large' });
     ensureMeta('meta[name="googlebot"]', { name: 'googlebot', content: noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large' });
-    if (keywords.length) ensureMeta('meta[name="keywords"]', { name: 'keywords', content: keywords.join(', ') });
+    if (keywords.length) {
+      ensureMeta('meta[name="keywords"]', { name: 'keywords', content: keywords.join(', ') });
+    } else {
+      document.head.querySelector('meta[name="keywords"]')?.remove();
+    }
 
     ensureMeta('meta[property="og:title"]', { property: 'og:title', content: fullTitle });
     ensureMeta('meta[property="og:description"]', { property: 'og:description', content: description });

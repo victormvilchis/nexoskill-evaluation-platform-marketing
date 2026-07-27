@@ -13,7 +13,7 @@
 
   <groupId>com.nexoskill</groupId>
   <artifactId>nexoskill-marketing-backend</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.3</version>
   <name>NexoSkill Marketing Backend</name>
   <description>API pública para solicitudes comerciales del sitio de marketing de NexoSkill.</description>
 

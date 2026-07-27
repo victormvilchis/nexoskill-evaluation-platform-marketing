@@ -148,3 +148,62 @@ body.nav-open {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Final QA refinements: accessibility, anchor navigation and narrow viewports. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+section[id],
+[id].lead-capture-section {
+  scroll-margin-top: 96px;
+}
+
+.nav-dropdown__menu a.is-active {
+  background: var(--surface-blue);
+  color: var(--navy-950);
+}
+
+.lead-form__reference strong,
+.legal-page a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 960px) {
+  .site-nav {
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
+
+  .site-nav__actions .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    width: min(var(--container), calc(100% - 24px));
+  }
+
+  .site-nav {
+    padding-inline: 18px;
+  }
+
+  .lead-form,
+  .quote-plan-summary,
+  .contact-card {
+    padding-inline: 18px;
+  }
+}

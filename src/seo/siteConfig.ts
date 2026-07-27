@@ -14,7 +14,12 @@ const readEnv = (key: EnvKey) => {
   return typeof value === 'string' ? value.trim() : '';
 };
 
-const readUrl = (key: EnvKey) => readEnv(key).replace(/\/$/, '');
+const readUrl = (key: EnvKey) => readEnv(key).replace(/\/+$/, '');
+
+const normalizeApiUrl = (value: string) => {
+  const base = value || 'http://localhost:8081/api';
+  return /\/api(?:\/|$)/i.test(base) ? base : `${base}/api`;
+};
 
 export const siteConfig = {
   name: 'NexoSkill',
@@ -22,7 +27,7 @@ export const siteConfig = {
   siteUrl: readUrl('VITE_SITE_URL') || 'http://localhost:5174',
   contactEmail: readEnv('VITE_CONTACT_EMAIL'),
   privacyEmail: readEnv('VITE_PRIVACY_EMAIL') || readEnv('VITE_CONTACT_EMAIL'),
-  apiUrl: readUrl('VITE_API_URL') || 'http://localhost:8081/api',
+  apiUrl: normalizeApiUrl(readUrl('VITE_API_URL')),
   legalEntity: readEnv('VITE_LEGAL_ENTITY') || 'NexoSkill',
   legalAddress: readEnv('VITE_LEGAL_ADDRESS'),
   analytics: {

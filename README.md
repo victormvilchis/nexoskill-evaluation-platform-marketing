@@ -2,7 +2,7 @@
 
 ## Estado de la versión
 
-**0.1.2 — Rediseño integral UX/UI:** sistema visual centralizado, navegación ejecutiva accesible, formularios refinados y experiencia comercial homologada para publicación.
+**0.1.3 — QA visual y cierre productivo:** conserva el diseño visual aprobado, refuerza navegación por teclado, anchors, SEO dinámico, configuración tolerante del API y documentación de despliegue.
 
 Sitio público y comercial de NexoSkill. Este repositorio es independiente de `nexoskill-evaluation-platform`.
 
@@ -81,6 +81,9 @@ MAIL_HEALTH_ENABLED=false
 ```
 
 ## Validación
+
+La URL del API puede configurarse como `http://localhost:8081` o `http://localhost:8081/api`; el frontend normaliza automáticamente la base hacia `/api`.
+
 
 ```powershell
 npm test

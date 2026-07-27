@@ -48,6 +48,6 @@ test('el sitio comercial no expone accesos operativos', async () => {
 });
 
 test('el efecto de navegación no devuelve el resultado de window.scrollTo desde useEffect', () => {
-  assert.match(app, /useEffect\(\(\) => \{\s*window\.scrollTo\(/s);
+  assert.match(app, /window\.scrollTo\(\{ top: 0, behavior: 'auto' \}\)/);
   assert.doesNotMatch(app, /useEffect\(\(\) => window\.scrollTo\(/);
 });

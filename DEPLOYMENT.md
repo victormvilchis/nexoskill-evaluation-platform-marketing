@@ -17,7 +17,7 @@ Una caída de la plataforma de evaluaciones no debe impedir que el sitio públic
 ## Configuración
 
 1. Copiar `.env.production.example` a `.env.production`.
-2. Configurar identidad jurídica, domicilio, correos, URL pública y URL de la plataforma.
+2. Configurar identidad jurídica, domicilio, correos y URL pública del sitio.
 3. Configurar `DB_URL`, usuario, contraseña e `IP_HASH_SALT` fuerte.
 4. Mantener `VITE_ENABLE_ANALYTICS=false` hasta validar consentimiento y los identificadores de analítica.
 5. Mantener `MAIL_HEALTH_ENABLED=false` si SMTP no está configurado.
@@ -32,7 +32,7 @@ docker compose --env-file .env.production -f docker-compose.production.yml up -d
 
 ```bash
 curl -fsS http://127.0.0.1:8080/health
-curl -fsS http://127.0.0.1:8080/api/../actuator/health
+docker compose --env-file .env.production -f docker-compose.production.yml exec marketing-api curl -fsS http://127.0.0.1:8081/actuator/health
 ```
 
 El endpoint Actuator se conserva en el backend, pero no debe exponerse públicamente mediante el reverse proxy externo salvo que exista una regla de acceso restringida.

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnalyticsManager } from '../analytics/AnalyticsManager';
 import { AppErrorBoundary } from '../components/common/AppErrorBoundary';
@@ -24,15 +24,41 @@ const PrivacyPage = lazy(() => import('../pages/PrivacyPage').then((module) => (
 const TermsPage = lazy(() => import('../pages/TermsPage').then((module) => ({ default: module.TermsPage })));
 
 function RouteEffects() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  const [announcement, setAnnouncement] = useState('');
 
   useEffect(() => {
+    if (hash) {
+      const targetId = decodeURIComponent(hash.slice(1));
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        target.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      });
+      return;
+    }
+
     window.scrollTo({ top: 0, behavior: 'auto' });
     const main = document.getElementById('main-content');
     window.requestAnimationFrame(() => main?.focus({ preventScroll: true }));
+  }, [hash, pathname]);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setAnnouncement(document.title.replace(/\s*\|\s*NexoSkill$/, ''));
+    }, 50);
+
+    return () => window.clearTimeout(timeout);
   }, [pathname]);
 
-  return null;
+  return <p aria-live="polite" className="sr-only" role="status">{announcement}</p>;
 }
 
 function PageLoader() {
