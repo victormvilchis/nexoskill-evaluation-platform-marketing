@@ -32,7 +32,7 @@ export function HomePage() {
             </p>
             <div className="hero__actions">
               <Link className="button button--primary button--large" to="/solicitar-demo">
-                Solicitar una demo <Icon name="arrow" size={18} />
+                Solicitar demo <Icon name="arrow" size={18} />
               </Link>
               <Link className="button button--secondary button--large" to="/plataforma">Conocer la plataforma</Link>
             </div>
@@ -190,7 +190,7 @@ export function HomePage() {
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
                 <ul>{service.bullets.map((bullet) => <li key={bullet}><Icon name="check" size={16} /> {bullet}</li>)}</ul>
-                <ArrowLink to={service.href}>Conocer más</ArrowLink>
+                <ArrowLink to={service.href}>Conocer servicio</ArrowLink>
               </article>
             ))}
           </div>

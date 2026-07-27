@@ -28,7 +28,7 @@ export function TermsPage() {
           <section><h2>Contenido y propiedad intelectual</h2><p>Los textos, estructura visual, marca, componentes y materiales publicados pertenecen a {siteConfig.legalEntity} o se utilizan con autorización. No se autoriza su reproducción comercial sin consentimiento.</p></section>
           <section><h2>Tecnologías y marcas de terceros</h2><p>Las tecnologías mencionadas se presentan como áreas generales de conocimiento. Las marcas pertenecen a sus respectivos titulares y su mención no implica afiliación, patrocinio ni contenido oficial.</p></section>
           <section><h2>Disponibilidad</h2><p>Se aplican medidas razonables para mantener el sitio disponible y seguro, pero pueden existir interrupciones por mantenimiento, infraestructura, proveedores o causas fuera de control.</p></section>
-          <section><h2>Enlaces externos</h2><p>El acceso a la plataforma u otros sitios puede dirigir a aplicaciones independientes con sus propios términos, políticas y controles de seguridad.</p></section>
+          <section><h2>Enlaces de terceros</h2><p>Los enlaces externos que eventualmente se publiquen tendrán sus propios términos, políticas y controles de seguridad.</p></section>
           <section><h2>Contacto</h2><p>{contactEmail ? <>Las dudas sobre estas condiciones pueden enviarse a <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</> : <>Las dudas sobre estas condiciones pueden enviarse mediante el <Link to="/contacto">formulario de contacto</Link>.</>}</p></section>
         </div>
       </div>

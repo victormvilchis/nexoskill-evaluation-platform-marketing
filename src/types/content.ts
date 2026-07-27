@@ -24,7 +24,10 @@ export type IconName =
   | 'rocket'
   | 'refresh'
   | 'clipboard'
-  | 'search';
+  | 'search'
+  | 'chevron'
+  | 'send'
+  | 'lock';
 
 export interface NavigationItem {
   label: string;

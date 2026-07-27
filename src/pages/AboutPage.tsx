@@ -110,7 +110,7 @@ export function AboutPage() {
       <CTASection
         description="Comparte el objetivo, la tecnología y el tamaño del equipo para explorar una solución alineada con tu contexto."
         eyebrow="Conversemos"
-        primaryLabel="Solicitar una demo"
+        primaryLabel="Solicitar demo"
         secondaryHref="/contacto"
         secondaryLabel="Contactar al equipo"
         title="Construyamos una experiencia de desarrollo para tu organización."

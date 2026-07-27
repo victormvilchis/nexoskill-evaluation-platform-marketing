@@ -15,7 +15,7 @@ export function CTASection({
   eyebrow = 'Convierte preparación en resultados',
   title = 'Diseñemos una solución para tu equipo.',
   description = 'Cuéntanos qué tecnología necesitas evaluar, cuántas personas participarán y cuál es el objetivo del programa.',
-  primaryLabel = 'Solicitar una demo',
+  primaryLabel = 'Solicitar demo',
   primaryHref = '/solicitar-demo',
   secondaryLabel = 'Hablar con ventas',
   secondaryHref = '/contacto',

@@ -1,12 +1,15 @@
 # NexoSkill Marketing Website
 
+## Estado de la versión
+
+**0.1.2 — Rediseño integral UX/UI:** sistema visual centralizado, navegación ejecutiva accesible, formularios refinados y experiencia comercial homologada para publicación.
+
 Sitio público y comercial de NexoSkill. Este repositorio es independiente de `nexoskill-evaluation-platform`.
 
 ## Puertos locales
 
 - Sitio de marketing: `http://localhost:5174`
 - API de prospectos: `http://localhost:8081`
-- Plataforma de evaluaciones: `http://localhost:5173/evaluaciones/dashboard`
 
 ## Requisitos
 
@@ -35,7 +38,6 @@ Para detener ambos procesos:
 
 - Marketing se publica en la raíz de su dominio: `https://nexoskill.com`.
 - La plataforma se publica de forma independiente: `https://app.nexoskill.com`.
-- En local, el botón **Iniciar sesión** dirige a `http://localhost:5173/evaluaciones/dashboard`.
 
 ## Backend y Oracle
 
@@ -95,8 +97,3 @@ Consulta [`DEPLOYMENT.md`](DEPLOYMENT.md). Para desarrollo:
 ```powershell
 docker compose up --build
 ```
-
-
-## Estado de la versión
-
-Versión `0.1.1`: cierre UX/UI prepublicación con navegación de soluciones, página institucional completa, formularios reorganizados, estados de confirmación y recuperación ante errores de renderizado.

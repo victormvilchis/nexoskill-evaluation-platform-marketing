@@ -1,0 +1,150 @@
+/* Functional and accessibility refinements layered over the original NexoSkill visual system. */
+
+body.nav-open {
+  overflow: hidden;
+}
+
+.nav-dropdown__chevron {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  transform-origin: center;
+  transition: transform 180ms ease;
+}
+
+.nav-dropdown__chevron svg {
+  display: block;
+}
+
+.nav-dropdown--open .nav-dropdown__chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown__menu {
+  max-height: min(560px, calc(100vh - 110px));
+  overflow-y: auto;
+}
+
+.nav-backdrop {
+  display: none;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.66;
+}
+
+.button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: button-spin 700ms linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lead-form__submit-area {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.lead-form__submit-area .button {
+  min-width: 210px;
+}
+
+.lead-form__security-note {
+  display: inline-flex;
+  max-width: 620px;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface-soft);
+  color: var(--ink-600);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.lead-form__security-note svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--blue-600);
+}
+
+.site-nav a:focus-visible,
+.site-nav button:focus-visible,
+.nav-toggle:focus-visible,
+.button:focus-visible,
+.footer-privacy-button:focus-visible {
+  outline: 3px solid rgba(28, 181, 168, 0.28);
+  outline-offset: 3px;
+}
+
+@media (max-width: 960px) {
+  .site-header {
+    z-index: 110;
+  }
+
+  .site-nav {
+    z-index: 112;
+  }
+
+  .nav-toggle {
+    position: relative;
+    z-index: 113;
+  }
+
+  .nav-backdrop {
+    position: fixed;
+    z-index: 109;
+    inset: 76px 0 0;
+    display: block;
+    border: 0;
+    background: rgba(8, 29, 51, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+  }
+
+  .nav-backdrop--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-dropdown__menu {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 680px) {
+  .lead-form__submit-area {
+    justify-items: stretch;
+  }
+
+  .lead-form__submit-area .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

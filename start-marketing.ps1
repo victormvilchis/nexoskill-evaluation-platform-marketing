@@ -83,9 +83,6 @@ Write-LocalEnvironment @{
 }
 Import-DotEnv (Join-Path $PSScriptRoot '.env.local')
 
-if (-not $env:VITE_PLATFORM_URL -or $env:VITE_PLATFORM_URL -eq 'http://localhost:5173/evaluaciones/admin/students') {
-    $env:VITE_PLATFORM_URL = 'http://localhost:5173/evaluaciones/dashboard'
-}
 
 foreach ($command in @('node', 'npm', 'java', 'mvn')) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
@@ -130,7 +127,6 @@ if (-not $backendReady) {
 Write-Host ''
 Write-Host 'NexoSkill Marketing: http://localhost:5174/' -ForegroundColor Green
 Write-Host 'API de solicitudes: http://localhost:8081/actuator/health' -ForegroundColor Green
-Write-Host 'Plataforma de evaluaciones: http://localhost:5173/evaluaciones/dashboard'
 Write-Host ''
 Write-Host 'Para detener frontend y backend, presiona Ctrl+C.' -ForegroundColor Yellow
 Write-Host ''

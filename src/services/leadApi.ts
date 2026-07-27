@@ -46,9 +46,9 @@ export async function submitLead(kind: LeadKind, payload: LeadSubmissionPayload)
   } catch (error) {
     if (error instanceof LeadApiError) throw error;
     if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new LeadApiError('La solicitud tardó demasiado. Verifica que el backend esté disponible e intenta nuevamente.');
+      throw new LeadApiError('La solicitud tardó demasiado. Verifica tu conexión e inténtalo nuevamente.');
     }
-    throw new LeadApiError('No fue posible conectar con el servicio de solicitudes. Verifica que el backend esté ejecutándose.');
+    throw new LeadApiError('No pudimos conectar con el servicio en este momento. Verifica tu conexión e inténtalo nuevamente.');
   } finally {
     window.clearTimeout(timeout);
   }

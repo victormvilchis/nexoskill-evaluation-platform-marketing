@@ -1,151 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:5174/</loc>
+    <loc>https://nexoskill.com/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/plataforma</loc>
+    <loc>https://nexoskill.com/plataforma</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias</loc>
+    <loc>https://nexoskill.com/tecnologias</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/bootcamps</loc>
+    <loc>https://nexoskill.com/bootcamps</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/capacitaciones</loc>
+    <loc>https://nexoskill.com/capacitaciones</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/asesorias</loc>
+    <loc>https://nexoskill.com/asesorias</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/planes</loc>
+    <loc>https://nexoskill.com/planes</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/empresas</loc>
+    <loc>https://nexoskill.com/empresas</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/nosotros</loc>
+    <loc>https://nexoskill.com/nosotros</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/contacto</loc>
+    <loc>https://nexoskill.com/contacto</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/solicitar-demo</loc>
+    <loc>https://nexoskill.com/solicitar-demo</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/solicitar-cotizacion</loc>
+    <loc>https://nexoskill.com/solicitar-cotizacion</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/preguntas-frecuentes</loc>
+    <loc>https://nexoskill.com/preguntas-frecuentes</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/aviso-de-privacidad</loc>
+    <loc>https://nexoskill.com/aviso-de-privacidad</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/terminos-y-condiciones</loc>
+    <loc>https://nexoskill.com/terminos-y-condiciones</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/java-spring-boot</loc>
+    <loc>https://nexoskill.com/tecnologias/java-spring-boot</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/apis-microservicios</loc>
+    <loc>https://nexoskill.com/tecnologias/apis-microservicios</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/salesforce</loc>
+    <loc>https://nexoskill.com/tecnologias/salesforce</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/python-analisis-datos</loc>
+    <loc>https://nexoskill.com/tecnologias/python-analisis-datos</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/sql-bases-datos</loc>
+    <loc>https://nexoskill.com/tecnologias/sql-bases-datos</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/cloud-aws</loc>
+    <loc>https://nexoskill.com/tecnologias/cloud-aws</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/devops-entrega-continua</loc>
+    <loc>https://nexoskill.com/tecnologias/devops-entrega-continua</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/testing-automatizacion</loc>
+    <loc>https://nexoskill.com/tecnologias/testing-automatizacion</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/desarrollo-seguro</loc>
+    <loc>https://nexoskill.com/tecnologias/desarrollo-seguro</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:5174/tecnologias/arquitectura-software</loc>
+    <loc>https://nexoskill.com/tecnologias/arquitectura-software</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

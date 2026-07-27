@@ -89,6 +89,7 @@ export function LeadForm({
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<{ type: 'idle' | 'sending' | 'success' | 'error'; message?: string; reference?: string }>({ type: 'idle' });
   const formStartedAt = useRef(new Date().toISOString());
+  const submittingRef = useRef(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const statusRef = useRef<HTMLDivElement | null>(null);
 
@@ -115,6 +116,7 @@ export function LeadForm({
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submittingRef.current) return;
     const nextErrors = validate(form, planId, Boolean(planOptions?.length));
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
@@ -143,6 +145,7 @@ export function LeadForm({
       website: form.website,
     };
 
+    submittingRef.current = true;
     setStatus({ type: 'sending', message: 'Enviando solicitud…' });
     try {
       const response = await submitLead(kind, payload);
@@ -164,6 +167,8 @@ export function LeadForm({
         trackEvent('lead_submit_error', { request_type: kind, error_type: 'network' });
         window.requestAnimationFrame(() => statusRef.current?.focus());
       }
+    } finally {
+      submittingRef.current = false;
     }
   };
 
@@ -333,10 +338,13 @@ export function LeadForm({
         </div>
       ) : null}
 
-      <button className="button button--primary button--full button--large" disabled={status.type === 'sending'} type="submit">
-        {status.type === 'sending' ? 'Enviando…' : submitLabel} <Icon name="arrow" size={18} />
-      </button>
-      <p className="lead-form__security-note"><Icon name="shield" size={16} /> La información se utiliza únicamente para atender la solicitud y prevenir envíos abusivos.</p>
+      <div className="lead-form__submit-area">
+        <button className="button button--primary button--large" disabled={status.type === 'sending'} type="submit">
+          {status.type === 'sending' ? <span aria-hidden="true" className="button__spinner" /> : <Icon name="send" size={17} />}
+          <span>{status.type === 'sending' ? 'Enviando…' : submitLabel}</span>
+        </button>
+        <p className="lead-form__security-note"><Icon name="lock" size={16} /> La información se utiliza únicamente para atender la solicitud y prevenir envíos abusivos.</p>
+      </div>
     </form>
   );
 }

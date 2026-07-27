@@ -15,7 +15,7 @@ export function DemoPage() {
       <Seo
         description={isContact ? 'Contacta al equipo comercial de NexoSkill.' : 'Solicita una demostración de NexoSkill y conoce cómo evaluar, preparar y medir el avance de tu talento tecnológico.'}
         path={isContact ? '/contacto' : '/solicitar-demo'}
-        title={isContact ? 'Contacto comercial' : 'Solicitar una demo'}
+        title={isContact ? 'Contacto comercial' : 'Solicitar demo'}
       />
       <section className="contact-hero">
         <div className="container contact-grid contact-grid--form">
@@ -36,7 +36,7 @@ export function DemoPage() {
             description={isContact ? 'Completa los datos para que podamos canalizar tu solicitud.' : 'Completa el contexto básico y coordinaremos una sesión para mostrarte la solución.'}
             kind={isContact ? 'contact' : 'demo'}
             source={location.pathname}
-            submitLabel={isContact ? 'Enviar mensaje' : 'Solicitar demostración'}
+            submitLabel={isContact ? 'Enviar mensaje' : 'Solicitar demo'}
             title={isContact ? 'Contactar a NexoSkill' : 'Coordinar una demostración'}
           />
         </div>

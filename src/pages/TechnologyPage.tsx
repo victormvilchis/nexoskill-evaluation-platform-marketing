@@ -42,7 +42,7 @@ export function TechnologyPage() {
                 <span><strong>Modalidades</strong>{technology.modalities.length} opciones</span>
               </div>
               <div className="hero__actions">
-                <Link className="button button--primary" to={`/solicitar-demo?tecnologia=${technology.slug}`}>Solicitar información <Icon name="arrow" size={18} /></Link>
+                <Link className="button button--primary" to={`/solicitar-demo?tecnologia=${technology.slug}`}>Solicitar demo <Icon name="arrow" size={18} /></Link>
                 <Link className="button button--secondary" to="/bootcamps">Consultar bootcamps</Link>
               </div>
             </div>

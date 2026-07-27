@@ -39,7 +39,7 @@ export function PageHero({
           <p>{description}</p>
           <div className="hero__actions">
             <Link className="button button--primary button--large" to="/solicitar-demo">
-              Solicitar información <Icon name="arrow" size={18} />
+              Solicitar demo <Icon name="arrow" size={18} />
             </Link>
             <Link className="button button--secondary button--large" to={secondaryHref}>{secondaryLabel}</Link>
           </div>

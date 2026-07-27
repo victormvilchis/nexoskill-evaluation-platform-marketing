@@ -38,6 +38,7 @@ test('la configuración productiva aplica seguridad y separación de servicios',
   assert.match(nginx, /Strict-Transport-Security/);
   assert.match(nginx, /client_max_body_size 64k/);
   assert.match(docker, /no-new-privileges:true/);
-  assert.match(env, /VITE_PLATFORM_URL=http:\/\/localhost:5173\/evaluaciones\/dashboard/);
+  assert.doesNotMatch(env, /VITE_PLATFORM_URL/);
+  assert.match(env, /VITE_API_URL=http:\/\/localhost:8081\/api/);
   assert.match(backend, /MAIL_HEALTH_ENABLED:false/);
 });

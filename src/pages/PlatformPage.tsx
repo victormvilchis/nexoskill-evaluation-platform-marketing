@@ -94,7 +94,7 @@ export function PlatformPage() {
           description="La información se presenta a nivel comercial sin publicar detalles técnicos sensibles. El control de acceso, los roles y la separación por organización forman parte del diseño de la solución."
           eyebrow="Control empresarial"
           items={['Acceso por roles', 'Separación por organización', 'Sesiones controladas', 'Configuración por ambiente']}
-          linkLabel="Solicitar una demostración"
+          linkLabel="Solicitar demo"
           linkTo="/solicitar-demo"
           title="Gobierno, seguridad y escalabilidad desde la base."
         />

@@ -41,12 +41,10 @@ test('cada enlace principal apunta a una ruta implementada', () => {
   links.forEach((link) => assert.ok(app.includes(`path="${link}"`) || link.startsWith('/tecnologias/'), `Ruta no implementada: ${link}`));
 });
 
-test('la URL de la plataforma no está repetida en componentes', async () => {
+test('el sitio comercial no expone accesos operativos', async () => {
   const header = await readFile(new URL('../src/components/layout/Header.tsx', import.meta.url), 'utf8');
   const footer = await readFile(new URL('../src/components/layout/Footer.tsx', import.meta.url), 'utf8');
-  assert.match(header, /siteConfig\.platformUrl/);
-  assert.match(footer, /siteConfig\.platformUrl/);
-  assert.doesNotMatch(`${header}\n${footer}`, /localhost:5173|app\.nexoskill\.com/);
+  assert.doesNotMatch(`${header}\n${footer}`, /Iniciar sesión|Acceso a la plataforma|platformUrl/i);
 });
 
 test('el efecto de navegación no devuelve el resultado de window.scrollTo desde useEffect', () => {
