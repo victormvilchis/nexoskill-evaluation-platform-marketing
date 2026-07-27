@@ -41,3 +41,11 @@ Todos los cambios relevantes de NexoSkill Marketing se documentan en este archiv
 
 - Validación para impedir el uso de `SYSTEM` como usuario productivo.
 - Protección CI contra credenciales y archivos `.env` versionados.
+
+### Corrección de Repository Guard
+
+- Se sustituyó el `git grep` autorreferencial del pipeline por un verificador centralizado en Node.js.
+- El guard ahora distingue archivos de ejemplo, asignaciones vacías y secretos reales.
+- Se eliminó del código cualquier valor de contraseña usado como patrón literal.
+- Se bloquean archivos `.env`, builds, reportes, logs y artefactos locales versionados.
+- Se agregaron pruebas de regresión para prevenir falsos positivos en GitHub Actions.

@@ -53,20 +53,13 @@ jobs:
   repository-guard:
     name: Repository guard
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Bloquear secretos y artefactos locales
-        shell: bash
-        run: |
-          set -euo pipefail
-          tracked="$(git ls-files)"
-          if echo "$tracked" | grep -E '(^|/)\.env($|\.local$|\.production$)'; then
-            echo 'Se detectó un archivo de configuración sensible versionado.' >&2
-            exit 1
-          fi
-          if git grep -nEi 'EvaluationApp123|(DB_PASSWORD|MAIL_PASSWORD)=[^$[:space:]][^[:space:]]+' -- ':!*.example' ':!*.md' ':!.github/workflows/ci.yml'; then
-            echo 'Se detectó un posible secreto en el repositorio.' >&2
-            exit 1
-          fi
+        run: npm run repository:guard
