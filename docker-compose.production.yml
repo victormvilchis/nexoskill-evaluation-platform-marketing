@@ -1,40 +1,86 @@
+name: ${COMPOSE_PROJECT_NAME:-nexoskill-marketing}
+
 services:
   marketing-api:
+    image: ${MARKETING_API_IMAGE:-nexoskill/marketing-api}:${MARKETING_IMAGE_TAG:-1.0.1}
     build:
       context: ./backend
-    env_file: .env.production
+    env_file:
+      - .env.production
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      BACKEND_PORT: 8081
+      APP_COMMIT: ${APP_COMMIT:-unknown}
+      APP_BUILD_TIME: ${APP_BUILD_TIME:-unknown}
     expose:
       - "8081"
     restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
     healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://localhost:8081/actuator/health"]
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8081/actuator/health/readiness"]
       interval: 30s
       timeout: 5s
       retries: 5
-      start_period: 35s
+      start_period: 40s
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: ${LOG_MAX_SIZE:-10m}
+        max-file: ${LOG_MAX_FILES:-5}
+    networks:
+      - marketing-private
 
   marketing-web:
+    image: ${MARKETING_WEB_IMAGE:-nexoskill/marketing-web}:${MARKETING_IMAGE_TAG:-1.0.1}
     build:
       context: .
       args:
         VITE_SITE_URL: ${VITE_SITE_URL}
         VITE_API_URL: /api
-        VITE_CONTACT_EMAIL: ${VITE_CONTACT_EMAIL}
-        VITE_PRIVACY_EMAIL: ${VITE_PRIVACY_EMAIL}
-        VITE_LEGAL_ENTITY: ${VITE_LEGAL_ENTITY}
-        VITE_LEGAL_ADDRESS: ${VITE_LEGAL_ADDRESS}
+        VITE_CONTACT_EMAIL: ${VITE_CONTACT_EMAIL:-}
+        VITE_PRIVACY_EMAIL: ${VITE_PRIVACY_EMAIL:-}
+        VITE_LEGAL_ENTITY: ${VITE_LEGAL_ENTITY:-NexoSkill}
+        VITE_LEGAL_ADDRESS: ${VITE_LEGAL_ADDRESS:-}
         VITE_ENABLE_ANALYTICS: ${VITE_ENABLE_ANALYTICS:-false}
         VITE_GTM_ID: ${VITE_GTM_ID:-}
         VITE_GA_MEASUREMENT_ID: ${VITE_GA_MEASUREMENT_ID:-}
     ports:
-      - "127.0.0.1:8080:80"
+      - "${MARKETING_BIND_ADDRESS:-127.0.0.1}:${MARKETING_HTTP_PORT:-8080}:8080"
     depends_on:
       marketing-api:
         condition: service_healthy
     restart: unless-stopped
+    init: true
+    stop_grace_period: 15s
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: ${LOG_MAX_SIZE:-10m}
+        max-file: ${LOG_MAX_FILES:-5}
+    networks:
+      - marketing-private
+
+networks:
+  marketing-private:
+    driver: bridge

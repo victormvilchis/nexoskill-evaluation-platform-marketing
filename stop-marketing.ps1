@@ -14,7 +14,7 @@ function Stop-ProjectProcess([int]$ProcessId, [string]$Source) {
     $process = Get-CimInstance Win32_Process -Filter "ProcessId = $ProcessId" -ErrorAction SilentlyContinue
     if (-not $process) { return }
 
-    $belongsToProject = $process.CommandLine -and $process.CommandLine.Contains($projectRoot, [StringComparison]::OrdinalIgnoreCase)
+    $belongsToProject = $process.CommandLine -and ($process.CommandLine.IndexOf($projectRoot, [StringComparison]::OrdinalIgnoreCase) -ge 0)
     if ($ForcePorts -or $belongsToProject) {
         taskkill /PID $ProcessId /T /F | Out-Null
         $script:stopped += "$Source/PID $ProcessId"

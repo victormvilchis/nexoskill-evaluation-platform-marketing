@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
-const version = '1.0.0-rc.1';
+const version = '1.0.1';
 
 const [pkgText, pom, application, envExample, prodExample, gitignore] = await Promise.all([
   read('package.json'),
@@ -16,9 +16,9 @@ const [pkgText, pom, application, envExample, prodExample, gitignore] = await Pr
 ]);
 
 const pkg = JSON.parse(pkgText);
-assert.equal(pkg.version, version, 'La versión del frontend no corresponde a RC1.');
-assert.match(pom, new RegExp(`<version>${version.replaceAll('.', '\\.')}<\\/version>`), 'La versión del backend no corresponde a RC1.');
-assert.match(application, /version: 1\.0\.0-rc\.1/, 'La información Actuator no corresponde a RC1.');
+assert.equal(pkg.version, version, 'La versión del frontend no corresponde a 1.0.1.');
+assert.match(pom, new RegExp(`<version>${version.replaceAll('.', '\\.')}<\\/version>`), 'La versión del backend no corresponde a 1.0.1.');
+assert.match(application, /version: 1\.0\.1/, 'La información Actuator no corresponde a 1.0.1.');
 
 for (const variable of ['VITE_SITE_URL', 'VITE_API_URL', 'DB_URL', 'DB_USERNAME', 'DB_PASSWORD', 'IP_HASH_SALT']) {
   assert.match(envExample, new RegExp(`^${variable}=`, 'm'), `Falta ${variable} en .env.example.`);
@@ -26,7 +26,7 @@ for (const variable of ['VITE_SITE_URL', 'VITE_API_URL', 'DB_URL', 'DB_USERNAME'
 for (const variable of ['VITE_SITE_URL', 'DB_URL', 'DB_USERNAME', 'DB_PASSWORD', 'CORS_ALLOWED_ORIGINS', 'IP_HASH_SALT']) {
   assert.match(prodExample, new RegExp(`^${variable}=`, 'm'), `Falta ${variable} en .env.production.example.`);
 }
-for (const ignored of ['.env', '.env.*', '.runtime/', 'logs/', 'playwright-report/', 'test-results/']) {
+for (const ignored of ['.env', '.env.*', '.runtime/', 'logs/', 'playwright-report/', 'test-results/', 'build/', 'backups/', '.deploy/']) {
   assert.ok(gitignore.includes(ignored), `Falta excluir ${ignored} en .gitignore.`);
 }
 
@@ -72,4 +72,4 @@ for (const file of scanFiles) {
   }
 }
 
-console.log('Release check 1.0.0-rc.1 completado.');
+console.log('Release check 1.0.1 completado.');

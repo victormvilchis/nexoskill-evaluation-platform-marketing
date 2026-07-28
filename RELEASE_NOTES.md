@@ -1,38 +1,30 @@
-## Corrección RC1 r2
+# NexoSkill Marketing 1.0.1
 
-Esta revisión corrige los últimos hallazgos reales de Playwright: contraste insuficiente en la Home y una prueba de dropdown que asumía navegación de escritorio en el proyecto móvil.
+## Deployment Readiness
 
-# NexoSkill Marketing 1.0.0 RC1
+Esta versión no agrega páginas ni funcionalidades comerciales. Su objetivo es dejar la versión estable `1.0.0` preparada para una instalación futura cuando exista infraestructura.
 
-Esta versión es un candidato de publicación. No agrega nuevas líneas comerciales; estabiliza la experiencia existente y prepara el proyecto para despliegue.
+### Incluye
 
-## Alcance
+- Versiones frontend, backend y Actuator homologadas en `1.0.1`.
+- Nginx ejecutado mediante imagen sin privilegios y puerto interno `8080`.
+- Backend sin puerto público en Docker Compose productivo.
+- Contenedores con filesystem de solo lectura, `cap_drop`, health checks y rotación de logs.
+- Readiness de Spring Boot para validar dependencias antes de publicar tráfico.
+- Validación estricta de variables productivas y rechazo de placeholders.
+- Scripts Linux de preflight, despliegue, actualización, rollback, estado y apagado.
+- Plantillas Data Pump para respaldo y restauración de objetos `MKT_*`.
+- Manifiesto SHA-256 de artefactos generados.
+- Documentación de operación, incidentes y rollback.
 
-- Sitio comercial completo y responsivo.
-- Formularios persistentes sobre Oracle con objetos `MKT_*`.
-- Pruebas E2E y accesibilidad en navegador real.
-- Configuración local y productiva separada.
-- CI de GitHub para frontend, backend y control de secretos.
-- Scripts operativos de inicio, apagado y diagnóstico.
+### No incluye
 
-## Condiciones para promover a 1.0.0
+- Dominio, DNS o certificado TLS.
+- Servidor o proveedor de hosting.
+- Credenciales Oracle o SMTP.
+- Cambios de esquema o migraciones nuevas.
+- Panel de administración comercial.
 
-- Definir dominio y URL pública.
-- Configurar SMTP real y correos legales/comerciales.
-- Completar datos jurídicos del aviso de privacidad.
-- Ejecutar la suite E2E contra el entorno candidato.
-- Confirmar respaldo y restauración de Oracle.
-- Rotar todas las credenciales utilizadas durante desarrollo.
+## Corrección de compatibilidad
 
-
-## Ajustes correctivos de RC1
-
-- Ejecución local de Playwright sobre Google Chrome instalado.
-- Video local deshabilitado para no requerir FFmpeg.
-- Prueba 404 alineada con la página real.
-- Control móvil único y backdrop fuera del árbol accesible.
-- Diagnóstico de Java corregido para PowerShell.
-
-## Corrección del pipeline de seguridad
-
-El job `Repository guard` ahora ejecuta `npm run repository:guard`. La validación revisa archivos sensibles y asignaciones reales sin interpretar sus propias expresiones regulares o pruebas como credenciales. Esta corrección no modifica la aplicación, la base de datos ni los contratos de API.
+- Compatibilidad corregida con Windows PowerShell 5.1 en el apagado seguro de procesos de marketing.

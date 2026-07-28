@@ -1,51 +1,28 @@
 # Changelog
 
-Todos los cambios relevantes de NexoSkill Marketing se documentan en este archivo.
+## [1.0.1] - 2026-07-27
+- Corrige `stop-marketing.ps1` para compatibilidad con Windows PowerShell 5.1 al validar procesos por ruta sin usar la sobrecarga no disponible de `String.Contains`.
 
-## Corrección RC1 r2 — contraste y navegación móvil
+### Added
 
-- Corrige contraste WCAG AA en los niveles de las tarjetas de tecnologías de la Home.
-- Corrige el color de las listas en la tarjeta destacada de servicios.
-- Adapta la prueba del dropdown de Soluciones para escritorio y navegación móvil.
-- Agrega una prueba de regresión para evitar reintroducir estos errores.
+- Validación de configuración productiva y placeholders.
+- Scripts de preflight, deploy, update, rollback, status y stop.
+- Plantillas Data Pump para objetos Oracle `MKT_*`.
+- Runbook operativo y documentación de deployment readiness.
+- Manifiesto de artefactos con hashes SHA-256.
 
-## [1.0.0-rc.1]
+### Changed
 
-### Correcciones de validación local Playwright
+- Nginx productivo ahora utiliza una imagen sin privilegios y escucha en `8080`.
+- Docker Compose productivo restringe capacidades, filesystem y exposición de puertos.
+- Health check del backend utiliza readiness.
+- Frontend, backend y Actuator se homologaron a `1.0.1`.
 
-- Chrome instalado localmente se utiliza como canal de ejecución cuando no se está en CI.
-- La grabación de video se desactiva localmente para evitar dependencia de FFmpeg; permanece activa en CI.
-- La prueba 404 valida el contenido semántico real de la página.
-- El backdrop móvil deja de exponerse como un segundo botón accesible.
-- El diagnóstico de Java evita falsos `NativeCommandError` en PowerShell.
- - 2026-07-27
+### Security
 
-### Agregado
+- El perfil productivo valida URL Oracle, contraseña, usuario aplicativo, salt y CORS HTTPS.
+- Se incorporó rotación de logs y metadatos de commit/build.
 
-- Pruebas E2E con Playwright para navegación, formularios, 404 y móvil.
-- Auditoría automática de accesibilidad con axe-core.
-- GitHub Actions para frontend, backend y protección del repositorio.
-- Perfiles Spring Boot `local` y `prod`.
-- Identificador de correlación por solicitud y contrato de error estable.
-- Scripts `.cmd` y validaciones operativas previas al arranque.
-- Mailpit opcional para verificar correos en desarrollo.
-- Documentación y checklist de Release Candidate.
+## [1.0.0] - 2026-07-27
 
-### Cambiado
-
-- Versión homologada en frontend y backend.
-- Inicio local con validación explícita de herramientas, puertos, Oracle y variables.
-- Configuración productiva con fail-fast para secretos y orígenes inseguros.
-
-### Seguridad
-
-- Validación para impedir el uso de `SYSTEM` como usuario productivo.
-- Protección CI contra credenciales y archivos `.env` versionados.
-
-### Corrección de Repository Guard
-
-- Se sustituyó el `git grep` autorreferencial del pipeline por un verificador centralizado en Node.js.
-- El guard ahora distingue archivos de ejemplo, asignaciones vacías y secretos reales.
-- Se eliminó del código cualquier valor de contraseña usado como patrón literal.
-- Se bloquean archivos `.env`, builds, reportes, logs y artefactos locales versionados.
-- Se agregaron pruebas de regresión para prevenir falsos positivos en GitHub Actions.
+Primera versión estable del sitio comercial de NexoSkill.
