@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $backendRoot = $PSScriptRoot
 $projectRoot = Split-Path $backendRoot -Parent
 $logsRoot = Join-Path $projectRoot 'logs'
