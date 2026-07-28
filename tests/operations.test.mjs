@@ -28,4 +28,6 @@ test('el script de apagado libera los puertos del proyecto de marketing', () => 
   assert.match(stop, /5174/);
   assert.match(stop, /8081/);
   assert.match(stop, /taskkill/);
+  assert.match(stop, /IndexOf\(\$projectRoot, \[StringComparison\]::OrdinalIgnoreCase\) -ge 0/);
+  assert.doesNotMatch(stop, /\.Contains\([^\n]+,\s*\[StringComparison\]/);
 });

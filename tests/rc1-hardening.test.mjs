@@ -17,7 +17,7 @@ const [pkg, playwright, workflow, localProfile, prodProfile, errorHandler, corre
   read('CHANGELOG.md'),
 ]);
 
-test('RC1 integra Playwright, axe y scripts de validación', () => {
+test('la versión estable conserva Playwright, axe y scripts de validación', () => {
   assert.match(pkg, /"@playwright\/test"/);
   assert.match(pkg, /"@axe-core\/playwright"/);
   assert.match(pkg, /"test:e2e"/);
@@ -59,5 +59,5 @@ test('artefactos locales de pruebas y ejecución están excluidos de Git', () =>
   assert.match(gitignore, /playwright-report\//);
   assert.match(gitignore, /test-results\//);
   assert.match(gitignore, /\.runtime\//);
-  assert.match(changelog, /1\.0\.0-rc\.1/);
+  assert.match(changelog, /1\.0\.1/);
 });

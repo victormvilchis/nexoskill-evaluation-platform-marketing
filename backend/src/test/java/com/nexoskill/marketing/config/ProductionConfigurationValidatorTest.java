@@ -24,17 +24,45 @@ class ProductionConfigurationValidatorTest {
     }
 
     @Test
+    void rejectsMissingDatabasePassword() {
+        MockEnvironment environment = baseEnvironment().withProperty("DB_PASSWORD", "");
+        ProductionConfigurationValidator validator = new ProductionConfigurationValidator(environment);
+        assertThrows(IllegalStateException.class, () -> validator.run(new DefaultApplicationArguments(new String[0])));
+    }
+
+    @Test
+    void rejectsPlaceholderDatabaseUrl() {
+        MockEnvironment environment = baseEnvironment()
+                .withProperty("DB_URL", "jdbc:oracle:thin:@//REPLACE_WITH_ORACLE_HOST:1521/XEPDB1");
+        ProductionConfigurationValidator validator = new ProductionConfigurationValidator(environment);
+        assertThrows(IllegalStateException.class, () -> validator.run(new DefaultApplicationArguments(new String[0])));
+    }
+
+    @Test
     void rejectsLocalhostCorsInProduction() {
         MockEnvironment environment = baseEnvironment().withProperty("CORS_ALLOWED_ORIGINS", "http://localhost:5174");
         ProductionConfigurationValidator validator = new ProductionConfigurationValidator(environment);
         assertThrows(IllegalStateException.class, () -> validator.run(new DefaultApplicationArguments(new String[0])));
     }
 
+    @Test
+    void rejectsIncompleteMailConfigurationWhenEnabled() {
+        MockEnvironment environment = baseEnvironment()
+                .withProperty("MAIL_ENABLED", "true")
+                .withProperty("MAIL_HOST", "")
+                .withProperty("MAIL_FROM", "")
+                .withProperty("CONTACT_RECIPIENT", "");
+        ProductionConfigurationValidator validator = new ProductionConfigurationValidator(environment);
+        assertThrows(IllegalStateException.class, () -> validator.run(new DefaultApplicationArguments(new String[0])));
+    }
+
     private MockEnvironment baseEnvironment() {
         return new MockEnvironment()
+                .withProperty("DB_URL", "jdbc:oracle:thin:@//oracle.internal:1521/XEPDB1")
                 .withProperty("DB_USERNAME", "EVALUATION_APP")
+                .withProperty("DB_PASSWORD", "StrongDatabasePassword123!")
                 .withProperty("IP_HASH_SALT", "0123456789abcdef0123456789abcdef")
-                .withProperty("CORS_ALLOWED_ORIGINS", "https://nexoskill.com")
+                .withProperty("CORS_ALLOWED_ORIGINS", "https://nexoskill.example")
                 .withProperty("MAIL_ENABLED", "false");
     }
 }

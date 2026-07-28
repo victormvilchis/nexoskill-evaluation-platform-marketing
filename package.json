@@ -1,7 +1,7 @@
 {
   "name": "nexoskill-evaluation-platform-marketing",
   "private": true,
-  "version": "1.0.0-rc.1",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -21,7 +21,10 @@
     "check:all": "npm run check && npm run test:e2e",
     "analyze": "npm run build -- --mode analyze",
     "release:check": "node scripts/release-check.mjs && npm run repository:guard",
-    "repository:guard": "node scripts/repository-guard.mjs"
+    "repository:guard": "node scripts/repository-guard.mjs",
+    "deployment:validate": "node scripts/deployment/validate-production-env.mjs --example .env.production.example",
+    "deployment:manifest": "node scripts/deployment/generate-release-manifest.mjs",
+    "deployment:check": "npm run repository:guard && npm run release:check && npm run deployment:validate && npm run build && npm run deployment:manifest"
   },
   "dependencies": {
     "react": "19.2.8",

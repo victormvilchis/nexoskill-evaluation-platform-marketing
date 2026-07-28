@@ -68,6 +68,11 @@ management:
     health:
       probes:
         enabled: true
+      group:
+        liveness:
+          include: livenessState,ping
+        readiness:
+          include: readinessState,db
       show-details: never
   info:
     env:
@@ -76,7 +81,9 @@ management:
 info:
   app:
     name: NexoSkill Marketing Backend
-    version: 1.0.0-rc.1
+    version: 1.0.1
+    commit: ${APP_COMMIT:unknown}
+    build-time: ${APP_BUILD_TIME:unknown}
 
 app:
   cors:

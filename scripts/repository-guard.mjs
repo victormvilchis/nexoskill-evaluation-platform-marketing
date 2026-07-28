@@ -19,6 +19,9 @@ const ignoredDirectories = new Set([
   'test-results',
   'blob-report',
   'coverage',
+  'build',
+  'backups',
+  '.deploy',
 ]);
 
 const allowedEnvironmentExamples = new Set([
@@ -38,6 +41,9 @@ const forbiddenTrackedPaths = [
   /(^|\/)dist\//i,
   /(^|\/)backend\/target\//i,
   /(^|\/)node_modules\//i,
+  /(^|\/)build\//i,
+  /(^|\/)backups\//i,
+  /(^|\/)\.deploy\//i,
   /\.log$/i,
 ];
 
@@ -64,7 +70,7 @@ const safePlaceholderValues = new Set([
 ]);
 
 const sourceExtensions = new Set([
-  '.ts', '.tsx', '.js', '.mjs', '.java', '.yml', '.yaml', '.properties', '.json', '.html', '.xml', '.conf', '.ps1', '.cmd',
+  '.ts', '.tsx', '.js', '.mjs', '.java', '.yml', '.yaml', '.properties', '.json', '.html', '.xml', '.conf', '.ps1', '.cmd', '.sh',
 ]);
 
 const sourceRoots = [
@@ -77,6 +83,7 @@ const sourceRoots = [
   'start-marketing.ps1',
   'stop-marketing.ps1',
   'check-marketing.ps1',
+  'scripts/deployment/',
 ];
 
 const findings = [];

@@ -23,6 +23,8 @@ jobs:
         run: npm install
       - name: Validar código, contenido y SEO
         run: npm run check
+      - name: Validar plantilla de despliegue
+        run: npm run deployment:validate
       - name: Instalar Chromium
         run: npx playwright install --with-deps chromium
       - name: Pruebas E2E y accesibilidad
@@ -63,3 +65,21 @@ jobs:
           node-version: '22'
       - name: Bloquear secretos y artefactos locales
         run: npm run repository:guard
+
+
+  deployment-config:
+    name: Deployment config
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar variables de ejemplo
+        run: node scripts/deployment/validate-production-env.mjs --example .env.production.example
+      - name: Validar Docker Compose productivo
+        run: |
+          cp .env.production.example .env.production
+          docker compose --env-file .env.production -f docker-compose.production.yml config --quiet
+          rm -f .env.production
