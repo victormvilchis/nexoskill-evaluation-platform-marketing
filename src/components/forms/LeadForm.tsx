@@ -1,6 +1,7 @@
-import { type FormEvent, useId, useRef, useState } from 'react';
+import { type FormEvent, useCallback, useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '../common/Icon';
+import { PrivacyNoticeModal } from '../privacy/PrivacyNoticeModal';
 import { LeadApiError, submitLead } from '../../services/leadApi';
 import { trackEvent } from '../../analytics/analytics';
 import { getLeadAttribution } from '../../analytics/attribution';
@@ -89,11 +90,16 @@ export function LeadForm({
   const [form, setForm] = useState<FormState>(() => createInitialState(defaultTechnology));
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<{ type: 'idle' | 'sending' | 'success' | 'error'; message?: string; reference?: string; requestId?: string }>({ type: 'idle' });
+  const [privacyNoticeOpen, setPrivacyNoticeOpen] = useState(false);
   const formStartedAt = useRef(new Date().toISOString());
   const submittingRef = useRef(false);
   const formStartTrackedRef = useRef(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const statusRef = useRef<HTMLDivElement | null>(null);
+  const privacyNoticeTriggerRef = useRef<HTMLButtonElement | null>(null);
+
+  const openPrivacyNotice = useCallback(() => setPrivacyNoticeOpen(true), []);
+  const closePrivacyNotice = useCallback(() => setPrivacyNoticeOpen(false), []);
 
   const fieldId = (field: keyof FormState | 'planId') => `${formId}-${field}`;
   const errorId = (field: keyof FormState | 'planId') => `${fieldId(field)}-error`;
@@ -216,6 +222,7 @@ export function LeadForm({
   }
 
   return (
+    <>
     <form aria-busy={status.type === 'sending'} className={formClass} noValidate onFocusCapture={trackFormStart} onSubmit={handleSubmit} ref={formRef}>
       <div className="lead-form__heading">
         <span>Solicitud comercial</span>
@@ -351,10 +358,13 @@ export function LeadForm({
       </label>
 
       <div className="lead-form__consent-wrap">
-        <label className="lead-consent" htmlFor={fieldId('consentPrivacy')}>
+        <div className="lead-consent">
           <input aria-describedby={errors.consentPrivacy ? errorId('consentPrivacy') : undefined} aria-invalid={Boolean(errors.consentPrivacy)} checked={form.consentPrivacy} id={fieldId('consentPrivacy')} type="checkbox" onChange={(event) => updateField('consentPrivacy', event.target.checked)} />
-          <span>Acepto que Valtieris procese estos datos para atender mi solicitud comercial. Consulta el <Link to="/aviso-de-privacidad">aviso de privacidad</Link>.</span>
-        </label>
+          <div className="lead-consent__copy">
+            <label htmlFor={fieldId('consentPrivacy')}>Acepto que Valtieris procese estos datos para atender mi solicitud comercial.</label>
+            <span>Consulta el <button className="lead-consent__privacy-button" onClick={openPrivacyNotice} ref={privacyNoticeTriggerRef} type="button">aviso de privacidad</button>.</span>
+          </div>
+        </div>
         {errors.consentPrivacy ? <small className="field-error" id={errorId('consentPrivacy')}>{errors.consentPrivacy}</small> : null}
       </div>
 
@@ -373,5 +383,7 @@ export function LeadForm({
         <p className="lead-form__security-note"><Icon name="lock" size={16} /> La información se utiliza únicamente para atender la solicitud y prevenir envíos abusivos.</p>
       </div>
     </form>
+    <PrivacyNoticeModal isOpen={privacyNoticeOpen} onClose={closePrivacyNotice} returnFocusRef={privacyNoticeTriggerRef} />
+    </>
   );
 }

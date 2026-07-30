@@ -11,7 +11,7 @@ const request = await read('backend/src/main/java/com/nexoskill/marketing/api/Le
 const prospect = await read('backend/src/main/java/com/nexoskill/marketing/domain/Prospect.java');
 const service = await read('backend/src/main/java/com/nexoskill/marketing/service/LeadService.java');
 const migration = await read('backend/src/main/resources/db/migration/oracle/V2__add_marketing_attribution.sql');
-const privacy = await read('src/pages/PrivacyPage.tsx');
+const privacy = await read('src/components/privacy/PrivacyNoticeContent.tsx');
 
 test('la atribución conserva UTM, click ids y contexto de conversión', () => {
   for (const parameter of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'msclkid', 'li_fat_id']) {

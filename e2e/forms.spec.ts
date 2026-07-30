@@ -80,3 +80,32 @@ test('las validaciones locales enfocan el primer campo inválido', async ({ page
   await expect(page.getByLabel('Nombre *')).toBeFocused();
   await expect(page.getByRole('alert')).toContainText('Revisa los campos');
 });
+
+for (const scenario of [
+  { name: 'solicitud de demo', path: '/solicitar-demo' },
+  { name: 'solicitud de cotización', path: '/solicitar-cotizacion?plan=professional-academy' },
+]) {
+  test(`el aviso de privacidad abre en modal y conserva datos en ${scenario.name}`, async ({ page }) => {
+    await page.goto(scenario.path);
+    await page.getByLabel('Nombre *').fill('María');
+    await page.getByLabel('Correo empresarial *').fill('maria@empresa.com');
+    await page.getByLabel('Empresa *').fill('Empresa Demo');
+
+    const privacyButton = page.getByRole('button', { name: 'aviso de privacidad' });
+    await privacyButton.click();
+
+    const dialog = page.getByRole('dialog', { name: 'Aviso de privacidad' });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole('heading', { name: 'Datos que recopilamos' })).toBeVisible();
+    await expect(page).toHaveURL(scenario.path);
+
+    await page.keyboard.press('Escape');
+
+    await expect(dialog).toBeHidden();
+    await expect(privacyButton).toBeFocused();
+    await expect(page.getByLabel('Nombre *')).toHaveValue('María');
+    await expect(page.getByLabel('Correo empresarial *')).toHaveValue('maria@empresa.com');
+    await expect(page.getByLabel('Empresa *')).toHaveValue('Empresa Demo');
+  });
+}
+

@@ -1,19 +1,15 @@
 # Valtieris Marketing 1.1.0 Parte 1
 
-## Rebranding enterprise
-
-- Nueva marca pública **Valtieris**.
-- Nuevo logotipo horizontal para fondos claros y oscuros.
-- Nuevo símbolo para favicon, PWA, Open Graph y visuales del producto.
-- Nueva paleta enterprise basada en navy `#071A2B`, azul `#155EEF` y teal `#0F766E`.
-- Rediseño transversal de header, hero, secciones, tarjetas, formularios, planes, CTA y footer.
-- Business Talent se presenta como el plan recomendado.
-- SEO, manifest, datos estructurados, correos y metadata del backend quedan alineados con la marca.
-- Se conservan paquetes Java y objetos Oracle existentes para compatibilidad técnica.
-
 ## Conversión, atribución y consentimiento
 
 Esta entrega agrega medición comercial y atribución de campañas sin incorporar paneles administrativos ni mezclar código con la plataforma principal.
+
+### Mejora del flujo de formularios
+
+- El enlace al aviso de privacidad dentro de los formularios abre un modal y no abandona la solicitud en curso.
+- Los valores capturados se conservan al abrir y cerrar el aviso.
+- Se mantiene la ruta pública `/aviso-de-privacidad` para navegación legal desde el footer y acceso directo.
+- El modal incluye control de foco, cierre con teclado, bloqueo de scroll y presentación responsiva.
 
 ### Incluye
 

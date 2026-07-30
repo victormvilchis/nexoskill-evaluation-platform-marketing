@@ -6,7 +6,7 @@ const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 const [app, analytics, consent, seo, nginx, env, backend, docker, privacy, terms, packageJson] = await Promise.all([
   read('../src/app/App.tsx'), read('../src/analytics/analytics.ts'), read('../src/components/privacy/ConsentBanner.tsx'),
   read('../src/seo/Seo.tsx'), read('../nginx.conf'), read('../.env.example'), read('../backend/src/main/resources/application.yml'),
-  read('../docker-compose.production.yml'), read('../src/pages/PrivacyPage.tsx'), read('../src/pages/TermsPage.tsx'), read('../package.json'),
+  read('../docker-compose.production.yml'), read('../src/components/privacy/PrivacyNoticeContent.tsx'), read('../src/pages/TermsPage.tsx'), read('../package.json'),
 ]);
 
 test('la analítica se carga únicamente con consentimiento', () => {

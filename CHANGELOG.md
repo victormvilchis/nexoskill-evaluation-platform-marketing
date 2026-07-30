@@ -2,6 +2,13 @@
 
 ## [1.1.0] - 2026-07-28
 
+### Corregido
+
+- El aviso de privacidad dentro de los formularios comerciales ahora abre en un modal accesible sin cambiar de ruta.
+- Los datos capturados se conservan al consultar y cerrar el aviso en solicitudes de demo y cotización.
+- El modal permite cierre con `Escape`, clic exterior y botones explícitos, bloquea el scroll de fondo y restaura el foco al control de origen.
+- El contenido legal se centralizó para que la página pública y el modal utilicen la misma versión.
+
 ### Added
 
 - Atribución UTM y click IDs conservada durante la sesión.
@@ -9,15 +16,6 @@
 - Migración Oracle `V2__add_marketing_attribution.sql`.
 - Persistencia de referente, landing, página de conversión y consentimiento analítico.
 - Documentación de campañas y privacidad.
-
-### Rebranding Valtieris
-
-- La marca pública cambia de NexoSkill a **Valtieris**.
-- Se incorporan logotipo horizontal, variante inversa, símbolo, favicon, iconos PWA y Open Graph.
-- El sistema visual adopta navy profundo, azul ejecutivo y teal con superficies claras.
-- Header, hero, navegación, tarjetas, formularios, planes, CTA y footer quedan homologados.
-- SEO, manifest, JSON-LD, correos y metadatos del backend utilizan Valtieris.
-- Los identificadores técnicos compatibles, paquetes Java y objetos Oracle `MKT_*` se conservan para evitar una migración disruptiva.
 
 ### Changed
 
