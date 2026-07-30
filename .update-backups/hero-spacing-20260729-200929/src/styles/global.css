@@ -1274,7 +1274,7 @@ p {
 .subpage-hero,
 .contact-hero {
   min-height: 670px;
-  padding: 64px 0 96px;
+  padding: 110px 0;
   background-image: radial-gradient(circle at 85% 10%, rgba(37, 185, 173, 0.16), transparent 30%), linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: auto, 54px 54px, 54px 54px;
 }
@@ -1434,7 +1434,7 @@ p {
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding: 56px 0 96px;
+  padding: 104px 0 112px;
   background:
     radial-gradient(circle at 15% 25%, rgba(37, 185, 173, 0.15), transparent 32%),
     linear-gradient(135deg, var(--navy-950), #102b45 72%, #123b4b);
@@ -2201,7 +2201,7 @@ p {
 
 @media (max-width: 680px) {
   .page-hero {
-    padding: 40px 0 72px;
+    padding: 76px 0 84px;
   }
 
   .page-hero__content h1 {
@@ -2540,7 +2540,7 @@ p {
 
   .subpage-hero,
   .contact-hero {
-    padding: 44px 0 72px;
+    padding: 78px 0;
   }
 
   .subpage-card,
@@ -3440,7 +3440,7 @@ p {
 }
 
 .quote-hero {
-  padding: 56px 0 96px;
+  padding: 96px 0 112px;
   background-image:
     radial-gradient(circle at 8% 10%, rgba(37, 185, 173, 0.15), transparent 30%),
     linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -3690,7 +3690,7 @@ p {
   }
 
   .quote-hero {
-    padding: 40px 0 72px;
+    padding: 72px 0 84px;
   }
 
   .quote-form {
@@ -4261,7 +4261,7 @@ p {
   display: flex;
   align-items: center;
   gap: 9px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
   color: rgba(255, 255, 255, 0.68);
   font-size: 0.84rem;
   font-weight: 600;
@@ -4803,7 +4803,7 @@ p {
 
 @media (max-width: 680px) {
   .breadcrumbs {
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
 
   .about-principles-grid,
