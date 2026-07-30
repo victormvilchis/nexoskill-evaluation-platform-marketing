@@ -12,9 +12,9 @@ load_environment
 backup_dir=${ORACLE_BACKUP_DIR:-$PROJECT_ROOT/backups/oracle}
 mkdir -p "$backup_dir"
 timestamp=$(date -u +%Y%m%dT%H%M%SZ)
-dump_file="nexoskill_marketing_${timestamp}.dmp"
-log_file="nexoskill_marketing_${timestamp}.log"
-par_file="$backup_dir/nexoskill_marketing_${timestamp}.par"
+dump_file="valtieris_marketing_${timestamp}.dmp"
+log_file="valtieris_marketing_${timestamp}.log"
+par_file="$backup_dir/valtieris_marketing_${timestamp}.par"
 
 cat > "$par_file" <<PAR
 DIRECTORY=${ORACLE_DIRECTORY}

@@ -1,34 +1,37 @@
 :root {
   color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #15243a;
+  color: #283b50;
   background: #f7f9fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --navy-950: #071322;
-  --navy-900: #0a192b;
-  --navy-800: #11263f;
-  --navy-700: #1a3657;
-  --blue-700: #145f79;
-  --blue-600: #167995;
-  --teal-500: #25b9ad;
-  --teal-400: #53d9ca;
-  --teal-300: #7ce7dc;
-  --ink-900: #122238;
-  --ink-700: #3d4f65;
-  --ink-600: #56677a;
-  --ink-500: #6e7d8f;
-  --line: #dce4ed;
-  --line-dark: rgba(255, 255, 255, 0.13);
+
+  /* Valtieris enterprise design system */
+  --navy-950: #071a2b;
+  --navy-900: #0b2239;
+  --navy-800: #102f50;
+  --navy-700: #163d66;
+  --blue-700: #124ac4;
+  --blue-600: #155eef;
+  --teal-500: #0f766e;
+  --teal-400: #14a99b;
+  --teal-300: #5eead4;
+  --ink-900: #152238;
+  --ink-700: #283b50;
+  --ink-600: #52657a;
+  --ink-500: #5f7084;
+  --line: #d8e1ea;
+  --line-dark: rgba(255, 255, 255, 0.14);
   --surface: #ffffff;
-  --surface-soft: #f1f5f9;
-  --surface-blue: #edf7f8;
-  --shadow-sm: 0 8px 28px rgba(8, 29, 51, 0.08);
-  --shadow-md: 0 24px 60px rgba(8, 29, 51, 0.12);
+  --surface-soft: #f7f9fc;
+  --surface-blue: #eaf2ff;
+  --surface-teal: #e6f7f4;
+  --shadow-sm: 0 10px 30px rgba(7, 26, 43, 0.08);
+  --shadow-md: 0 26px 70px rgba(7, 26, 43, 0.14);
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 28px;
-  --container: 1180px;
+  --container: 1200px;
 }
 
 * {
@@ -3912,7 +3915,7 @@ p {
 }
 
 .page-loader > span {
-  animation: nexoskill-spin 0.8s linear infinite;
+  animation: valtieris-spin 0.8s linear infinite;
   border: 3px solid rgba(8, 20, 38, 0.16);
   border-radius: 50%;
   border-top-color: #25b9ad;
@@ -3920,7 +3923,7 @@ p {
   width: 1.4rem;
 }
 
-@keyframes nexoskill-spin {
+@keyframes valtieris-spin {
   to { transform: rotate(360deg); }
 }
 

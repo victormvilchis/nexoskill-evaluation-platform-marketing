@@ -22,7 +22,7 @@ read confirmation
 [ "$confirmation" = "RESTAURAR" ] || fail "Restauración cancelada."
 
 timestamp=$(date -u +%Y%m%dT%H%M%SZ)
-log_file="nexoskill_marketing_restore_${timestamp}.log"
+log_file="valtieris_marketing_restore_${timestamp}.log"
 impdp "$ORACLE_DATAPUMP_CONNECT" \
   DIRECTORY="$ORACLE_DIRECTORY" \
   DUMPFILE="$dump_file" \

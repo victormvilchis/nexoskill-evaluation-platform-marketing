@@ -12,10 +12,10 @@
   </parent>
 
   <groupId>com.nexoskill</groupId>
-  <artifactId>nexoskill-marketing-backend</artifactId>
-  <version>1.0.1</version>
-  <name>NexoSkill Marketing Backend</name>
-  <description>API pública para solicitudes comerciales del sitio de marketing de NexoSkill.</description>
+  <artifactId>valtieris-marketing-backend</artifactId>
+  <version>1.1.0</version>
+  <name>Valtieris Marketing Backend</name>
+  <description>API pública para solicitudes comerciales del sitio de marketing de Valtieris.</description>
 
   <properties>
     <java.version>21</java.version>

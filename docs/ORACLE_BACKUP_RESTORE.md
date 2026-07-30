@@ -16,7 +16,7 @@ Se recomienda configurar `ORACLE_DATAPUMP_CONNECT` mediante Oracle Wallet para e
 
 ```env
 ORACLE_DIRECTORY=DATA_PUMP_DIR
-ORACLE_DATAPUMP_CONNECT=/@NEXOSKILL_BACKUP
+ORACLE_DATAPUMP_CONNECT=/@VALTIERIS_BACKUP
 ORACLE_BACKUP_DIR=./backups/oracle
 ORACLE_RESTORE_TABLE_ACTION=SKIP
 ```
@@ -32,7 +32,7 @@ El script solicita un export de tablas y secuencias `MKT_%` y guarda localmente 
 ## Restauración
 
 ```bash
-./scripts/deployment/restore-oracle.sh nexoskill_marketing_YYYYMMDDTHHMMSSZ.dmp
+./scripts/deployment/restore-oracle.sh valtieris_marketing_YYYYMMDDTHHMMSSZ.dmp
 ```
 
 La restauración exige escribir `RESTAURAR`. Antes de usar `REPLACE` o `TRUNCATE`, confirma que no se perderán prospectos recientes.

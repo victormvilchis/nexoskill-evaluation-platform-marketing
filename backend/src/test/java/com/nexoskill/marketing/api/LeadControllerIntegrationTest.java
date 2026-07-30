@@ -1,5 +1,6 @@
 package com.nexoskill.marketing.api;
 
+import com.nexoskill.marketing.domain.Prospect;
 import com.nexoskill.marketing.domain.ProspectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,11 +41,23 @@ class LeadControllerIntegrationTest {
                   "email": "maria@empresa.com",
                   "company": "Empresa Demo",
                   "message": "Necesitamos evaluar un equipo de desarrollo.",
+                  "utmSource": "linkedin",
+                  "utmMedium": "social",
+                  "utmCampaign": "java_backend_2026",
+                  "utmContent": "hero_demo",
+                  "utmTerm": "academia_java",
+                  "clickId": "test-click-id",
+                  "clickIdType": "li_fat_id",
+                  "referrer": "https://www.linkedin.com/",
+                  "landingPage": "/?utm_source=linkedin&utm_medium=social&utm_campaign=java_backend_2026",
+                  "conversionPage": "/solicitar-demo",
+                  "attributionCapturedAt": "%s",
+                  "analyticsConsent": "DENIED",
                   "consentPrivacy": true,
                   "formStartedAt": "%s",
                   "website": ""
                 }
-                """.formatted(Instant.now().minusSeconds(5));
+                """.formatted(Instant.now().minusSeconds(30), Instant.now().minusSeconds(5));
 
         mockMvc.perform(post("/api/v1/leads/contact")
                         .header("X-Request-Id", "test-request-0001")
@@ -56,6 +69,11 @@ class LeadControllerIntegrationTest {
                 .andExpect(jsonPath("$.message").isNotEmpty());
 
         org.junit.jupiter.api.Assertions.assertEquals(1, repository.count());
+        Prospect stored = repository.findAll().getFirst();
+        org.junit.jupiter.api.Assertions.assertEquals("linkedin", stored.getUtmSource());
+        org.junit.jupiter.api.Assertions.assertEquals("java_backend_2026", stored.getUtmCampaign());
+        org.junit.jupiter.api.Assertions.assertEquals("/solicitar-demo", stored.getConversionPage());
+        org.junit.jupiter.api.Assertions.assertEquals("DENIED", stored.getAnalyticsConsent());
     }
 
     @Test

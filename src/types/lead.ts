@@ -15,6 +15,18 @@ export interface LeadSubmissionPayload {
   planId?: string;
   message: string;
   source?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmTerm?: string;
+  clickId?: string;
+  clickIdType?: string;
+  referrer?: string;
+  landingPage?: string;
+  conversionPage?: string;
+  attributionCapturedAt?: string;
+  analyticsConsent?: 'GRANTED' | 'DENIED' | 'UNSET';
   consentPrivacy: boolean;
   formStartedAt: string;
   website?: string;

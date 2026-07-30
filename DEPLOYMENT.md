@@ -1,8 +1,8 @@
-# Despliegue de NexoSkill Marketing 1.0.1
+# Despliegue de Valtieris Marketing 1.1.0
 
 ## Objetivo
 
-La versión 1.0.1 deja el sitio preparado para desplegarse cuando exista servidor y endpoint HTTPS. No requiere definir ahora un dominio real, pero el perfil productivo no inicia con placeholders ni secretos vacíos.
+La versión 1.1.0 deja el sitio preparado para desplegarse cuando exista servidor y endpoint HTTPS. No requiere definir ahora un dominio real, pero el perfil productivo no inicia con placeholders ni secretos vacíos.
 
 ## Arquitectura
 

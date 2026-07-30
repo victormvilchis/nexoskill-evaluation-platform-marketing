@@ -67,10 +67,10 @@ export function Seo({ title, description, path = '/', noIndex = false, image = '
     const extra = Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : [];
     const breadcrumb = breadcrumbSchema(path, title);
     const schemas = [organizationSchema(), websiteSchema(), breadcrumb, ...extra].filter(Boolean);
-    let script = document.head.querySelector<HTMLScriptElement>('#nexoskill-structured-data');
+    let script = document.head.querySelector<HTMLScriptElement>('#valtieris-structured-data');
     if (!script) {
       script = document.createElement('script');
-      script.id = 'nexoskill-structured-data';
+      script.id = 'valtieris-structured-data';
       script.type = 'application/ld+json';
       document.head.appendChild(script);
     }

@@ -14,9 +14,9 @@ const [pkgText, compose, dockerfile, nginx, prodEnv, application, validator] = a
 ]);
 const pkg = JSON.parse(pkgText);
 
-test('la versión 1.0.1 está homologada', () => {
-  assert.equal(pkg.version, '1.0.1');
-  assert.match(application, /version: 1\.0\.1/);
+test('la versión 1.1.0 está homologada', () => {
+  assert.equal(pkg.version, '1.1.0');
+  assert.match(application, /version: 1\.1\.0/);
   assert.match(application, /readiness:\n\s+include: readinessState,db/);
 });
 

@@ -8,14 +8,15 @@ import { Seo } from '../seo/Seo';
 export function QuoteRequestPage() {
   const [searchParams] = useSearchParams();
   const requestedPlan = searchParams.get('plan') ?? plans[1].id;
-  const initialPlan = plans.some((plan) => plan.id === requestedPlan) ? requestedPlan : plans[1].id;
+  const normalizedPlan = requestedPlan === 'business-certification' ? 'business-talent' : requestedPlan;
+  const initialPlan = plans.some((plan) => plan.id === normalizedPlan) ? normalizedPlan : plans[1].id;
   const [planId, setPlanId] = useState(initialPlan);
   const selectedPlan = useMemo(() => plans.find((plan) => plan.id === planId) ?? plans[1], [planId]);
 
   return (
     <div className="quote-page">
       <Seo
-        description="Solicita una cotización de NexoSkill según el tamaño de tu equipo, tecnologías de interés y objetivo del programa."
+        description="Solicita una cotización de Valtieris según el plan, la capacidad, el contenido tecnológico y el objetivo de tu organización."
         path="/solicitar-cotizacion"
         title="Solicitar cotización"
       />
@@ -40,7 +41,7 @@ export function QuoteRequestPage() {
 
           <LeadForm
             defaultService="Cotización"
-            description="Comparte el tamaño del equipo y el objetivo para preparar una propuesta comercial."
+            description="Comparte el contexto de tu organización y el objetivo para preparar una propuesta comercial."
             kind="quote"
             onPlanChange={setPlanId}
             planId={planId}

@@ -94,8 +94,8 @@ export interface Plan {
   technologyScope: string;
   roles: string;
   reporting: string;
-  substitutions: string;
-  support: string;
+  certificationManagement: string;
+  talentTracking: string;
   features: string[];
   ctaLabel: string;
   featured?: boolean;

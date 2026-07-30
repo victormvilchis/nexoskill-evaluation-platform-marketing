@@ -1,9 +1,12 @@
 import { siteConfig } from '../seo/siteConfig';
+import { attributionEventContext } from './attribution';
+import { analyticsConsentKey, readAnalyticsConsent, type AnalyticsConsent } from './consent';
 
-export type AnalyticsConsent = 'granted' | 'denied' | 'unset';
+export { analyticsConsentKey, readAnalyticsConsent };
+export type { AnalyticsConsent };
+const SCRIPT_ID = 'valtieris-analytics-script';
 
-const CONSENT_KEY = 'nexoskill.analytics-consent.v1';
-const SCRIPT_ID = 'nexoskill-analytics-script';
+const ANALYTICS_COOKIE_PREFIXES = ['_ga', '_gid', '_gat'];
 
 declare global {
   interface Window {
@@ -12,18 +15,44 @@ declare global {
   }
 }
 
-export const analyticsConsentKey = CONSENT_KEY;
+function clearAnalyticsCookies() {
+  if (typeof document === 'undefined') return;
+  const cookieNames = document.cookie
+    .split(';')
+    .map((cookie) => cookie.split('=')[0]?.trim())
+    .filter((name): name is string => Boolean(name));
 
-export function readAnalyticsConsent(): AnalyticsConsent {
-  if (typeof window === 'undefined') return 'unset';
-  const value = window.localStorage.getItem(CONSENT_KEY);
-  return value === 'granted' || value === 'denied' ? value : 'unset';
+  for (const name of cookieNames) {
+    if (!ANALYTICS_COOKIE_PREFIXES.some((prefix) => name === prefix || name.startsWith(`${prefix}_`))) continue;
+    document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+    document.cookie = `${name}=; Max-Age=0; path=/; domain=${window.location.hostname}; SameSite=Lax`;
+  }
+}
+
+function revokeAnalytics() {
+  window.gtag?.('consent', 'update', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
+  window.dataLayer?.push({ event: 'consent_update', analytics_consent: 'denied' });
+  clearAnalyticsCookies();
 }
 
 export function storeAnalyticsConsent(consent: Exclude<AnalyticsConsent, 'unset'>) {
-  window.localStorage.setItem(CONSENT_KEY, consent);
-  window.dispatchEvent(new CustomEvent('nexoskill:analytics-consent', { detail: consent }));
-  if (consent === 'granted') initializeAnalytics();
+  try {
+    window.localStorage.setItem(analyticsConsentKey, consent);
+  } catch {
+    // La preferencia sigue aplicándose durante la sesión aunque el almacenamiento esté bloqueado.
+  }
+  window.dispatchEvent(new CustomEvent('valtieris:analytics-consent', { detail: consent }));
+  if (consent === 'granted') {
+    initializeAnalytics();
+    trackEvent('analytics_consent_update', { consent: 'granted' });
+  } else {
+    revokeAnalytics();
+  }
 }
 
 export function analyticsIsConfigured() {
@@ -35,6 +64,13 @@ export function initializeAnalytics() {
   if (document.getElementById(SCRIPT_ID)) return;
 
   window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'consent_default',
+    analytics_storage: 'granted',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
 
   if (siteConfig.analytics.gtmId) {
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
@@ -56,12 +92,21 @@ export function initializeAnalytics() {
 
   window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
   window.gtag('js', new Date());
-  window.gtag('config', measurementId, { send_page_view: false, anonymize_ip: true });
+  window.gtag('config', measurementId, {
+    send_page_view: false,
+    anonymize_ip: true,
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
+  });
 }
 
 export function trackEvent(name: string, parameters: Record<string, string | number | boolean | undefined> = {}) {
   if (!analyticsIsConfigured() || readAnalyticsConsent() !== 'granted') return;
-  const cleanParameters = Object.fromEntries(Object.entries(parameters).filter(([, value]) => value !== undefined));
+  const cleanParameters = Object.fromEntries(Object.entries({
+    ...attributionEventContext(),
+    ...parameters,
+  }).filter(([, value]) => value !== undefined && value !== ''));
+
   if (siteConfig.analytics.gtmId) {
     window.dataLayer?.push({ event: name, ...cleanParameters });
     return;

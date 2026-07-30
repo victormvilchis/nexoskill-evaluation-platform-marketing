@@ -1,4 +1,4 @@
-param(
+﻿param(
     [switch]$Quiet,
     [switch]$AllowOccupiedPorts
 )
@@ -82,7 +82,7 @@ foreach ($port in @(5174, 8081)) {
 
 if (-not $Quiet) {
     Write-Host ''
-    Write-Host 'Diagnóstico NexoSkill Marketing' -ForegroundColor Cyan
+    Write-Host 'Diagnóstico Valtieris Marketing' -ForegroundColor Cyan
     foreach ($warning in $warnings) { Write-Host "WARN: $warning" -ForegroundColor Yellow }
     foreach ($error in $errors) { Write-Host "ERROR: $error" -ForegroundColor Red }
     if ($errors.Count -eq 0) { Write-Host 'Diagnóstico completado sin errores bloqueantes.' -ForegroundColor Green }

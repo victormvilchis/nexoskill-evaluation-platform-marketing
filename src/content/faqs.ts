@@ -2,7 +2,7 @@ import type { FaqItem } from '../types/content';
 
 export const faqs: FaqItem[] = [
   {
-    question: '¿Qué es NexoSkill?',
+    question: '¿Qué es Valtieris?',
     answer: 'Es una solución para evaluar, preparar y dar seguimiento al talento tecnológico mediante plataforma, contenido especializado y servicios de capacitación.',
   },
   {

@@ -25,7 +25,20 @@ GROUP BY request_type, status
 ORDER BY request_type, status;
 
 PROMPT === Últimas solicitudes ===
-SELECT id, request_type, status, first_name, email, company, created_at
+SELECT id, request_type, status, first_name, email, company,
+       utm_source, utm_medium, utm_campaign, landing_page, conversion_page,
+       analytics_consent, created_at
 FROM MKT_PROSPECT
 ORDER BY created_at DESC
 FETCH FIRST 20 ROWS ONLY;
+
+
+PROMPT === Conversiones por campaña ===
+SELECT NVL(utm_source, 'direct') AS utm_source,
+       NVL(utm_medium, 'none') AS utm_medium,
+       NVL(utm_campaign, 'sin-campana') AS utm_campaign,
+       request_type,
+       COUNT(*) AS total
+FROM MKT_PROSPECT
+GROUP BY NVL(utm_source, 'direct'), NVL(utm_medium, 'none'), NVL(utm_campaign, 'sin-campana'), request_type
+ORDER BY total DESC;

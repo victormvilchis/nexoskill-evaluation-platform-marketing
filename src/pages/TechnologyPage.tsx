@@ -19,7 +19,7 @@ export function TechnologyPage() {
   return (
     <>
       <Seo
-        description={`${technology.summary} Conoce competencias, niveles, evaluaciones, rutas y modalidades disponibles en NexoSkill.`}
+        description={`${technology.summary} Conoce competencias, niveles, evaluaciones, rutas y modalidades disponibles en Valtieris.`}
         path={`/tecnologias/${technology.slug}`}
         title={`Evaluación y capacitación en ${technology.name}`}
         keywords={technology.seoKeywords}

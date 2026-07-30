@@ -13,7 +13,7 @@ export function DemoPage() {
   return (
     <div className="contact-page">
       <Seo
-        description={isContact ? 'Contacta al equipo comercial de NexoSkill.' : 'Solicita una demostración de NexoSkill y conoce cómo evaluar, preparar y medir el avance de tu talento tecnológico.'}
+        description={isContact ? 'Contacta al equipo comercial de Valtieris.' : 'Solicita una demostración de Valtieris y conoce cómo evaluar, preparar y medir el avance de tu talento tecnológico.'}
         path={isContact ? '/contacto' : '/solicitar-demo'}
         title={isContact ? 'Contacto comercial' : 'Solicitar demo'}
       />
@@ -22,7 +22,7 @@ export function DemoPage() {
           <div>
             <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">{isContact ? 'Contacto' : 'Solicitar demo'}</span></nav>
             <span className="eyebrow eyebrow--hero">{isContact ? 'Hablemos de tu necesidad' : 'Conoce la plataforma'}</span>
-            <h1>{isContact ? 'Conversemos sobre tu programa de talento.' : 'Solicita una demostración de NexoSkill.'}</h1>
+            <h1>{isContact ? 'Conversemos sobre tu programa de talento.' : 'Solicita una demostración de Valtieris.'}</h1>
             <p>{isContact ? 'Comparte el contexto de tu organización y el equipo comercial dará seguimiento a tu solicitud.' : 'Cuéntanos qué necesitas evaluar, preparar o desarrollar. Coordinaremos una sesión enfocada en el contexto real de tu organización.'}</p>
             <ul className="contact-benefits">
               <li><Icon name="check" size={18} /> Atención según el objetivo del equipo</li>
@@ -37,7 +37,7 @@ export function DemoPage() {
             kind={isContact ? 'contact' : 'demo'}
             source={location.pathname}
             submitLabel={isContact ? 'Enviar mensaje' : 'Solicitar demo'}
-            title={isContact ? 'Contactar a NexoSkill' : 'Coordinar una demostración'}
+            title={isContact ? 'Contactar a Valtieris' : 'Coordinar una demostración'}
           />
         </div>
       </section>

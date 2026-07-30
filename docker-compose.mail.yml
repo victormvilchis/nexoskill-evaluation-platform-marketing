@@ -15,8 +15,8 @@ services:
       MAIL_SMTP_AUTH: "false"
       MAIL_STARTTLS: "false"
       MAIL_STARTTLS_REQUIRED: "false"
-      MAIL_FROM: no-reply@nexoskill.local
-      CONTACT_RECIPIENT: ventas@nexoskill.local
+      MAIL_FROM: no-reply@valtieris.local
+      CONTACT_RECIPIENT: ventas@valtieris.local
     depends_on:
       mailpit:
         condition: service_started

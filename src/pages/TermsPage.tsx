@@ -7,7 +7,7 @@ export function TermsPage() {
   return (
     <>
       <Seo
-        description="Consulta las condiciones de uso del sitio público de NexoSkill y sus formularios comerciales."
+        description="Consulta las condiciones de uso del sitio público de Valtieris y sus formularios comerciales."
         path="/terminos-y-condiciones"
         title="Términos y condiciones"
       />
@@ -17,7 +17,7 @@ export function TermsPage() {
             <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">Términos y condiciones</span></nav>
             <span className="eyebrow eyebrow--hero">Condiciones del sitio</span>
             <h1>Términos y condiciones de uso.</h1>
-            <p>Estas condiciones aplican al sitio público de NexoSkill. El uso de la plataforma SaaS podrá estar sujeto a contratos y condiciones independientes.</p>
+            <p>Estas condiciones aplican al sitio público de Valtieris. El uso de la plataforma SaaS podrá estar sujeto a contratos y condiciones independientes.</p>
             <small>Última actualización: 27 de julio de 2026.</small>
           </div>
         </section>

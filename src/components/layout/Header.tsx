@@ -162,14 +162,14 @@ export function Header() {
               </button>
 
               <div
-                aria-label="Soluciones NexoSkill"
+                aria-label="Soluciones Valtieris"
                 className="nav-dropdown__menu"
                 hidden={!solutionsOpen}
                 id="solutions-navigation"
                 onKeyDown={handleSolutionsKeyDown}
                 ref={solutionsMenuRef}
               >
-                <span className="nav-dropdown__eyebrow">Soluciones NexoSkill</span>
+                <span className="nav-dropdown__eyebrow">Soluciones Valtieris</span>
                 {solutionsNavigation.map((item) => (
                   <NavLink className={({ isActive }) => (isActive ? 'is-active' : undefined)} key={item.href} to={item.href}>
                     <strong>{item.label}</strong>

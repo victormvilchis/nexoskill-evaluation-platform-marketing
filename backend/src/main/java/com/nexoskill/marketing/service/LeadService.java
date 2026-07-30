@@ -77,7 +77,7 @@ public class LeadService {
         Prospect saved = repository.save(prospect);
         mailNotificationService.notifySubmission(saved);
         LOGGER.info("Marketing prospect created. id={}, type={}", saved.getId(), saved.getRequestType());
-        return new LeadResponse(reference(saved.getId()), "Recibimos tu solicitud. El equipo de NexoSkill se pondrá en contacto contigo.", saved.getCreatedAt());
+        return new LeadResponse(reference(saved.getId()), "Recibimos tu solicitud. El equipo de Valtieris se pondrá en contacto contigo.", saved.getCreatedAt());
     }
 
     private Prospect map(RequestType type, LeadRequest request, HttpServletRequest httpRequest, Instant now) {
@@ -97,7 +97,22 @@ public class LeadService {
         prospect.setTechnologyInterest(sanitizer.clean(request.technologyInterest()));
         prospect.setPlanId(sanitizer.clean(request.planId()));
         prospect.setMessage(sanitizer.clean(request.message()));
-        prospect.setSource(sanitizer.clean(request.source()));
+        prospect.setSource(limit(sanitizer.clean(request.source()), 160));
+        prospect.setUtmSource(limit(sanitizer.clean(request.utmSource()), 100));
+        prospect.setUtmMedium(limit(sanitizer.clean(request.utmMedium()), 100));
+        prospect.setUtmCampaign(limit(sanitizer.clean(request.utmCampaign()), 160));
+        prospect.setUtmContent(limit(sanitizer.clean(request.utmContent()), 160));
+        prospect.setUtmTerm(limit(sanitizer.clean(request.utmTerm()), 160));
+        prospect.setClickId(limit(sanitizer.clean(request.clickId()), 200));
+        prospect.setClickIdType(limit(sanitizer.lower(request.clickIdType()), 30));
+        prospect.setReferrer(limit(sanitizer.clean(request.referrer()), 500));
+        prospect.setLandingPage(limit(sanitizer.clean(request.landingPage()), 500));
+        prospect.setConversionPage(limit(sanitizer.clean(request.conversionPage()), 500));
+        prospect.setAttributionCapturedAt(request.attributionCapturedAt() == null
+                ? null
+                : OffsetDateTime.ofInstant(request.attributionCapturedAt(), ZoneOffset.UTC));
+        String analyticsConsent = limit(sanitizer.clean(request.analyticsConsent()), 20);
+        prospect.setAnalyticsConsent(analyticsConsent == null ? "UNSET" : analyticsConsent);
         prospect.setConsentPrivacy(request.consentPrivacy());
         prospect.setConsentAt(OffsetDateTime.ofInstant(now, ZoneOffset.UTC));
         prospect.setIpHash(clientIdentityService.hashIp(httpRequest));
@@ -169,7 +184,7 @@ public class LeadService {
     }
 
     private LeadResponse silentAcceptance(Instant now) {
-        return new LeadResponse("NS-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase(Locale.ROOT), "Recibimos tu solicitud. El equipo de NexoSkill se pondrá en contacto contigo.", OffsetDateTime.ofInstant(now, ZoneOffset.UTC));
+        return new LeadResponse("VT-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase(Locale.ROOT), "Recibimos tu solicitud. El equipo de Valtieris se pondrá en contacto contigo.", OffsetDateTime.ofInstant(now, ZoneOffset.UTC));
     }
 
     private String reference(Long id) {

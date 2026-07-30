@@ -25,7 +25,7 @@ if (-not $env:SPRING_PROFILES_ACTIVE) { $env:SPRING_PROFILES_ACTIVE = 'local' }
 
 Set-Location $backendRoot
 Write-Host ''
-Write-Host "NexoSkill Marketing API ($($env:SPRING_PROFILES_ACTIVE)): http://localhost:8081" -ForegroundColor Green
+Write-Host "Valtieris Marketing API ($($env:SPRING_PROFILES_ACTIVE)): http://localhost:8081" -ForegroundColor Green
 Write-Host 'Health: http://localhost:8081/actuator/health'
 Write-Host "Log: $logsRoot\backend.log"
 Write-Host ''

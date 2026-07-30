@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#081426"/>
-  <path d="M17 44V20h7l16 16V20h7v24h-7L24 28v16z" fill="#61e6d2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Valtieris">
+  <title>Valtieris</title>
+  <path fill="#0F766E" d="M54 116h86l116 202-55 96L54 158z"/>
+  <path fill="#155EEF" d="M458 116h-86L256 318l55 96 147-256z"/>
+  <path fill="#0B2239" d="M174 116h67l31 55-42 18zm164 0h-67l-31 55 42 18z"/>
+  <circle cx="256" cy="82" r="34" fill="#0B2239"/>
+  <path fill="#0B2239" d="M171 205c25-18 53-27 85-27s60 9 85 27l-29 52-27-15v70l-29 50-29-50v-70l-27 15z"/>
 </svg>

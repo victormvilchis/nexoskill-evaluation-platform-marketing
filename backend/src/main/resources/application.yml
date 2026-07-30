@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: nexoskill-marketing-backend
+    name: valtieris-marketing-backend
   profiles:
     default: local
   lifecycle:
@@ -19,7 +19,7 @@ spring:
     password: ${DB_PASSWORD:}
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
-      pool-name: NexoSkillMarketingPool
+      pool-name: ValtierisMarketingPool
       minimum-idle: ${DB_POOL_MIN_IDLE:1}
       maximum-pool-size: ${DB_POOL_MAX_SIZE:5}
       connection-timeout: 20000
@@ -80,8 +80,8 @@ management:
 
 info:
   app:
-    name: NexoSkill Marketing Backend
-    version: 1.0.1
+    name: Valtieris Marketing Backend
+    version: 1.1.0
     commit: ${APP_COMMIT:unknown}
     build-time: ${APP_BUILD_TIME:unknown}
 
@@ -92,7 +92,7 @@ app:
     enabled: ${MAIL_ENABLED:false}
     recipient: ${CONTACT_RECIPIENT:}
     from: ${MAIL_FROM:}
-    brand-name: NexoSkill
+    brand-name: Valtieris
   spam:
     minimum-completion-time: ${SPAM_MIN_COMPLETION_TIME:2s}
     maximum-completion-time: ${SPAM_MAX_COMPLETION_TIME:24h}

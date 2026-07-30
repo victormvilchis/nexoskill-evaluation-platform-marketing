@@ -10,8 +10,8 @@ class TextSanitizerTest {
 
     @Test
     void normalizesWhitespaceAndControlCharacters() {
-        assertThat(sanitizer.clean("  Hola\u0000   equipo\r\n\r\n\r\nNexoSkill  "))
-                .isEqualTo("Hola equipo\n\nNexoSkill");
+        assertThat(sanitizer.clean("  Hola\u0000   equipo\r\n\r\n\r\nValtieris  "))
+                .isEqualTo("Hola equipo\n\nValtieris");
     }
 
     @Test

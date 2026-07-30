@@ -15,7 +15,7 @@ public record MarketingProperties(
 ) {
     public MarketingProperties {
         cors = cors == null ? new Cors(List.of("http://localhost:5174")) : cors;
-        mail = mail == null ? new Mail(false, "", "", "NexoSkill") : mail;
+        mail = mail == null ? new Mail(false, "", "", "Valtieris") : mail;
         spam = spam == null ? new Spam(Duration.ofSeconds(2), Duration.ofHours(24), Duration.ofMinutes(3), 2) : spam;
         rateLimit = rateLimit == null ? new RateLimit(8, Duration.ofMinutes(15)) : rateLimit;
         security = security == null ? new Security("change-this-before-production", false) : security;
@@ -33,7 +33,7 @@ public record MarketingProperties(
         public Mail {
             recipient = recipient == null ? "" : recipient.trim();
             from = from == null ? "" : from.trim();
-            brandName = brandName == null || brandName.isBlank() ? "NexoSkill" : brandName.trim();
+            brandName = brandName == null || brandName.isBlank() ? "Valtieris" : brandName.trim();
         }
     }
 

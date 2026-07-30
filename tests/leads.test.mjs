@@ -11,6 +11,7 @@ const bootcamps = await read('src/pages/BootcampsPage.tsx');
 const controller = await read('backend/src/main/java/com/nexoskill/marketing/api/LeadController.java');
 const service = await read('backend/src/main/java/com/nexoskill/marketing/service/LeadService.java');
 const migration = await read('backend/src/main/resources/db/migration/oracle/V1__create_marketing_prospects.sql');
+const attributionMigration = await read('backend/src/main/resources/db/migration/oracle/V2__add_marketing_attribution.sql');
 const pom = await read('backend/pom.xml');
 const application = await read('backend/src/main/resources/application.yml');
 
@@ -44,5 +45,8 @@ test('la persistencia utiliza Oracle y objetos aislados con prefijo MKT', () => 
   assert.match(application, /MKT_FLYWAY_HISTORY/);
   assert.match(migration, /CREATE TABLE MKT_PROSPECT/);
   assert.match(migration, /CREATE SEQUENCE MKT_PROSPECT_SEQ/);
+  assert.match(attributionMigration, /UTM_SOURCE/);
+  assert.match(attributionMigration, /CONVERSION_PAGE/);
+  assert.match(attributionMigration, /ANALYTICS_CONSENT/);
   assert.doesNotMatch(pom, /postgresql/);
 });

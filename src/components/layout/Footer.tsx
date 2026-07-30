@@ -41,13 +41,13 @@ export function Footer() {
         </div>
 
         <div className="site-footer__bottom">
-          <p>© {year} NexoSkill. Todos los derechos reservados.</p>
+          <p>© {year} Valtieris. Todos los derechos reservados.</p>
           <div>
             {footerNavigation.legal.map((item) => <Link key={item.href} to={item.href}>{item.label}</Link>)}
             {analyticsIsConfigured() ? (
               <button
                 className="footer-privacy-button"
-                onClick={() => window.dispatchEvent(new Event('nexoskill:open-consent'))}
+                onClick={() => window.dispatchEvent(new Event('valtieris:open-consent'))}
                 type="button"
               >
                 Preferencias de cookies

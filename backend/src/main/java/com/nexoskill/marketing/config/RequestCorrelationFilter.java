@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class RequestCorrelationFilter extends OncePerRequestFilter {
 
     public static final String HEADER = "X-Request-Id";
-    public static final String ATTRIBUTE = "nexoskill.requestId";
+    public static final String ATTRIBUTE = "valtieris.requestId";
     private static final Pattern SAFE_ID = Pattern.compile("^[A-Za-z0-9._-]{8,64}$");
 
     @Override

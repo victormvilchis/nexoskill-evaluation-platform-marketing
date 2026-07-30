@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnalyticsManager } from '../analytics/AnalyticsManager';
+import { AttributionManager } from '../analytics/AttributionManager';
 import { AppErrorBoundary } from '../components/common/AppErrorBoundary';
 import { ConsentBanner } from '../components/privacy/ConsentBanner';
 import { Footer } from '../components/layout/Footer';
@@ -52,7 +53,7 @@ function RouteEffects() {
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
-      setAnnouncement(document.title.replace(/\s*\|\s*NexoSkill$/, ''));
+      setAnnouncement(document.title.replace(/\s*\|\s*Valtieris$/, ''));
     }, 50);
 
     return () => window.clearTimeout(timeout);
@@ -70,6 +71,7 @@ export function App() {
     <>
       <a className="skip-link" href="#main-content">Saltar al contenido principal</a>
       <RouteEffects />
+      <AttributionManager />
       <AnalyticsManager />
       <Header />
       <div id="main-content" role="main" tabIndex={-1}>

@@ -8,11 +8,11 @@ COMPOSE_FILE=${COMPOSE_FILE:-$PROJECT_ROOT/docker-compose.production.yml}
 STATE_DIR=${STATE_DIR:-$PROJECT_ROOT/.deploy}
 
 log() {
-  printf '[nexoskill] %s\n' "$*"
+  printf '[valtieris] %s\n' "$*"
 }
 
 fail() {
-  printf '[nexoskill] ERROR: %s\n' "$*" >&2
+  printf '[valtieris] ERROR: %s\n' "$*" >&2
   exit 1
 }
 
@@ -55,8 +55,8 @@ save_current_release() {
   mkdir -p "$STATE_DIR"
   cat > "$STATE_DIR/current.env" <<STATE
 MARKETING_IMAGE_TAG=${MARKETING_IMAGE_TAG:-unknown}
-MARKETING_API_IMAGE=${MARKETING_API_IMAGE:-nexoskill/marketing-api}
-MARKETING_WEB_IMAGE=${MARKETING_WEB_IMAGE:-nexoskill/marketing-web}
+MARKETING_API_IMAGE=${MARKETING_API_IMAGE:-valtieris/marketing-api}
+MARKETING_WEB_IMAGE=${MARKETING_WEB_IMAGE:-valtieris/marketing-web}
 APP_COMMIT=${APP_COMMIT:-unknown}
 APP_BUILD_TIME=${APP_BUILD_TIME:-unknown}
 STATE

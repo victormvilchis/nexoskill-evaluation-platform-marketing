@@ -7,7 +7,7 @@ export const organizationSchema = (): StructuredData => ({
   '@type': 'Organization',
   name: siteConfig.name,
   url: siteConfig.siteUrl,
-  logo: new URL('/favicon.svg', siteConfig.siteUrl).toString(),
+  logo: new URL('/icon-512.png', siteConfig.siteUrl).toString(),
   description: siteConfig.description,
   email: siteConfig.contactEmail || undefined,
 });

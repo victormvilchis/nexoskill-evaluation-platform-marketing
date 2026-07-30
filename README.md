@@ -1,12 +1,12 @@
-# NexoSkill Marketing Website
+# Valtieris Marketing Website
 
-Sitio público y comercial de NexoSkill. Este repositorio es independiente de `nexoskill-evaluation-platform` y no contiene la operación de evaluaciones, estudiantes ni administración SaaS.
+Sitio público y comercial de Valtieris. Este repositorio es independiente de `nexoskill-evaluation-platform` y no contiene la operación de evaluaciones, estudiantes ni administración SaaS.
 
 ## Estado
 
-**1.0.1 — Deployment Readiness**
+**1.1.0 Parte 1 — Conversión, atribución y consentimiento**
 
-Esta versión conserva la experiencia comercial estable de `1.0.0` y prepara el código para una instalación productiva futura: contenedores endurecidos, validación de variables, health checks, scripts de despliegue, actualización, rollback y respaldo Oracle.
+Esta versión conserva la experiencia comercial estable de `1.0.1` y agrega atribución UTM, eventos normalizados de conversión, persistencia de origen comercial en Oracle y consentimiento preparado para analítica externa.
 
 ## Servicios locales
 
@@ -48,6 +48,8 @@ Los objetos del sitio comercial permanecen aislados mediante el prefijo `MKT_`:
 - `MKT_PROSPECT_SEQ`
 - `MKT_FLYWAY_HISTORY`
 
+Flyway agrega en `V2__add_marketing_attribution.sql` las columnas de campaña, página de entrada, página de conversión y consentimiento analítico.
+
 Los formularios disponibles son:
 
 - `POST /api/v1/leads/contact`
@@ -55,6 +57,32 @@ Los formularios disponibles son:
 - `POST /api/v1/leads/quote`
 - `POST /api/v1/leads/advisory`
 - `POST /api/v1/leads/bootcamp`
+
+## Atribución de campañas
+
+Valtieris conserva durante la sesión los parámetros `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` y los identificadores `gclid`, `fbclid`, `msclkid` o `li_fat_id`. Esta información se envía únicamente cuando la persona completa un formulario.
+
+Ejemplo:
+
+```text
+http://localhost:5174/solicitar-demo?utm_source=linkedin&utm_medium=social&utm_campaign=java_backend_2026
+```
+
+Consulta [`docs/ATTRIBUTION_AND_ANALYTICS.md`](docs/ATTRIBUTION_AND_ANALYTICS.md).
+
+## Marca y sistema visual
+
+La identidad pública del sitio es **Valtieris**. Los activos y reglas de uso están documentados en [`docs/VALTIERIS_BRAND_SYSTEM.md`](docs/VALTIERIS_BRAND_SYSTEM.md).
+
+## Analítica y consentimiento
+
+La analítica externa permanece desactivada mientras:
+
+```env
+VITE_ENABLE_ANALYTICS=false
+```
+
+Cuando se configura Google Tag Manager o Google Analytics, el script solo se carga después de consentimiento explícito. Los eventos no incluyen datos escritos en los formularios.
 
 ## Validaciones
 
@@ -85,6 +113,7 @@ Documentación:
 - [`docs/DEPLOYMENT_READINESS.md`](docs/DEPLOYMENT_READINESS.md)
 - [`docs/OPERATIONS_RUNBOOK.md`](docs/OPERATIONS_RUNBOOK.md)
 - [`docs/ORACLE_BACKUP_RESTORE.md`](docs/ORACLE_BACKUP_RESTORE.md)
+- [`docs/ATTRIBUTION_AND_ANALYTICS.md`](docs/ATTRIBUTION_AND_ANALYTICS.md)
 
 ## Git y CI
 

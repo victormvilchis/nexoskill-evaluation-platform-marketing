@@ -58,11 +58,14 @@ test('los formularios conservan envío real, carga, bloqueo y privacidad', () =>
   assert.match(leadForm, /setStatus\(\{ type: 'success'/);
 });
 
-test('se conserva el sistema visual previo y las mejoras son acotadas', () => {
-  assert.match(globalStyles, /\.site-header__inner[\s\S]*min-height: 76px/);
-  assert.match(globalStyles, /\.nav-dropdown__menu[\s\S]*width: min\(430px/);
-  assert.match(globalStyles, /--navy-950/);
-  assert.doesNotMatch(enhancements, /--brand-950|--container:|\.hero\s*\{/);
+test('el rebranding de Valtieris aplica un sistema visual enterprise consistente', () => {
+  assert.match(globalStyles, /--navy-950:\s*#071a2b/i);
+  assert.match(globalStyles, /--blue-600:\s*#155eef/i);
+  assert.match(globalStyles, /--teal-500:\s*#0f766e/i);
+  assert.match(enhancements, /Valtieris enterprise rebrand/);
+  assert.match(enhancements, /\.site-header/);
+  assert.match(enhancements, /\.hero\s*\{/);
+  assert.match(enhancements, /\.pricing-card--featured/);
   assert.match(enhancements, /:focus-visible/);
   assert.match(enhancements, /prefers-reduced-motion/);
 });

@@ -1,6 +1,6 @@
 ## Objetivo
 
-Describe el cambio y su relación con NexoSkill Marketing.
+Describe el cambio y su relación con Valtieris Marketing.
 
 ## Validaciones
 

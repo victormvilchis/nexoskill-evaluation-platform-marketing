@@ -1,30 +1,58 @@
-# NexoSkill Marketing 1.0.1
+# Valtieris Marketing 1.1.0 Parte 1
 
-## Deployment Readiness
+## Rebranding enterprise
 
-Esta versión no agrega páginas ni funcionalidades comerciales. Su objetivo es dejar la versión estable `1.0.0` preparada para una instalación futura cuando exista infraestructura.
+- Nueva marca pública **Valtieris**.
+- Nuevo logotipo horizontal para fondos claros y oscuros.
+- Nuevo símbolo para favicon, PWA, Open Graph y visuales del producto.
+- Nueva paleta enterprise basada en navy `#071A2B`, azul `#155EEF` y teal `#0F766E`.
+- Rediseño transversal de header, hero, secciones, tarjetas, formularios, planes, CTA y footer.
+- Business Talent se presenta como el plan recomendado.
+- SEO, manifest, datos estructurados, correos y metadata del backend quedan alineados con la marca.
+- Se conservan paquetes Java y objetos Oracle existentes para compatibilidad técnica.
+
+## Conversión, atribución y consentimiento
+
+Esta entrega agrega medición comercial y atribución de campañas sin incorporar paneles administrativos ni mezclar código con la plataforma principal.
 
 ### Incluye
 
-- Versiones frontend, backend y Actuator homologadas en `1.0.1`.
-- Nginx ejecutado mediante imagen sin privilegios y puerto interno `8080`.
-- Backend sin puerto público en Docker Compose productivo.
-- Contenedores con filesystem de solo lectura, `cap_drop`, health checks y rotación de logs.
-- Readiness de Spring Boot para validar dependencias antes de publicar tráfico.
-- Validación estricta de variables productivas y rechazo de placeholders.
-- Scripts Linux de preflight, despliegue, actualización, rollback, estado y apagado.
-- Plantillas Data Pump para respaldo y restauración de objetos `MKT_*`.
-- Manifiesto SHA-256 de artefactos generados.
-- Documentación de operación, incidentes y rollback.
+- Captura de `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` y `utm_term`.
+- Captura de `gclid`, `fbclid`, `msclkid` y `li_fat_id`.
+- Conservación temporal de la atribución mediante `sessionStorage`.
+- Registro de página de entrada, referente externo y página de conversión.
+- Persistencia Oracle mediante `V2__add_marketing_attribution.sql`.
+- Registro del estado de consentimiento analítico junto con la solicitud.
+- Eventos normalizados para CTA, tecnologías, servicios, planes y formularios.
+- Analítica externa bloqueada hasta obtener consentimiento explícito.
+- Revocación de analítica y limpieza de cookies conocidas cuando se rechaza.
+- Aviso de privacidad actualizado.
+- Correos comerciales enriquecidos con campaña y contexto de conversión.
+- Pruebas unitarias, E2E y backend para atribución.
 
 ### No incluye
 
-- Dominio, DNS o certificado TLS.
-- Servidor o proveedor de hosting.
-- Credenciales Oracle o SMTP.
-- Cambios de esquema o migraciones nuevas.
-- Panel de administración comercial.
+- Panel de prospectos o cotizaciones.
+- Login o administración comercial.
+- Activación automática de Google Analytics o Google Tag Manager.
+- Dominio, DNS, servidor, certificado TLS o SMTP productivo.
 
-## Corrección de compatibilidad
+### Migración Oracle
 
-- Compatibilidad corregida con Windows PowerShell 5.1 en el apagado seguro de procesos de marketing.
+Flyway aplicará automáticamente:
+
+```text
+V2__add_marketing_attribution.sql
+```
+
+La migración conserva todos los registros actuales y únicamente agrega columnas e índice de campaña.
+
+## Ajuste comercial de planes
+
+- Starter tecnológico: 15 asientos activos y contenido creado por la organización.
+- Professional Academy: 25 asientos activos y banco de preguntas de una tecnología.
+- Business Talent: 40 asientos activos, hasta cuatro tecnologías, gestión de certificaciones y seguimiento de estudiantes y colaboradores.
+- Enterprise: asientos personalizados, catálogo tecnológico amplio, configuración de certificaciones por organización y seguimiento de múltiples academias, áreas o programas.
+- Se eliminan de Enterprise las referencias a integraciones, SSO, API, identidad visual y condiciones de servicio como capacidades exclusivas.
+- La configuración inicial, la identidad visual y el acompañamiento de adopción se ofrecen en todos los planes.
+- Los enlaces anteriores con `plan=business-certification` se normalizan a `business-talent`.

@@ -11,7 +11,7 @@ export function FaqPage() {
   return (
     <div>
       <Seo
-        description="Respuestas sobre la plataforma NexoSkill, asientos, contenido, planes, personalización, bootcamps, seguridad y contratación."
+        description="Respuestas sobre la plataforma Valtieris, asientos, contenido, planes, personalización, bootcamps, seguridad y contratación."
         path="/preguntas-frecuentes"
         title="Preguntas frecuentes"
         structuredData={faqSchema([...faqs, ...pricingFaqs])}

@@ -1,4 +1,4 @@
-Contact: https://nexoskill.com/contacto
+Contact: https://valtieris.example/contacto
 Preferred-Languages: es, en
-Canonical: https://nexoskill.com/.well-known/security.txt
+Canonical: https://valtieris.example/.well-known/security.txt
 Expires: 2027-07-27T23:59:59Z

@@ -1,9 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#081426"/>
-  <circle cx="980" cy="80" r="240" fill="#16304f"/>
-  <circle cx="1070" cy="500" r="290" fill="#0d7f87" opacity=".35"/>
-  <text x="90" y="210" fill="#61e6d2" font-family="Arial, sans-serif" font-size="34" font-weight="700">NEXOSKILL</text>
-  <text x="90" y="310" fill="#ffffff" font-family="Arial, sans-serif" font-size="62" font-weight="700">Talento tecnológico</text>
-  <text x="90" y="385" fill="#ffffff" font-family="Arial, sans-serif" font-size="62" font-weight="700">con resultados medibles.</text>
-  <text x="90" y="470" fill="#b7c5d7" font-family="Arial, sans-serif" font-size="28">Evaluación · Preparación · Analítica</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Valtieris</title>
+  <desc id="description">Evaluación y desarrollo de talento tecnológico con resultados medibles.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071A2B"/>
+      <stop offset="0.65" stop-color="#0B2239"/>
+      <stop offset="1" stop-color="#102F50"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#155EEF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="34" fill="url(#background)"/>
+  <circle cx="1050" cy="105" r="230" fill="#155EEF" opacity="0.13"/>
+  <circle cx="120" cy="570" r="260" fill="#0F766E" opacity="0.13"/>
+  <g transform="translate(86 108)">
+    <path d="M36 92h82l74 116-48 68z" fill="#0F766E"/>
+    <path d="M270 92h82l-108 184-50-68z" fill="#155EEF"/>
+    <path d="M122 94h52l35 38 35-38h52l-56 71h-62z" fill="#EAF2FF" opacity="0.95"/>
+    <circle cx="209" cy="52" r="27" fill="#EAF2FF"/>
+    <path d="M172 158h74l-37 72z" fill="#0B2239" stroke="#EAF2FF" stroke-width="8"/>
+  </g>
+  <text x="470" y="285" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="96" font-weight="750">Valtieris</text>
+  <text x="472" y="355" fill="#C8D5E3" font-family="Inter, Arial, sans-serif" font-size="32">Evaluación y desarrollo de talento tecnológico</text>
+  <rect x="472" y="405" width="204" height="7" rx="3.5" fill="url(#mark)"/>
 </svg>

@@ -57,7 +57,7 @@ export function TechnologiesPage() {
               align="center"
               description="Explora el catálogo completo o filtra por área. Cada especialidad detalla competencias, niveles, modalidades y programas relacionados."
               eyebrow="Especialidades"
-              title="Tecnologías disponibles en NexoSkill."
+              title="Tecnologías disponibles en Valtieris."
             />
 
             <div className="technology-filters" role="search" aria-label="Filtrar tecnologías">

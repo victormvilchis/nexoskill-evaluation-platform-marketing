@@ -17,10 +17,10 @@ const [app, header, siteConfig, seo, notFound, styles, packageJson, pom, backend
   read('.gitattributes'),
 ]);
 
-test('la versión 1.0.1 está alineada entre frontend y backend', () => {
-  assert.match(packageJson, /"version": "1\.0\.1"/);
-  assert.match(pom, /<artifactId>nexoskill-marketing-backend<\/artifactId>\s*<version>1\.0\.1<\/version>/);
-  assert.match(backendConfig, /version: 1\.0\.1/);
+test('la versión 1.1.0 está alineada entre frontend y backend', () => {
+  assert.match(packageJson, /"version": "1\.1\.0"/);
+  assert.match(pom, /<artifactId>valtieris-marketing-backend<\/artifactId>\s*<version>1\.1\.0<\/version>/);
+  assert.match(backendConfig, /version: 1\.1\.0/);
 });
 
 test('la navegación interna por anchors funciona con header sticky y foco accesible', () => {

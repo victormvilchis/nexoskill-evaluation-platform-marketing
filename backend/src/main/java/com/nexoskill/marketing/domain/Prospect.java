@@ -73,6 +73,42 @@ public class Prospect {
     @Column(name = "SOURCE", length = 160)
     private String source;
 
+    @Column(name = "UTM_SOURCE", length = 100)
+    private String utmSource;
+
+    @Column(name = "UTM_MEDIUM", length = 100)
+    private String utmMedium;
+
+    @Column(name = "UTM_CAMPAIGN", length = 160)
+    private String utmCampaign;
+
+    @Column(name = "UTM_CONTENT", length = 160)
+    private String utmContent;
+
+    @Column(name = "UTM_TERM", length = 160)
+    private String utmTerm;
+
+    @Column(name = "CLICK_ID", length = 200)
+    private String clickId;
+
+    @Column(name = "CLICK_ID_TYPE", length = 30)
+    private String clickIdType;
+
+    @Column(name = "REFERRER_URL", length = 500)
+    private String referrer;
+
+    @Column(name = "LANDING_PAGE", length = 500)
+    private String landingPage;
+
+    @Column(name = "CONVERSION_PAGE", length = 500)
+    private String conversionPage;
+
+    @Column(name = "ATTRIBUTION_CAPTURED_AT")
+    private OffsetDateTime attributionCapturedAt;
+
+    @Column(name = "ANALYTICS_CONSENT", nullable = false, length = 20)
+    private String analyticsConsent;
+
     @Column(name = "CONSENT_PRIVACY", nullable = false)
     private boolean consentPrivacy;
 
@@ -140,6 +176,30 @@ public class Prospect {
     public void setMessage(String message) { this.message = message; }
     public String getSource() { return source; }
     public void setSource(String source) { this.source = source; }
+    public String getUtmSource() { return utmSource; }
+    public void setUtmSource(String utmSource) { this.utmSource = utmSource; }
+    public String getUtmMedium() { return utmMedium; }
+    public void setUtmMedium(String utmMedium) { this.utmMedium = utmMedium; }
+    public String getUtmCampaign() { return utmCampaign; }
+    public void setUtmCampaign(String utmCampaign) { this.utmCampaign = utmCampaign; }
+    public String getUtmContent() { return utmContent; }
+    public void setUtmContent(String utmContent) { this.utmContent = utmContent; }
+    public String getUtmTerm() { return utmTerm; }
+    public void setUtmTerm(String utmTerm) { this.utmTerm = utmTerm; }
+    public String getClickId() { return clickId; }
+    public void setClickId(String clickId) { this.clickId = clickId; }
+    public String getClickIdType() { return clickIdType; }
+    public void setClickIdType(String clickIdType) { this.clickIdType = clickIdType; }
+    public String getReferrer() { return referrer; }
+    public void setReferrer(String referrer) { this.referrer = referrer; }
+    public String getLandingPage() { return landingPage; }
+    public void setLandingPage(String landingPage) { this.landingPage = landingPage; }
+    public String getConversionPage() { return conversionPage; }
+    public void setConversionPage(String conversionPage) { this.conversionPage = conversionPage; }
+    public OffsetDateTime getAttributionCapturedAt() { return attributionCapturedAt; }
+    public void setAttributionCapturedAt(OffsetDateTime attributionCapturedAt) { this.attributionCapturedAt = attributionCapturedAt; }
+    public String getAnalyticsConsent() { return analyticsConsent; }
+    public void setAnalyticsConsent(String analyticsConsent) { this.analyticsConsent = analyticsConsent; }
     public boolean isConsentPrivacy() { return consentPrivacy; }
     public void setConsentPrivacy(boolean consentPrivacy) { this.consentPrivacy = consentPrivacy; }
     public OffsetDateTime getConsentAt() { return consentAt; }

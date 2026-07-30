@@ -19,7 +19,7 @@ export function BootcampsPage() {
       <div>
         <PageHero
           description="Programas intensivos para acelerar el desarrollo de capacidades con una ruta clara, práctica guiada y seguimiento durante todo el proceso."
-          eyebrow="Bootcamps NexoSkill"
+          eyebrow="Bootcamps Valtieris"
           secondaryHref="/capacitaciones"
           secondaryLabel="Ver capacitaciones"
           title="Preparación intensiva con objetivos, seguimiento y cierre medible."

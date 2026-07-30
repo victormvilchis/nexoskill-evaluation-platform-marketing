@@ -97,7 +97,7 @@ export const technologies: Technology[] = [
     modalities: ['Simuladores originales', 'Ruta de preparación', 'Capacitación por nivel', 'Academia empresarial'],
     relatedPrograms: ['Salesforce Administrator', 'Salesforce Development', 'Automatización y gobierno'],
     faqs: [
-      { question: '¿El contenido usa preguntas oficiales?', answer: 'No. NexoSkill trabaja con reactivos originales y escenarios alineados con competencias, sin presentar material protegido como contenido oficial.' },
+      { question: '¿El contenido usa preguntas oficiales?', answer: 'No. Valtieris trabaja con reactivos originales y escenarios alineados con competencias, sin presentar material protegido como contenido oficial.' },
       { question: '¿Se puede preparar por rol?', answer: 'Sí. La ruta puede configurarse para administración, desarrollo, automatización, soporte o una combinación de competencias.' },
       { question: '¿Puedo incorporar contenido propio?', answer: 'La plataforma está preparada para combinar contenido global con bancos y evaluaciones administrados por cada organización.' },
     ],
@@ -199,7 +199,7 @@ export const technologies: Technology[] = [
     modalities: ['Evaluación diagnóstica', 'Ruta de preparación', 'Taller de arquitectura', 'Academia empresarial'],
     relatedPrograms: ['Fundamentos cloud', 'Arquitectura en AWS', 'Seguridad y confiabilidad cloud'],
     faqs: [
-      { question: '¿NexoSkill es un proveedor oficial de AWS?', answer: 'La página no afirma afiliación ni carácter oficial. Los programas se presentan como preparación técnica independiente basada en competencias.' },
+      { question: '¿Valtieris es un proveedor oficial de AWS?', answer: 'La página no afirma afiliación ni carácter oficial. Los programas se presentan como preparación técnica independiente basada en competencias.' },
       { question: '¿Se pueden evaluar servicios específicos?', answer: 'Sí. El alcance puede concentrarse en cómputo, datos, serverless, seguridad, observabilidad u otras áreas definidas por la organización.' },
       { question: '¿Incluye laboratorios?', answer: 'Los bootcamps y capacitaciones pueden incorporar prácticas en ambientes autorizados y configurados para el programa.' },
     ],

@@ -10,14 +10,14 @@ export function AboutPage() {
   return (
     <div className="about-page">
       <Seo
-        description="Conoce el enfoque de NexoSkill para evaluar, preparar y desarrollar talento tecnológico mediante plataforma, contenido y acompañamiento especializado."
+        description="Conoce el enfoque de Valtieris para evaluar, preparar y desarrollar talento tecnológico mediante plataforma, contenido y acompañamiento especializado."
         path="/nosotros"
-        title="Acerca de NexoSkill"
+        title="Acerca de Valtieris"
       />
 
       <PageHero
-        description="NexoSkill integra tecnología, contenido y acompañamiento para que las organizaciones desarrollen capacidades técnicas con una ruta clara y resultados observables."
-        eyebrow="Acerca de NexoSkill"
+        description="Valtieris integra tecnología, contenido y acompañamiento para que las organizaciones desarrollen capacidades técnicas con una ruta clara y resultados observables."
+        eyebrow="Acerca de Valtieris"
         secondaryHref="/plataforma"
         secondaryLabel="Conocer la plataforma"
         title="Convertimos conocimiento técnico en experiencias de desarrollo medibles."
@@ -38,7 +38,7 @@ export function AboutPage() {
           <div className="about-statement">
             <span>Nuestra propuesta</span>
             <h2>Una experiencia que conecta diagnóstico, preparación, práctica y evidencia.</h2>
-            <p>NexoSkill está diseñado para apoyar programas empresariales, academias internas, evaluación de talento y rutas de preparación sin presentar la formación como una colección de cuestionarios.</p>
+            <p>Valtieris está diseñado para apoyar programas empresariales, academias internas, evaluación de talento y rutas de preparación sin presentar la formación como una colección de cuestionarios.</p>
             <Link className="arrow-link" to="/empresas">Ver soluciones para organizaciones <Icon name="arrow" size={18} /></Link>
           </div>
         </div>

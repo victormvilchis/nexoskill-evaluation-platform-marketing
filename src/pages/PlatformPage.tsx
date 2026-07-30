@@ -18,8 +18,8 @@ export function PlatformPage() {
       />
       <div>
         <PageHero
-          description="NexoSkill reúne evaluación, preparación y seguimiento en una operación organizada para empresas que necesitan desarrollar talento con evidencia clara."
-          eyebrow="Plataforma NexoSkill"
+          description="Valtieris reúne evaluación, preparación y seguimiento en una operación organizada para empresas que necesitan desarrollar talento con evidencia clara."
+          eyebrow="Plataforma Valtieris"
           secondaryHref="/planes"
           secondaryLabel="Conocer los planes"
           title="Una sola plataforma para convertir conocimiento en resultados medibles."
@@ -31,7 +31,7 @@ export function PlatformPage() {
         <section className="section">
           <div className="container editorial-split">
             <SectionHeading
-              description="NexoSkill no se limita a aplicar cuestionarios. La plataforma organiza el proceso completo: contenido, personas, evaluaciones, avance y resultados."
+              description="Valtieris no se limita a aplicar cuestionarios. La plataforma organiza el proceso completo: contenido, personas, evaluaciones, avance y resultados."
               eyebrow="Qué resuelve"
               title="Visibilidad para operar una academia técnica con consistencia."
             />

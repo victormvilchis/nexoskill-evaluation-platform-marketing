@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-const baseUrl = (process.env.VITE_SITE_URL || 'https://nexoskill.com').replace(/\/$/, '');
+const baseUrl = (process.env.VITE_SITE_URL || 'https://valtieris.example').replace(/\/$/, '');
 const technologySource = await readFile(new URL('../src/content/technologies.ts', import.meta.url), 'utf8');
 const slugs = [...technologySource.matchAll(/slug:\s*'([^']+)'/g)].map((match) => match[1]);
 const staticRoutes = [

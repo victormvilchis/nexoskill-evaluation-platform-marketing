@@ -46,7 +46,7 @@ public class MailNotificationService {
         message.setReplyTo(prospect.getEmail());
         message.setSubject("Nueva solicitud " + prospect.getRequestType() + " - " + prospect.getCompany());
         message.setText(String.join("\n", List.of(
-                "Se recibió una nueva solicitud comercial en NexoSkill.",
+                "Se recibió una nueva solicitud comercial en Valtieris.",
                 "",
                 "Referencia: " + reference(prospect),
                 "Tipo: " + prospect.getRequestType(),
@@ -61,7 +61,12 @@ public class MailNotificationService {
                 "Servicio: " + nullable(prospect.getServiceInterest()),
                 "Tecnología: " + nullable(prospect.getTechnologyInterest()),
                 "Plan: " + nullable(prospect.getPlanId()),
-                "Origen: " + nullable(prospect.getSource()),
+                "Origen interno: " + nullable(prospect.getSource()),
+                "Campaña UTM: " + campaign(prospect),
+                "Landing: " + nullable(prospect.getLandingPage()),
+                "Conversión: " + nullable(prospect.getConversionPage()),
+                "Referente: " + nullable(prospect.getReferrer()),
+                "Consentimiento analítico: " + nullable(prospect.getAnalyticsConsent()),
                 "",
                 "Mensaje:",
                 prospect.getMessage(),
@@ -101,6 +106,16 @@ public class MailNotificationService {
     private String fullName(Prospect prospect) {
         String lastName = prospect.getLastName() == null ? "" : prospect.getLastName();
         return (prospect.getFirstName() + " " + lastName).trim();
+    }
+
+
+    private String campaign(Prospect prospect) {
+        if (prospect.getUtmSource() == null && prospect.getUtmCampaign() == null) return "No especificada";
+        return String.join(" / ", List.of(
+                nullable(prospect.getUtmSource()),
+                nullable(prospect.getUtmMedium()),
+                nullable(prospect.getUtmCampaign())
+        ));
     }
 
     private String nullable(String value) {

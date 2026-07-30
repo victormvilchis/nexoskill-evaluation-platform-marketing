@@ -5,13 +5,15 @@ async function completeRequiredFields(page: import('@playwright/test').Page) {
   await page.getByLabel('Correo empresarial *').fill('maria@empresa.com');
   await page.getByLabel('Empresa *').fill('Empresa Demo');
   await page.getByLabel('¿Qué necesitas? *').fill('Necesitamos evaluar y preparar un equipo de desarrollo.');
-  await page.getByLabel(/Acepto que NexoSkill/).check();
+  await page.getByLabel(/Acepto que Valtieris/).check();
 }
 
 test('el formulario evita doble envío y muestra confirmación real', async ({ page }) => {
   let requests = 0;
+  let submittedPayload: Record<string, unknown> = {};
   await page.route('**/api/v1/leads/demo', async (route) => {
     requests += 1;
+    submittedPayload = route.request().postDataJSON() as Record<string, unknown>;
     await new Promise((resolve) => setTimeout(resolve, 350));
     await route.fulfill({
       status: 201,
@@ -24,7 +26,7 @@ test('el formulario evita doble envío y muestra confirmación real', async ({ p
     });
   });
 
-  await page.goto('/solicitar-demo');
+  await page.goto('/solicitar-demo?utm_source=linkedin&utm_medium=social&utm_campaign=java_backend_2026&utm_content=hero_demo&li_fat_id=click-123');
   await completeRequiredFields(page);
   const submit = page.getByRole('button', { name: 'Solicitar demo' });
   await submit.click();
@@ -32,6 +34,16 @@ test('el formulario evita doble envío y muestra confirmación real', async ({ p
   await expect(page.getByText('Solicitud registrada')).toBeVisible();
   await expect(page.getByText('NS-00000042')).toBeVisible();
   expect(requests).toBe(1);
+  expect(submittedPayload).toMatchObject({
+    utmSource: 'linkedin',
+    utmMedium: 'social',
+    utmCampaign: 'java_backend_2026',
+    utmContent: 'hero_demo',
+    clickId: 'click-123',
+    clickIdType: 'li_fat_id',
+    conversionPage: '/solicitar-demo?utm_source=linkedin&utm_medium=social&utm_campaign=java_backend_2026&utm_content=hero_demo&li_fat_id=click-123',
+    analyticsConsent: 'UNSET',
+  });
 });
 
 test('los errores del backend conservan la información capturada', async ({ page }) => {

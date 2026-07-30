@@ -22,13 +22,13 @@ const normalizeApiUrl = (value: string) => {
 };
 
 export const siteConfig = {
-  name: 'NexoSkill',
-  description: 'Evaluación, preparación y analítica para desarrollar talento tecnológico con resultados medibles.',
+  name: 'Valtieris',
+  description: 'Evaluación, preparación, certificaciones y seguimiento para desarrollar talento tecnológico con resultados medibles.',
   siteUrl: readUrl('VITE_SITE_URL') || 'http://localhost:5174',
   contactEmail: readEnv('VITE_CONTACT_EMAIL'),
   privacyEmail: readEnv('VITE_PRIVACY_EMAIL') || readEnv('VITE_CONTACT_EMAIL'),
   apiUrl: normalizeApiUrl(readUrl('VITE_API_URL')),
-  legalEntity: readEnv('VITE_LEGAL_ENTITY') || 'NexoSkill',
+  legalEntity: readEnv('VITE_LEGAL_ENTITY') || 'Valtieris',
   legalAddress: readEnv('VITE_LEGAL_ADDRESS'),
   analytics: {
     enabled: readEnv('VITE_ENABLE_ANALYTICS').toLowerCase() === 'true',

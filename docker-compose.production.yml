@@ -1,8 +1,8 @@
-name: ${COMPOSE_PROJECT_NAME:-nexoskill-marketing}
+name: ${COMPOSE_PROJECT_NAME:-valtieris-marketing}
 
 services:
   marketing-api:
-    image: ${MARKETING_API_IMAGE:-nexoskill/marketing-api}:${MARKETING_IMAGE_TAG:-1.0.1}
+    image: ${MARKETING_API_IMAGE:-valtieris/marketing-api}:${MARKETING_IMAGE_TAG:-1.1.0}
     build:
       context: ./backend
     env_file:
@@ -39,7 +39,7 @@ services:
       - marketing-private
 
   marketing-web:
-    image: ${MARKETING_WEB_IMAGE:-nexoskill/marketing-web}:${MARKETING_IMAGE_TAG:-1.0.1}
+    image: ${MARKETING_WEB_IMAGE:-valtieris/marketing-web}:${MARKETING_IMAGE_TAG:-1.1.0}
     build:
       context: .
       args:
@@ -47,7 +47,7 @@ services:
         VITE_API_URL: /api
         VITE_CONTACT_EMAIL: ${VITE_CONTACT_EMAIL:-}
         VITE_PRIVACY_EMAIL: ${VITE_PRIVACY_EMAIL:-}
-        VITE_LEGAL_ENTITY: ${VITE_LEGAL_ENTITY:-NexoSkill}
+        VITE_LEGAL_ENTITY: ${VITE_LEGAL_ENTITY:-Valtieris}
         VITE_LEGAL_ADDRESS: ${VITE_LEGAL_ADDRESS:-}
         VITE_ENABLE_ANALYTICS: ${VITE_ENABLE_ANALYTICS:-false}
         VITE_GTM_ID: ${VITE_GTM_ID:-}

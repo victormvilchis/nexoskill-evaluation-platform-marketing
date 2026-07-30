@@ -1,4 +1,4 @@
-# Checklist NexoSkill Marketing 1.0.0 RC1
+# Checklist Valtieris Marketing 1.0.0 RC1
 
 ## Código
 

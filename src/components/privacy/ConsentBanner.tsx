@@ -10,11 +10,11 @@ export function ConsentBanner() {
   useEffect(() => {
     const open = () => setIsOpen(true);
     const update = (event: Event) => setConsent((event as CustomEvent<AnalyticsConsent>).detail);
-    window.addEventListener('nexoskill:open-consent', open);
-    window.addEventListener('nexoskill:analytics-consent', update);
+    window.addEventListener('valtieris:open-consent', open);
+    window.addEventListener('valtieris:analytics-consent', update);
     return () => {
-      window.removeEventListener('nexoskill:open-consent', open);
-      window.removeEventListener('nexoskill:analytics-consent', update);
+      window.removeEventListener('valtieris:open-consent', open);
+      window.removeEventListener('valtieris:analytics-consent', update);
     };
   }, []);
 

@@ -10,7 +10,7 @@ export function NotFoundPage() {
       <div className="container">
         <span>404</span>
         <h1>Esta ruta no forma parte del sitio.</h1>
-        <p>Regresa al inicio para continuar explorando NexoSkill.</p>
+        <p>Regresa al inicio para continuar explorando Valtieris.</p>
         <Link className="button button--primary" to="/">Volver al inicio</Link>
       </div>
     </div>

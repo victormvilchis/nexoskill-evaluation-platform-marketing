@@ -14,17 +14,17 @@ export function PricingPage() {
   return (
     <div>
       <Seo
-        description="Compara los planes comerciales de NexoSkill para evaluar, preparar y dar seguimiento al talento tecnológico de tu organización."
+        description="Compara los planes comerciales de Valtieris para evaluar, preparar y dar seguimiento al talento tecnológico con un alcance claro."
         path="/planes"
         title="Planes comerciales"
       />
       <PageHero
-        description="Elige una base de capacidad y personalización para tu equipo. La cotización final se construye con asientos, tecnologías, operación y acompañamiento reales."
-        eyebrow="Planes NexoSkill"
+        description="Elige el nivel de plataforma, capacidad y contenido tecnológico que corresponde a tu operación. La propuesta final se ajusta al alcance real de cada organización."
+        eyebrow="Planes comerciales"
         secondaryHref="#comparacion"
         secondaryLabel="Comparar capacidades"
         title="Una solución comercial para cada etapa de crecimiento."
-        visualItems={['Capacidad por asientos', 'Contenido global o personalizado', 'Reportes según la operación', 'Acompañamiento escalable']}
+        visualItems={['Plataforma desde Starter', 'Contenido según el plan', 'Capacidad flexible', 'Acompañamiento escalable']}
         visualLabel="Modelo comercial"
         visualTitle="Sin precios genéricos ni alcances ambiguos."
       />
@@ -33,7 +33,7 @@ export function PricingPage() {
         <div className="container">
           <SectionHeading
             align="center"
-            description="Los planes centralizan capacidad, administración y seguimiento. Los servicios especializados se agregan según el objetivo del programa."
+            description="Los planes combinan plataforma, capacidad y contenido tecnológico. Los servicios especializados se agregan según el objetivo del programa."
             eyebrow="Opciones comerciales"
             title="Comienza con el alcance adecuado."
           />
@@ -46,12 +46,11 @@ export function PricingPage() {
       <section className="section section--soft" id="comparacion">
         <div className="container">
           <SectionHeading
-            description="Revisa las diferencias operativas principales. La propuesta definitiva puede ajustar capacidad y servicios sin duplicar configuraciones en el sitio."
+            description="Revisa la capacidad y el contenido incluido en cada opción. La propuesta definitiva puede ajustar alcance y servicios sin duplicar configuraciones en el sitio."
             eyebrow="Comparación"
             title="Capacidades por plan."
           />
           <PlanComparison />
-          <p className="comparison-note"><Icon name="shield" size={18} /> El acceso único y las integraciones se validan técnica y comercialmente antes de incluirse en una propuesta.</p>
         </div>
       </section>
 
@@ -59,7 +58,7 @@ export function PricingPage() {
         <div className="container">
           <SectionHeading
             align="center"
-            description="El licenciamiento se dimensiona con base en el uso previsto y se mantiene separado de los servicios de capacitación o consultoría."
+            description="La plataforma, los asientos y el contenido tecnológico se definen por plan y se mantienen separados de los servicios de capacitación o consultoría."
             eyebrow="Cómo cotizamos"
             title="Transparencia desde el alcance inicial."
           />
@@ -92,7 +91,7 @@ export function PricingPage() {
         <div className="container faq-grid">
           <div>
             <SectionHeading
-              description="Aclara cómo se administran los asientos, la personalización, los servicios y el crecimiento del plan."
+              description="Aclara cómo se administran la capacidad, el contenido tecnológico, los servicios y el crecimiento del plan."
               eyebrow="Preguntas de contratación"
               title="Lo esencial antes de solicitar una propuesta."
             />
@@ -103,7 +102,7 @@ export function PricingPage() {
       </section>
 
       <CTASection
-        description="Selecciona un plan y comparte el tamaño de tu equipo. Prepararemos el contexto necesario para construir una propuesta comercial."
+        description="Selecciona un plan y comparte el contexto de tu organización. Prepararemos la información necesaria para construir una propuesta comercial."
         eyebrow="Siguiente paso"
         primaryHref="/solicitar-cotizacion"
         primaryLabel="Solicitar cotización"

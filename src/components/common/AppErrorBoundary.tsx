@@ -16,7 +16,7 @@ export class AppErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    if (import.meta.env.DEV) console.error('NexoSkill render error', error, info);
+    if (import.meta.env.DEV) console.error('Valtieris render error', error, info);
   }
 
   render() {

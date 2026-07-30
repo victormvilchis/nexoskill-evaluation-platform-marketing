@@ -8,7 +8,7 @@ export function PrivacyPage() {
   return (
     <>
       <Seo
-        description="Conoce qué datos recopila NexoSkill mediante sus formularios comerciales, para qué se utilizan y cómo ejercer tus derechos de privacidad."
+        description="Conoce qué datos recopila Valtieris mediante sus formularios comerciales, para qué se utilizan y cómo ejercer tus derechos de privacidad."
         path="/aviso-de-privacidad"
         title="Aviso de privacidad"
       />
@@ -18,8 +18,8 @@ export function PrivacyPage() {
             <nav aria-label="Migas de pan" className="breadcrumbs"><Link to="/">Inicio</Link><span aria-hidden="true">/</span><span aria-current="page">Aviso de privacidad</span></nav>
             <span className="eyebrow eyebrow--hero">Privacidad</span>
             <h1>Aviso de privacidad del sitio público.</h1>
-            <p>Este documento describe el tratamiento de la información enviada a través de los formularios comerciales de NexoSkill.</p>
-            <small>Última actualización: 27 de julio de 2026.</small>
+            <p>Este documento describe el tratamiento de la información enviada a través de los formularios comerciales de Valtieris.</p>
+            <small>Última actualización: 28 de julio de 2026.</small>
           </div>
         </section>
         <div className="container legal-page__content">
@@ -32,6 +32,7 @@ export function PrivacyPage() {
             <h2>Datos que recopilamos</h2>
             <p>Los formularios pueden solicitar nombre, apellidos, correo, teléfono, empresa, cargo, tamaño de empresa o equipo, número estimado de estudiantes, tecnologías y servicios de interés, plan seleccionado y el mensaje proporcionado.</p>
             <p>Para seguridad y prevención de abuso también se conserva una huella irreversible de la dirección IP, el agente de usuario, la fuente de la solicitud, la fecha de consentimiento y la fecha de creación del registro. No se almacena la dirección IP en texto claro.</p>
+            <p>Cuando una persona llega mediante una campaña, podemos conservar parámetros de atribución como fuente, medio, campaña, contenido, término, identificador publicitario, referente, página de entrada y página donde se completó la solicitud. Estos datos se asocian únicamente al registro comercial enviado y no incluyen el contenido escrito en otros campos.</p>
           </section>
           <section>
             <h2>Finalidades</h2>
@@ -45,7 +46,8 @@ export function PrivacyPage() {
           <section>
             <h2>Analítica y almacenamiento local</h2>
             <p>La preferencia de analítica se guarda en el navegador. Las herramientas de medición permanecen desactivadas hasta que la persona las acepte. El rechazo no impide navegar ni enviar formularios.</p>
-            {analyticsIsConfigured() ? <button className="button button--secondary" onClick={() => window.dispatchEvent(new Event('nexoskill:open-consent'))} type="button">Administrar preferencias de analítica</button> : null}
+            <p>La atribución de campaña utilizada para contextualizar una solicitud comercial se conserva temporalmente en la sesión del navegador y se envía únicamente cuando la persona decide completar un formulario. No se activa ninguna herramienta externa por este mecanismo.</p>
+            {analyticsIsConfigured() ? <button className="button button--secondary" onClick={() => window.dispatchEvent(new Event('valtieris:open-consent'))} type="button">Administrar preferencias de analítica</button> : null}
           </section>
           <section>
             <h2>Conservación y transferencias</h2>

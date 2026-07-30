@@ -25,35 +25,45 @@ export function HomePage() {
         <div className="hero__glow" aria-hidden="true" />
         <div className="container hero__grid">
           <div className="hero__content">
-            <span className="eyebrow eyebrow--hero">Plataforma y servicios para talento tecnológico</span>
-            <h1>Evalúa y desarrolla talento tecnológico con una ruta clara.</h1>
+            <img
+              alt="Valtieris"
+              className="hero__brand-logo"
+              decoding="async"
+              height="188"
+              src="/brand/valtieris-logo-inverse-720.png"
+              width="720"
+            />
+            <span className="eyebrow eyebrow--hero">Evaluación y desarrollo de talento tecnológico</span>
+            <h1>Convierte capacidades tecnológicas en resultados medibles.</h1>
             <p className="hero__lead">
-              Diagnostica habilidades reales, prepara talento para nuevos retos y convierte el avance de cada persona en resultados claros para tu organización.
+              Diagnostica habilidades, construye rutas de preparación y da seguimiento a evaluaciones, avances y certificaciones desde una experiencia empresarial.
             </p>
             <div className="hero__actions">
               <Link className="button button--primary button--large" to="/solicitar-demo">
                 Solicitar demo <Icon name="arrow" size={18} />
               </Link>
-              <Link className="button button--secondary button--large" to="/plataforma">Conocer la plataforma</Link>
+              <Link className="button button--ghost-light button--large" to="/planes">Ver planes</Link>
             </div>
             <ul className="hero__proof" aria-label="Capacidades principales">
-              <li><Icon name="check" size={18} /> Diagnóstico por tecnología</li>
-              <li><Icon name="check" size={18} /> Preparación para certificaciones</li>
-              <li><Icon name="check" size={18} /> Analítica de avance</li>
+              <li><Icon name="check" size={18} /> Evaluaciones técnicas</li>
+              <li><Icon name="check" size={18} /> Rutas de preparación</li>
+              <li><Icon name="check" size={18} /> Seguimiento y certificaciones</li>
             </ul>
           </div>
 
-          <div className="hero-visual" aria-label="Vista conceptual de resultados y progreso de NexoSkill">
+          <div className="hero-visual" aria-label="Vista conceptual de resultados y progreso de Valtieris">
             <div className="hero-visual__topbar">
-              <span className="hero-visual__logo">N</span>
+              <span className="hero-visual__logo">
+                <img alt="" aria-hidden="true" height="64" src="/brand/valtieris-icon-64.png" width="64" />
+              </span>
               <div>
-                <strong>Academia tecnológica</strong>
-                <span>Vista general del equipo</span>
+                <strong>Valtieris Workspace</strong>
+                <span>Visión consolidada del talento</span>
               </div>
               <span className="hero-visual__status">Vista ilustrativa</span>
             </div>
             <div className="hero-visual__metrics">
-              <div><span>Participantes</span><strong>25</strong><small>Equipo activo</small></div>
+              <div><span>Participantes</span><strong>40</strong><small>Equipo activo</small></div>
               <div><span>Avance promedio</span><strong>78%</strong><small>Ruta asignada</small></div>
               <div><span>Evaluaciones</span><strong>12</strong><small>Completadas</small></div>
             </div>
@@ -207,8 +217,8 @@ export function HomePage() {
             />
             <ArrowLink to="/planes">Comparar todos los planes</ArrowLink>
           </div>
-          <div className="pricing-grid">
-            {plans.slice(0, 3).map((plan) => <PricingCard compact key={plan.id} plan={plan} />)}
+          <div className="pricing-grid pricing-grid--four">
+            {plans.map((plan) => <PricingCard compact key={plan.id} plan={plan} />)}
           </div>
         </div>
       </section>
