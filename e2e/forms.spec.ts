@@ -19,7 +19,7 @@ test('el formulario evita doble envío y muestra confirmación real', async ({ p
       status: 201,
       contentType: 'application/json',
       body: JSON.stringify({
-        reference: 'NS-00000042',
+        reference: 'VLT-00000042',
         message: 'Recibimos tu solicitud.',
         submittedAt: new Date().toISOString(),
       }),
@@ -32,7 +32,7 @@ test('el formulario evita doble envío y muestra confirmación real', async ({ p
   await submit.click();
   await expect(page.getByRole('button', { name: 'Enviando…' })).toBeDisabled();
   await expect(page.getByText('Solicitud registrada')).toBeVisible();
-  await expect(page.getByText('NS-00000042')).toBeVisible();
+  await expect(page.getByText('VLT-00000042')).toBeVisible();
   expect(requests).toBe(1);
   expect(submittedPayload).toMatchObject({
     utmSource: 'linkedin',

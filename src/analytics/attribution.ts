@@ -1,7 +1,6 @@
 import { readAnalyticsConsent } from './consent';
 
 const ATTRIBUTION_KEY = 'valtieris.marketing-attribution.v1';
-const LEGACY_ATTRIBUTION_KEY = 'nexoskill.marketing-attribution.v1';
 const MAX_URL_LENGTH = 500;
 
 const LIMITS = {
@@ -81,8 +80,7 @@ function normalizeStoredAttribution(value: MarketingAttribution): MarketingAttri
 function readStoredAttribution(): MarketingAttribution {
   if (typeof window === 'undefined') return {};
   try {
-    const raw = window.sessionStorage.getItem(ATTRIBUTION_KEY)
-      ?? window.sessionStorage.getItem(LEGACY_ATTRIBUTION_KEY);
+    const raw = window.sessionStorage.getItem(ATTRIBUTION_KEY);
     if (!raw) return {};
     const parsed = JSON.parse(raw) as MarketingAttribution;
     return parsed && typeof parsed === 'object' ? normalizeStoredAttribution(parsed) : {};
@@ -95,7 +93,6 @@ function storeAttribution(value: MarketingAttribution): void {
   if (typeof window === 'undefined') return;
   try {
     window.sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(value));
-    window.sessionStorage.removeItem(LEGACY_ATTRIBUTION_KEY);
   } catch {
     // El formulario debe seguir operando aunque el navegador bloquee sessionStorage.
   }

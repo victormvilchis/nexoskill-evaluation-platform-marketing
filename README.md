@@ -1,6 +1,6 @@
 # Valtieris Marketing Website
 
-Sitio público y comercial de Valtieris. Este repositorio es independiente de `nexoskill-evaluation-platform` y no contiene la operación de evaluaciones, estudiantes ni administración SaaS.
+Sitio público y comercial de Valtieris. Este repositorio contiene únicamente la experiencia de marketing, captación de prospectos y su API pública; la operación administrativa se mantiene en un producto independiente.
 
 ## Estado
 
@@ -69,10 +69,6 @@ http://localhost:5174/solicitar-demo?utm_source=linkedin&utm_medium=social&utm_c
 ```
 
 Consulta [`docs/ATTRIBUTION_AND_ANALYTICS.md`](docs/ATTRIBUTION_AND_ANALYTICS.md).
-
-## Marca y sistema visual
-
-La identidad pública del sitio es **Valtieris**. Los activos y reglas de uso están documentados en [`docs/VALTIERIS_BRAND_SYSTEM.md`](docs/VALTIERIS_BRAND_SYSTEM.md).
 
 ## Analítica y consentimiento
 

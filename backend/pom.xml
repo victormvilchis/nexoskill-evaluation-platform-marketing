@@ -11,7 +11,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>com.nexoskill</groupId>
+  <groupId>com.valtieris</groupId>
   <artifactId>valtieris-marketing-backend</artifactId>
   <version>1.1.0</version>
   <name>Valtieris Marketing Backend</name>

@@ -51,7 +51,7 @@ No deben reconstruirse el símbolo ni el wordmark mediante texto, emoji o iconos
 Para evitar una migración disruptiva, esta entrega conserva temporalmente:
 
 - El repositorio y rutas locales actuales.
-- El paquete Java `com.nexoskill.marketing`.
+- El backend utiliza el namespace Java `com.valtieris.marketing`.
 - Los objetos Oracle con prefijo `MKT_`.
 - Las claves de almacenamiento anteriores únicamente como lectura de compatibilidad y migración automática.
 

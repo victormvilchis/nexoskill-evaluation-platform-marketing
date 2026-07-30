@@ -16,7 +16,7 @@ const [brandMark, home, header, footer, siteConfig, index, manifest, globalStyle
   read('src/styles/executive.css'),
   read('src/content/plans.ts'),
   read('backend/src/main/resources/application.yml'),
-  read('backend/src/main/java/com/nexoskill/marketing/service/LeadService.java'),
+  read('backend/src/main/java/com/valtieris/marketing/service/LeadService.java'),
 ]);
 
 test('Valtieris es la marca pública y el logo se utiliza en navegación, hero y footer', async () => {
@@ -34,13 +34,14 @@ test('Valtieris es la marca pública y el logo se utiliza en navegación, hero y
 
 test('metadatos, manifest y backend usan la nueva marca', () => {
   assert.match(siteConfig, /name: 'Valtieris'/);
-  assert.match(index, /Valtieris \| Evaluación y desarrollo de talento tecnológico/);
+  assert.match(index, /<title>Valtieris<\/title>/);
   assert.match(index, /favicon\.ico/);
   assert.match(manifest, /"name": "Valtieris"/);
   assert.match(backendConfig, /name: valtieris-marketing-backend/);
   assert.match(backendConfig, /brand-name: Valtieris/);
   assert.match(leadService, /equipo de Valtieris/);
-  assert.doesNotMatch([brandMark, home, header, footer, siteConfig, index].join('\n'), /NexoSkill/);
+  assert.doesNotMatch([brandMark, home, header, footer, siteConfig, index].join('\n'), new RegExp(['nexo', 'skill'].join(''), 'i'));
+  assert.match(leadService, /ProspectReference\.fromId/);
 });
 
 test('el sistema visual utiliza la paleta enterprise aprobada', () => {

@@ -10,7 +10,7 @@ const [pkgText, compose, dockerfile, nginx, prodEnv, application, validator] = a
   read('nginx.conf'),
   read('.env.production.example'),
   read('backend/src/main/resources/application.yml'),
-  read('backend/src/main/java/com/nexoskill/marketing/config/ProductionConfigurationValidator.java'),
+  read('backend/src/main/java/com/valtieris/marketing/config/ProductionConfigurationValidator.java'),
 ]);
 const pkg = JSON.parse(pkgText);
 

@@ -7,6 +7,7 @@ import { ConsentBanner } from '../components/privacy/ConsentBanner';
 import { Footer } from '../components/layout/Footer';
 import { Header } from '../components/layout/Header';
 import { HomePage } from '../pages/HomePage';
+import { siteConfig } from '../seo/siteConfig';
 
 const AboutPage = lazy(() => import('../pages/AboutPage').then((module) => ({ default: module.AboutPage })));
 const AdvisoryPage = lazy(() => import('../pages/AdvisoryPage').then((module) => ({ default: module.AdvisoryPage })));
@@ -53,7 +54,8 @@ function RouteEffects() {
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
-      setAnnouncement(document.title.replace(/\s*\|\s*Valtieris$/, ''));
+      const heading = document.querySelector<HTMLHeadingElement>('#main-content h1')?.textContent?.trim();
+      setAnnouncement(heading || siteConfig.name);
     }, 50);
 
     return () => window.clearTimeout(timeout);

@@ -58,6 +58,7 @@ test('las rutas públicas cargan sin errores de consola ni 404 inesperados', asy
   for (const route of publicRoutes) {
     const response = await page.goto(route);
     expect(response?.status(), route).toBeLessThan(400);
+    await expect(page, route).toHaveTitle('Valtieris');
     await expect(page.locator('#main-content h1').first(), route).toBeVisible();
   }
 
@@ -67,6 +68,7 @@ test('las rutas públicas cargan sin errores de consola ni 404 inesperados', asy
 test('una ruta inexistente presenta una página 404 profesional', async ({ page }) => {
   await page.goto('/ruta-que-no-existe');
 
+  await expect(page).toHaveTitle('Valtieris');
   await expect(page.getByText('404', { exact: true })).toBeVisible();
   await expect(
     page.getByRole('heading', {

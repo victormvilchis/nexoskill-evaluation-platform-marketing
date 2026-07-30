@@ -32,10 +32,10 @@ const ensureLink = (selector: string, attributes: Record<string, string>) => {
 
 export function Seo({ title, description, path = '/', noIndex = false, image = '/og-image.png', keywords = [], structuredData }: SeoProps) {
   useEffect(() => {
-    const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+    const socialTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
     const canonicalUrl = new URL(path, siteConfig.siteUrl).toString();
     const imageUrl = new URL(image, siteConfig.siteUrl).toString();
-    document.title = fullTitle;
+    document.title = siteConfig.name;
 
     ensureMeta('meta[name="description"]', { name: 'description', content: description });
     ensureMeta('meta[name="robots"]', { name: 'robots', content: noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large' });
@@ -46,7 +46,7 @@ export function Seo({ title, description, path = '/', noIndex = false, image = '
       document.head.querySelector('meta[name="keywords"]')?.remove();
     }
 
-    ensureMeta('meta[property="og:title"]', { property: 'og:title', content: fullTitle });
+    ensureMeta('meta[property="og:title"]', { property: 'og:title', content: socialTitle });
     ensureMeta('meta[property="og:description"]', { property: 'og:description', content: description });
     ensureMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
     ensureMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });
@@ -56,7 +56,7 @@ export function Seo({ title, description, path = '/', noIndex = false, image = '
     ensureMeta('meta[property="og:locale"]', { property: 'og:locale', content: 'es_MX' });
 
     ensureMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
-    ensureMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: fullTitle });
+    ensureMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: socialTitle });
     ensureMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description });
     ensureMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: imageUrl });
 

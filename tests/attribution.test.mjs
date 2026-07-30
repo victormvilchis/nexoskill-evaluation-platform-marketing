@@ -7,9 +7,9 @@ const attribution = await read('src/analytics/attribution.ts');
 const analytics = await read('src/analytics/analytics.ts');
 const manager = await read('src/analytics/AnalyticsManager.tsx');
 const form = await read('src/components/forms/LeadForm.tsx');
-const request = await read('backend/src/main/java/com/nexoskill/marketing/api/LeadRequest.java');
-const prospect = await read('backend/src/main/java/com/nexoskill/marketing/domain/Prospect.java');
-const service = await read('backend/src/main/java/com/nexoskill/marketing/service/LeadService.java');
+const request = await read('backend/src/main/java/com/valtieris/marketing/api/LeadRequest.java');
+const prospect = await read('backend/src/main/java/com/valtieris/marketing/domain/Prospect.java');
+const service = await read('backend/src/main/java/com/valtieris/marketing/service/LeadService.java');
 const migration = await read('backend/src/main/resources/db/migration/oracle/V2__add_marketing_attribution.sql');
 const privacy = await read('src/components/privacy/PrivacyNoticeContent.tsx');
 

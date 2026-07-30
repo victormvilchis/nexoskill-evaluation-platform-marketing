@@ -52,3 +52,10 @@ La migración conserva todos los registros actuales y únicamente agrega columna
 - Se eliminan de Enterprise las referencias a integraciones, SSO, API, identidad visual y condiciones de servicio como capacidades exclusivas.
 - La configuración inicial, la identidad visual y el acompañamiento de adopción se ofrecen en todos los planes.
 - Los enlaces anteriores con `plan=business-certification` se normalizan a `business-talent`.
+## Homologación final de marca
+
+- Referencias de solicitudes con formato `VLT-00000000`.
+- Título de pestaña fijo en `Valtieris`.
+- Namespace backend `com.valtieris.marketing`.
+- Eliminación de referencias residuales a la identidad anterior en código, pruebas y documentación.
+
