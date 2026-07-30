@@ -5,32 +5,73 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const excludedDirectories = new Set(['.git', 'node_modules', 'dist', 'target', 'playwright-report', 'test-results', '.runtime', 'logs']);
+const excludedDirectories = new Set([
+  '.git',
+  '.update-backups',
+  'node_modules',
+  'dist',
+  'target',
+  'playwright-report',
+  'test-results',
+  '.runtime',
+  'logs',
+]);
 const binaryExtensions = new Set(['.png', '.ico', '.jpg', '.jpeg', '.webp', '.zip', '.jar', '.class']);
 const retiredBrand = ['nexo', 'skill'].join('');
-const retiredReferencePrefix = ['N', 'S', '-'].join('');
+const retiredReferencePrefix = ['n', 's', '-'].join('');
+const retiredReferencePattern = new RegExp(`(^|[^a-z0-9])${retiredReferencePrefix}(?=[a-z0-9])`, 'i');
 
 async function textFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   const files = [];
+
   for (const entry of entries) {
     if (excludedDirectories.has(entry.name)) continue;
     const absolute = path.join(directory, entry.name);
     if (entry.isDirectory()) files.push(...await textFiles(absolute));
     else if (!binaryExtensions.has(path.extname(entry.name).toLowerCase())) files.push(absolute);
   }
+
   return files;
 }
 
+function hasRetiredReference(content) {
+  const lower = content.toLowerCase();
+  return lower.includes(retiredBrand) || retiredReferencePattern.test(lower);
+}
+
+test('el detector de prefijos heredados es insensible a mayúsculas sin confundir estilos CSS', () => {
+  const upperPrefix = ['N', 'S', '-'].join('');
+  const lowerPrefix = ['n', 's', '-'].join('');
+  const mixedPrefix = ['N', 's', '-'].join('');
+  assert.equal(hasRetiredReference(`Referencia ${upperPrefix}000001`), true);
+  assert.equal(hasRetiredReference(`Referencia ${lowerPrefix}000001`), true);
+  assert.equal(hasRetiredReference(`Referencia ${mixedPrefix}000001`), true);
+  assert.equal(hasRetiredReference('font-family: Inter, ui-sans-serif, system-ui;'), false);
+});
+
 test('el repositorio no conserva referencias de la identidad anterior', async () => {
   const violations = [];
+
   for (const file of await textFiles(root)) {
     const content = await readFile(file, 'utf8');
-    if (content.toLowerCase().includes(retiredBrand) || content.includes(retiredReferencePrefix)) {
+    if (hasRetiredReference(content)) {
       violations.push(path.relative(root, file).replaceAll('\\', '/'));
     }
   }
-  assert.deepEqual(violations, []);
+
+  violations.sort();
+  assert.deepStrictEqual(
+    violations,
+    [],
+    `Se encontraron referencias de la identidad anterior en:\n${violations.join('\n')}`,
+  );
+});
+
+test('el metadata del proyecto backend usa exclusivamente la marca Valtieris', async () => {
+  const eclipseProject = await readFile(path.join(root, 'backend/.project'), 'utf8');
+  assert.match(eclipseProject, /<name>valtieris-marketing-backend<\/name>/);
+  assert.equal(hasRetiredReference(eclipseProject), false);
 });
 
 test('la referencia pública y el título de pestaña usan la marca Valtieris', async () => {
@@ -38,6 +79,7 @@ test('la referencia pública y el título de pestaña usan la marca Valtieris', 
   const reference = await readFile(path.join(root, 'backend/src/main/java/com/valtieris/marketing/service/ProspectReference.java'), 'utf8');
   const index = await readFile(path.join(root, 'index.html'), 'utf8');
   const seo = await readFile(path.join(root, 'src/seo/Seo.tsx'), 'utf8');
+
   assert.match(leadService, /ProspectReference\.fromId/);
   assert.match(reference, /PREFIX = "VLT-"/);
   assert.match(index, /<title>Valtieris<\/title>/);

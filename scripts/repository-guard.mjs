@@ -7,9 +7,9 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(fileURLToPath(new URL('../', import.meta.url)));
 
 const normalize = (path) => relative(root, path).split(sep).join('/');
-
 const ignoredDirectories = new Set([
   '.git',
+  '.update-backups',
   'node_modules',
   'dist',
   'target',
@@ -28,12 +28,12 @@ const allowedEnvironmentExamples = new Set([
   '.env.example',
   '.env.production.example',
 ]);
-
 const forbiddenTrackedPaths = [
   /(^|\/)\.env$/i,
   /(^|\/)\.env\.(?:local|production|development|test)$/i,
   /(^|\/)backend\/\.env$/i,
   /(^|\/)\.runtime\//i,
+  /(^|\/)\.update-backups\//i,
   /(^|\/)logs\//i,
   /(^|\/)playwright-report\//i,
   /(^|\/)test-results\//i,
@@ -46,7 +46,6 @@ const forbiddenTrackedPaths = [
   /(^|\/)\.deploy\//i,
   /\.log$/i,
 ];
-
 const environmentSecretNames = new Set([
   'DB_PASSWORD',
   'MAIL_PASSWORD',
@@ -72,7 +71,6 @@ const safePlaceholderValues = new Set([
 const sourceExtensions = new Set([
   '.ts', '.tsx', '.js', '.mjs', '.java', '.yml', '.yaml', '.properties', '.json', '.html', '.xml', '.conf', '.ps1', '.cmd', '.sh',
 ]);
-
 const sourceRoots = [
   'src/',
   'backend/src/main/',
@@ -87,7 +85,6 @@ const sourceRoots = [
 ];
 
 const findings = [];
-
 async function walk(directory) {
   const files = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -98,7 +95,6 @@ async function walk(directory) {
   }
   return files;
 }
-
 async function getTrackedFiles() {
   try {
     const output = execFileSync('git', ['ls-files', '-z'], {
@@ -116,7 +112,6 @@ function isForbiddenTrackedPath(path) {
   if (allowedEnvironmentExamples.has(path)) return false;
   return forbiddenTrackedPaths.some((pattern) => pattern.test(path));
 }
-
 function isSourceCandidate(path) {
   if (!sourceExtensions.has(extname(path).toLowerCase())) return false;
   return sourceRoots.some((candidate) => candidate.endsWith('/') ? path.startsWith(candidate) : path === candidate);
@@ -129,7 +124,6 @@ function stripWrappingQuotes(value) {
   }
   return trimmed;
 }
-
 function inspectEnvironmentFile(path, content) {
   const isExample = allowedEnvironmentExamples.has(path);
   for (const [index, line] of content.split(/\r?\n/).entries()) {
@@ -138,7 +132,6 @@ function inspectEnvironmentFile(path, content) {
 
     const [, name, rawValue] = match;
     if (!environmentSecretNames.has(name)) continue;
-
     const value = stripWrappingQuotes(rawValue);
     const normalizedValue = value.toLowerCase();
     const isSafePlaceholder = safePlaceholderValues.has(normalizedValue) || /^\$\{[A-Z0-9_]+(?::[^}]*)?\}$/.test(value);
@@ -148,7 +141,6 @@ function inspectEnvironmentFile(path, content) {
     }
   }
 }
-
 function inspectSourceFile(path, content) {
   const patterns = [
     {
@@ -164,7 +156,6 @@ function inspectSourceFile(path, content) {
       expression: /\b(?:https?|jdbc:[a-z0-9:]+):\/\/[^\s/@:]+:[^\s/@]+@/i,
     },
   ];
-
   for (const { name, expression } of patterns) {
     if (expression.test(content)) findings.push(`${path}: ${name}.`);
   }
@@ -173,10 +164,10 @@ function inspectSourceFile(path, content) {
 const trackedFiles = await getTrackedFiles();
 
 for (const path of trackedFiles) {
-  if (isForbiddenTrackedPath(path)) findings.push(`${path}: archivo local o sensible versionado.`);
-
   const absolutePath = resolve(root, path);
   if (!existsSync(absolutePath)) continue;
+
+  if (isForbiddenTrackedPath(path)) findings.push(`${path}: archivo local o sensible versionado.`);
 
   if (allowedEnvironmentExamples.has(path) || /(^|\/)\.env(?:\.[^/]+)?$/i.test(path)) {
     inspectEnvironmentFile(path, await readFile(absolutePath, 'utf8'));
@@ -186,7 +177,6 @@ for (const path of trackedFiles) {
     inspectSourceFile(path, await readFile(absolutePath, 'utf8'));
   }
 }
-
 if (findings.length > 0) {
   console.error('Repository guard encontró elementos que deben corregirse:');
   for (const finding of findings) console.error(`- ${finding}`);

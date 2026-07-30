@@ -2,6 +2,15 @@
 
 ### Corregido
 
+- El control de limpieza de marca informa los archivos infractores y detecta referencias heredadas sin confundir `sans-serif` con el prefijo comercial retirado.
+- El metadata de Eclipse del backend se renombra a `valtieris-marketing-backend` para eliminar la última referencia heredada detectada por el pipeline.
+- Los respaldos operativos `.update-backups/` dejan de versionarse y se eliminan del árbol del repositorio.
+- El contenedor global aumenta a `1280px` y reduce ligeramente los márgenes laterales de escritorio.
+
+## [1.1.0] - 2026-07-29
+
+### Corregido
+
 - Las referencias comerciales utilizan el prefijo `VLT-` de forma consistente en API, correos y pruebas.
 - La pestaña del navegador muestra únicamente `Valtieris` en todas las rutas.
 - El namespace Java cambia a `com.valtieris.marketing` y se eliminan referencias residuales a la identidad anterior.

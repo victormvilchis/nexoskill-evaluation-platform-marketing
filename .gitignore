@@ -20,3 +20,4 @@ logs/
 build/
 backups/
 .deploy/
+.update-backups/
